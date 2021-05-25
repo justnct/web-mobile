@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+
+	<decorator name="trang-chu" page="web/main.jsp">
+		<pattern>/khach-hang/trang-chu</pattern>
+	</decorator>
+	
+	<decorator name="trang-chu" page="web/main.jsp">
+		<pattern>/khach-hang/cua-hang</pattern>
+	</decorator>
+	
+	<decorator name="trang-chu" page="web/main.jsp">
+		<pattern>/khach-hang/chi-tiet-san-pham</pattern>
+	</decorator>
+	
+	<decorator name="trang-chu" page="web/main.jsp">
+		<pattern>/khach-hang/gio-hang</pattern>
+	</decorator>
+	
+	<decorator name="trang-chu" page="web/main.jsp">
+		<pattern>/khach-hang/lien-he</pattern>
+	</decorator>
+	
+	
+</decorators>
