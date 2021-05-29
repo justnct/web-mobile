@@ -1,3 +1,4 @@
+<%@ page import="com.laptrinhjavaweb.util.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
@@ -39,7 +40,14 @@
 								</ul>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="#"><i class="fa fa-user"></i> Login</a>
+								<security:authorize access="isAnonymous()">
+									<a href="<c:url value='/dang-nhap'/>"><i class="fa fa-user"></i>
+										Đăng nhập</a>
+								</security:authorize>
+								<security:authorize access="isAuthenticated()">
+									<a class="nav-link" href="<c:url value='/thoat'/>">Chào,
+											<%=SecurityUtils.getPrincipal().getFullName()%>.Thoát</a>
+								</security:authorize>
 							</div>
 						</div>
 					</div>
@@ -58,10 +66,12 @@
 						<ul>
 							<li class="active"><a
 								href="<c:url value='/khach-hang/trang-chu'/>">Trang chủ</a></li>
-							<li><a href="<c:url value='/khach-hang/cua-hang'/>">Cửa hàng</a></li>
-							<li><a href="<c:url value='/khach-hang/gio-hang'/>">Giỏ hàng</a>
-								</li>
-							<li><a href="<c:url value='/khach-hang/lien-he'/>">Liên hệ</a></li>
+							<li><a href="<c:url value='/khach-hang/cua-hang'/>">Cửa
+									hàng</a></li>
+							<li><a href="<c:url value='/khach-hang/gio-hang'/>">Giỏ
+									hàng</a></li>
+							<li><a href="<c:url value='/khach-hang/lien-he'/>">Liên
+									hệ</a></li>
 						</ul>
 					</nav>
 				</div>

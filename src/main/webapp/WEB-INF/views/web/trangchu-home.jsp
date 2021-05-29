@@ -102,20 +102,12 @@
 				<div class="col-lg-3">
 					<div class="hero__categories">
 						<div class="hero__categories__all">
-							<i class="fa fa-bars"></i> <span>All departments</span>
+							<i class="fa fa-bars"></i> <span>Tất cả sản phẩm</span>
+							   <li><a href="#">Fresh Meat</a></li>
+							
 						</div>
 						<ul>
-							<li><a href="#">Fresh Meat</a></li>
-							<li><a href="#">Vegetables</a></li>
-							<li><a href="#">Fruit & Nut Gifts</a></li>
-							<li><a href="#">Fresh Berries</a></li>
-							<li><a href="#">Ocean Foods</a></li>
-							<li><a href="#">Butter & Eggs</a></li>
-							<li><a href="#">Fastfood</a></li>
-							<li><a href="#">Fresh Onion</a></li>
-							<li><a href="#">Papayaya & Crisps</a></li>
-							<li><a href="#">Oatmeal</a></li>
-							<li><a href="#">Fresh Bananas</a></li>
+							<li><a href="#">Sản phẩm</a></li>
 						</ul>
 					</div>
 				</div>
@@ -124,10 +116,10 @@
 						<div class="hero__search__form">
 							<form action="#">
 								<div class="hero__search__categories">
-									All Categories <span class="arrow_carrot-down"></span>
+									Tất cả sản phẩm <span class="arrow_carrot-down"></span>
 								</div>
-								<input type="text" placeholder="What do yo u need?">
-								<button type="submit" class="site-btn">SEARCH</button>
+								<input type="text" placeholder="Bạn cần tìm gì ?">
+								<button type="submit" class="site-btn">TÌM KIẾM</button>
 							</form>
 						</div>
 						<div class="hero__search__phone">
@@ -135,19 +127,19 @@
 								<i class="fa fa-phone"></i>
 							</div>
 							<div class="hero__search__phone__text">
-								<h5>+65 11.188.888</h5>
-								<span>support 24/7 time</span>
+								<h5>0372996571</h5>
+								<span>Hoạt động 24/24</span>
 							</div>
 						</div>
 					</div>
 					<div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
 						<div class="hero__text">
-							<span>FRUIT FRESH</span>
+							<span>CỬA HÀNG ĐIỆN THOẠI</span>
 							<h2>
-								Vegetable <br />100% Organic
+								Chuyên điện thoại cảm ứng <br /> Bảo hành trọn đời - Hơi bị chiến
 							</h2>
-							<p>Free Pickup and Delivery Available</p>
-							<a href="#" class="primary-btn">SHOP NOW</a>
+							<p>Có Tiền Mua Thì Có Điện Thoại Bán</p>
+							<a href="<c:url value='/khach-hang/cua-hang'/>" class="primary-btn">MUA LIỀN IK</a>
 						</div>
 					</div>
 				</div>
@@ -213,15 +205,14 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>Featured Product</h2>
+						<h2>Sản Phẩm Nổi Bật</h2>
 					</div>
 					<div class="featured__controls">
 						<ul>
-							<li class="active" data-filter="*">All</li>
-							<li data-filter=".oranges">Oranges</li>
-							<li data-filter=".fresh-meat">Fresh Meat</li>
-							<li data-filter=".vegetables">Vegetables</li>
-							<li data-filter=".fastfood">Fastfood</li>
+							<li class="active" data-filter=".oranges">IPhone</li>
+							<li data-filter=".fresh-meat">Samsung</li>
+							<li data-filter=".vegetables">Xiaomi</li>
+							<li data-filter=".fastfood">Huwai</li>
 						</ul>
 					</div>
 				</div>
@@ -401,7 +392,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="latest-product__text">
-						<h4>Latest Products</h4>
+						<h4>Sản Phẩm Mới Nhất</h4>
 						<div class="latest-product__slider owl-carousel">
 							<div class="latest-prdouct__slider__item">
 								<a href="#" class="latest-product__item">
@@ -462,7 +453,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="latest-product__text">
-						<h4>Top Rated Products</h4>
+						<h4>Sản Phẩm Được Chọn</h4>
 						<div class="latest-product__slider owl-carousel">
 							<div class="latest-prdouct__slider__item">
 								<a href="#" class="latest-product__item">
@@ -523,7 +514,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="latest-product__text">
-						<h4>Review Products</h4>
+						<h4>Sản Phẩm Bán Chạy</h4>
 						<div class="latest-product__slider owl-carousel">
 							<div class="latest-prdouct__slider__item">
 								<a href="#" class="latest-product__item">
@@ -588,73 +579,6 @@
 	<!-- Latest Product Section End -->
 
 	<!-- Blog Section Begin -->
-	<section class="from-blog spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title from-blog__title">
-						<h2>From The Blog</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic">
-							<img src="img/blog/blog-1.jpg" alt="">
-						</div>
-						<div class="blog__item__text">
-							<ul>
-								<li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-								<li><i class="fa fa-comment-o"></i> 5</li>
-							</ul>
-							<h5>
-								<a href="#">Cooking tips make cooking simple</a>
-							</h5>
-							<p>Sed quia non numquam modi tempora indunt ut labore et
-								dolore magnam aliquam quaerat</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic">
-							<img src="img/blog/blog-2.jpg" alt="">
-						</div>
-						<div class="blog__item__text">
-							<ul>
-								<li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-								<li><i class="fa fa-comment-o"></i> 5</li>
-							</ul>
-							<h5>
-								<a href="#">6 ways to prepare breakfast for 30</a>
-							</h5>
-							<p>Sed quia non numquam modi tempora indunt ut labore et
-								dolore magnam aliquam quaerat</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic">
-							<img src="img/blog/blog-3.jpg" alt="">
-						</div>
-						<div class="blog__item__text">
-							<ul>
-								<li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-								<li><i class="fa fa-comment-o"></i> 5</li>
-							</ul>
-							<h5>
-								<a href="#">Visit the clean farm in the US</a>
-							</h5>
-							<p>Sed quia non numquam modi tempora indunt ut labore et
-								dolore magnam aliquam quaerat</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- Blog Section End -->
 
 	<!-- Footer Section Begin -->

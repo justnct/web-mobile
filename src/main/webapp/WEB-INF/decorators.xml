@@ -2,24 +2,12 @@
 <decorators defaultdir="/decorators">
 
 	<decorator name="trang-chu" page="web/main.jsp">
-		<pattern>/khach-hang/trang-chu</pattern>
+		<pattern>/khach-hang*</pattern>
 	</decorator>
 	
-	<decorator name="trang-chu" page="web/main.jsp">
-		<pattern>/khach-hang/cua-hang</pattern>
-	</decorator>
-	
-	<decorator name="trang-chu" page="web/main.jsp">
-		<pattern>/khach-hang/chi-tiet-san-pham</pattern>
-	</decorator>
-	
-	<decorator name="trang-chu" page="web/main.jsp">
-		<pattern>/khach-hang/gio-hang</pattern>
-	</decorator>
-	
-	<decorator name="trang-chu" page="web/main.jsp">
-		<pattern>/khach-hang/lien-he</pattern>
-	</decorator>
+	<decorator name="login" page="login.jsp">
+        <pattern>/dang-nhap</pattern>
+    </decorator>
 	
 	
 </decorators>
