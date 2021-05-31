@@ -19,7 +19,7 @@ public class ProductEntity {
 	private String name;
 	
 	@Column(name = "price_product")
-	private long price;
+	private int price;
 	
 	@Column(name = "link_big_picture", columnDefinition = "TEXT")
 	private String imgBig;
@@ -27,8 +27,28 @@ public class ProductEntity {
 	@Column(name = "link_img_picture", columnDefinition = "TEXT")
 	private String imgLittle;
 	
-	@Column(name = "id")
-	private long id;
+	@Column(name = "newest")
+	private int newest;
+	
+	@Column(name = "isChoice")
+	private int isChoice;
+	
+	@Column(name = "salest")
+	private int salest;
+	
+	@Column(name = "discount")
+	private int discount;
+	
+	@Column(name = "discountPrice")
+	private int discountPrice;
+
+	public long getId_product() {
+		return id_product;
+	}
+
+	public void setId_product(long id_product) {
+		this.id_product = id_product;
+	}
 
 	public String getName() {
 		return name;
@@ -38,11 +58,11 @@ public class ProductEntity {
 		this.name = name;
 	}
 
-	public long getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -62,11 +82,44 @@ public class ProductEntity {
 		this.imgLittle = imgLittle;
 	}
 
-	public long getId_product() {
-		return id_product;
+	public int getNewest() {
+		return newest;
 	}
 
-	public long getId() {
-		return id;
+	public void setNewest(int newest) {
+		this.newest = newest;
 	}
+
+	public int getIsChoice() {
+		return isChoice;
+	}
+
+	public void setIsChoice(int isChoice) {
+		this.isChoice = isChoice;
+	}
+
+	public int getSalest() {
+		return salest;
+	}
+
+	public void setSalest(int salest) {
+		this.salest = salest;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+
 }

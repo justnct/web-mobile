@@ -17,8 +17,8 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="header__top__left">
 							<ul>
-								<li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-								<li>Free Shipping for all Order of $99</li>
+								<li><i class="fa fa-envelope"></i>Cửa hàng T&T</li>
+								<li>Chuyên bán điện thoại xịn hơn người yêu cũ của bạn </li>
 							</ul>
 						</div>
 					</div>
@@ -32,10 +32,10 @@
 							</div>
 							<div class="header__top__right__language">
 								<img src="img/language.png" alt="">
-								<div>English</div>
+								<div>Việt Nam</div>
 								<span class="arrow_carrot-down"></span>
 								<ul>
-									<li><a href="#">Spanish</a></li>
+									<li><a href="#">Việt Nam</a></li>
 									<li><a href="#">English</a></li>
 								</ul>
 							</div>

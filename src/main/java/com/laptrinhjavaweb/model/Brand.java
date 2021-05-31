@@ -1,13 +1,13 @@
 package com.laptrinhjavaweb.model;
 
 public class Brand {
-	private int id;
+	private long id;
 	private String name;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {

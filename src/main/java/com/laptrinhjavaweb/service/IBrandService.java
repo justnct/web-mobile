@@ -2,8 +2,8 @@ package com.laptrinhjavaweb.service;
 
 import java.util.List;
 
-import com.laptrinhjavaweb.model.Brand;
+import com.laptrinhjavaweb.dto.BrandDTO;
 
 public interface IBrandService {
-	List<Brand> getAllBrand();
+	List<BrandDTO> getAllBrand();
 }

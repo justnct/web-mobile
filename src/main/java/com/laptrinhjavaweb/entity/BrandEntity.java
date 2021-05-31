@@ -16,9 +16,16 @@ public class BrandEntity {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "nameImg")
+	private String nameImg;
 
 	public long getId() {
 		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -28,6 +35,15 @@ public class BrandEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public String getNameImg() {
+		return nameImg;
+	}
+
+	public void setNameImg(String nameImg) {
+		this.nameImg = nameImg;
+	}
+
+		
 	
 }

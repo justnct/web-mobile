@@ -23,7 +23,7 @@
 
 </head>
 <!-- Page Preloder -->
-<div id="preloder">
+<%-- <div id="preloder">
 	<div class="loader"></div>
 </div>
 
@@ -157,7 +157,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> --%>
 <!-- Breadcrumb Section End -->
 
 <!-- Product Details Section Begin -->
@@ -202,7 +202,7 @@
 							</div>
 						</div>
 					</div>
-					<a href="#" class="primary-btn">ADD TO CARD</a> <a href="#"
+					<a href="#" class="primary-btn">THÊM VÀO GIỎ HÀNG</a> <!-- <a href="#"
 						class="heart-icon"><span class="icon_heart_alt"></span></a>
 					<ul>
 						<li><b>Availability</b> <span>In Stock</span></li>
@@ -216,7 +216,7 @@
 									class="fa fa-instagram"></i></a> <a href="#"><i
 									class="fa fa-pinterest"></i></a>
 							</div></li>
-					</ul>
+					</ul> -->
 				</div>
 			</div>
 			<div class="col-lg-12">
@@ -234,7 +234,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<h6>Products Infomation</h6>
+								<h6>Chi tiết sản phẩm</h6>
 								<p>Vestibulum ac diam sit amet quam vehicula elementum sed
 									sit amet dui. Pellentesque in ipsum id orci porta dapibus.
 									Proin eget tortor risus. Vivamus suscipit tortor eget felis
@@ -262,7 +262,7 @@
 						</div>
 						<div class="tab-pane" id="tabs-2" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<h6>Products Infomation</h6>
+								<h6>Thông tin sản phẩm</h6>
 								<p>Vestibulum ac diam sit amet quam vehicula elementum sed
 									sit amet dui. Pellentesque in ipsum id orci porta dapibus.
 									Proin eget tortor risus. Vivamus suscipit tortor eget felis
@@ -287,7 +287,7 @@
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<h6>Products Infomation</h6>
+								<h6>Bình luận</h6>
 								<p>Vestibulum ac diam sit amet quam vehicula elementum sed
 									sit amet dui. Pellentesque in ipsum id orci porta dapibus.
 									Proin eget tortor risus. Vivamus suscipit tortor eget felis
@@ -317,7 +317,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="section-title related__product__title">
-					<h2>Related Product</h2>
+					<h2>Sản phẩm mới nhất</h2>
 				</div>
 			</div>
 		</div>
