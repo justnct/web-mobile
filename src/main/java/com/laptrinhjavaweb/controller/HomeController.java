@@ -47,6 +47,11 @@ public class HomeController {
 		mListProductIsChoice = productService.getAllProductIsChoice();
 		mav.addObject("listIsChoice", mListProductIsChoice);
 
+		// list best product
+		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
+		mBestListProduct = productService.getBestProduct();
+		mav.addObject("listBest", mBestListProduct);
+		
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();

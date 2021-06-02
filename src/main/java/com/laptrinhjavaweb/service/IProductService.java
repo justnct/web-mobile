@@ -17,5 +17,5 @@ public interface IProductService {
 	
 	List<ProductDTO> getAllProductDiscount();
 
-
+	List<ProductDTO> getBestProduct();
 }

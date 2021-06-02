@@ -138,5 +138,26 @@ public class ProductService implements IProductService{
 		}
 		return mListProduct;
 	}
-	
+	@Override
+	public List<ProductDTO> getBestProduct() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		for(ProductEntity item : mListProductEntities) {
+			if(item.getPrice() > 20000000) {
+			ProductDTO product = new ProductDTO();
+			product.setId(item.getId_product());
+			product.setName(item.getName());
+			product.setNameImg(item.getImgBig());
+			product.setNameLittleImg(item.getImgLittle());
+			product.setNewest(item.getNewest());
+			product.setIsChoice(item.getIsChoice());
+			product.setSalest(item.getSalest());
+			product.setPrice(item.getPrice());
+			product.setDiscount(item.getDiscount());
+			product.setDiscountPrice(item.getDiscountPrice());
+			mListProduct.add(product);
+			}
+		}
+		return mListProduct;
+	}
 }

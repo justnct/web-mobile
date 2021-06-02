@@ -145,7 +145,7 @@
 	<!-- Hero Section End -->
 
 	<!-- Breadcrumb Section Begin -->
-	<section class="breadcrumb-section set-bg"
+	<!-- <section class="breadcrumb-section set-bg"
 		data-setbg="img/breadcrumb.jpg">
 		<div class="container">
 			<div class="row">
@@ -159,7 +159,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!-- Breadcrumb Section End -->
 
 	<!-- Product Section Begin -->
@@ -239,11 +239,8 @@
 									<div class="latest-prdouct__slider__item">
 										<c:forEach var="item" items="${listSalest}">
 											<a href="#" class="latest-product__item">
-												<div class="latest-product__item__pic">
-													<img
-														src="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
-														alt="">
-												</div>
+												<div class="product__item__pic set-bg"
+												data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>" alt=""></div>
 												<div class="latest-product__item__text">
 													<h6>${item.name}</h6>
 													<span>${item.price}</span>
@@ -267,7 +264,7 @@
 									<div class="col-lg-4">
 										<div class="product__discount__item">
 											<div class="product__discount__item__pic set-bg"
-												data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>">
+												data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>" alt="">
 												<div class="product__discount__percent">-${item.discount}%</div>
 												<ul class="product__item__pic__hover">
 													<li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -316,7 +313,7 @@
 							<div class="col-lg-4 col-md-6 col-sm-6">
 								<div class="product__item">
 									<div class="product__item__pic set-bg"
-										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'>
+										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>' alt="">
 										<ul class="product__item__pic__hover">
 											<li><a href="#"><i class="fa fa-heart"></i></a></li>
 											<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -327,7 +324,7 @@
 										<h6>
 											<a href="#">${item.name}</a>
 										</h6>
-										<h5>${item.price}</h5>
+										<h5>${item.price}VND</h5>
 									</div>
 								</div>
 							</div>
