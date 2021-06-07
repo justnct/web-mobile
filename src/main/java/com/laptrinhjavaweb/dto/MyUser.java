@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.User;
 
 public class MyUser extends User{
 	private String fullName;
-	
+
 	public String getFullName() {
 		return fullName;
 	}

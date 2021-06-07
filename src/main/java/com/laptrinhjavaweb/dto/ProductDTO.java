@@ -11,6 +11,15 @@ public class ProductDTO {
 	private int price;
 	private int discount;
 	private int discountPrice;
+	private String des;
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
+	}
 
 	public void setId(long id) {
 		this.id = id;

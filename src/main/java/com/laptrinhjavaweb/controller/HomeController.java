@@ -11,8 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.laptrinhjavaweb.dto.BrandDTO;
@@ -51,7 +53,7 @@ public class HomeController {
 		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
 		mBestListProduct = productService.getBestProduct();
 		mav.addObject("listBest", mBestListProduct);
-		
+
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
@@ -89,8 +91,13 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/khach-hang/chi-tiet-san-pham", method = RequestMethod.GET)
-	public ModelAndView shopGridPageWeb() {
+	public ModelAndView shopGridPageWeb(@RequestParam(value = "id") Long id) {
 		ModelAndView mav = new ModelAndView("web/trangchu-shop_details");
+		ProductDTO productDTO = productService.getProduct(id);
+		if (productDTO.getDiscount() > 0) {
+			productDTO.setPrice(productDTO.getPrice());
+		}
+		mav.addObject("product", productDTO);
 		return mav;
 	}
 

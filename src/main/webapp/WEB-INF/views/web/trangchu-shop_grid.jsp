@@ -238,9 +238,13 @@
 								<div class="latest-product__slider owl-carousel">
 									<div class="latest-prdouct__slider__item">
 										<c:forEach var="item" items="${listSalest}">
-											<a href="#" class="latest-product__item">
+											<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
+												<c:param name="id" value="${item.id}" />
+											</c:url>
+											<a href="${chitiet}" class="latest-product__item">
 												<div class="product__item__pic set-bg"
-												data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>" alt=""></div>
+													data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
+													alt=""></div>
 												<div class="latest-product__item__text">
 													<h6>${item.name}</h6>
 													<span>${item.price}</span>
@@ -261,24 +265,30 @@
 						<div class="row">
 							<div class="product__discount__slider owl-carousel">
 								<c:forEach var="item" items="${listDiscount}">
+									<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
+										<c:param name="id" value="${item.id}" />
+									</c:url>
 									<div class="col-lg-4">
-										<div class="product__discount__item">
-											<div class="product__discount__item__pic set-bg"
-												data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>" alt="">
-												<div class="product__discount__percent">-${item.discount}%</div>
-												<ul class="product__item__pic__hover">
-													<li><a href="#"><i class="fa fa-heart"></i></a></li>
-													<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-													<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-												</ul>
-											</div>
-											<div class="product__discount__item__text">
-												<span>${item.name}</span>
-												<div class="product__item__price">
-													${item.discountPrice} VND <span> ${item.price} VND</span>
+										<a href="${chitiet}">
+											<div class="product__discount__item">
+												<div class="product__discount__item__pic set-bg"
+													data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
+													alt="">
+													<div class="product__discount__percent">-${item.discount}%</div>
+													<ul class="product__item__pic__hover">
+														<li><a href="#"><i class="fa fa-heart"></i></a></li>
+														<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+														<li><a href="${chitiet}"><i class="fa fa-shopping-cart"></i></a></li>
+													</ul>
+												</div>
+												<div class="product__discount__item__text">
+													<span>${item.name}</span>
+													<div class="product__item__price">
+														${item.discountPrice} VND <span> ${item.price} VND</span>
+													</div>
 												</div>
 											</div>
-										</div>
+											</a>
 									</div>
 								</c:forEach>
 							</div>
@@ -313,7 +323,8 @@
 							<div class="col-lg-4 col-md-6 col-sm-6">
 								<div class="product__item">
 									<div class="product__item__pic set-bg"
-										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>' alt="">
+										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
+										alt="">
 										<ul class="product__item__pic__hover">
 											<li><a href="#"><i class="fa fa-heart"></i></a></li>
 											<li><a href="#"><i class="fa fa-retweet"></i></a></li>

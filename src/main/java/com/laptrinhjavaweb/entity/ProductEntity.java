@@ -11,36 +11,47 @@ import javax.persistence.Table;
 @Table(name = "mobile")
 public class ProductEntity {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_product")
 	private long id_product;
-	
+
 	@Column(name = "name_product")
 	private String name;
-	
+
 	@Column(name = "price_product")
 	private int price;
-	
+
 	@Column(name = "link_big_picture", columnDefinition = "TEXT")
 	private String imgBig;
-	
+
 	@Column(name = "link_img_picture", columnDefinition = "TEXT")
 	private String imgLittle;
-	
+
 	@Column(name = "newest")
 	private int newest;
-	
+
 	@Column(name = "isChoice")
 	private int isChoice;
-	
+
 	@Column(name = "salest")
 	private int salest;
-	
+
 	@Column(name = "discount")
 	private int discount;
-	
+
 	@Column(name = "discountPrice")
 	private int discountPrice;
+
+	@Column(name = "descrip", columnDefinition = "TEXT")
+	private String descrip;
+
+	public String getDescrip() {
+		return descrip;
+	}
+
+	public void setDescrip(String descrip) {
+		this.descrip = descrip;
+	}
 
 	public long getId_product() {
 		return id_product;
