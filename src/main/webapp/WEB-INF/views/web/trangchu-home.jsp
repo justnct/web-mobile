@@ -213,7 +213,7 @@
 									<h6>
 										<a href="${chitiet}">${item.name}</a>
 									</h6>
-									<h5>${item.price}VND</h5>
+									<h5>${item.converterPrice}</h5>
 								</div>
 							</div>
 						</div>
@@ -264,7 +264,7 @@
 											alt=""></div>
 										<div class="latest-product__item__text">
 											<h6>${item.name}</h6>
-											<span> ${item.price} VND</span>
+											<span> ${item.converterPrice}</span>
 										</div>
 									</a>
 								</c:forEach>
@@ -287,7 +287,7 @@
 											width="100" height="100" alt=""></div>
 										<div class="latest-product__item__text">
 											<h6>${item.name}</h6>
-											<span>${item.price} VND</span>
+											<span>${item.converterPrice}</span>
 										</div>
 									</a>
 								</c:forEach>
@@ -310,7 +310,7 @@
 											alt=""></div>
 										<div class="latest-product__item__text">
 											<h6>${item.name}</h6>
-											<span>${item.price}
+											<span>${item.converterPrice}
 											</span>
 										</div>
 									</a>

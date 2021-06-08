@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.laptrinhjavaweb.FormatNumber;
 import com.laptrinhjavaweb.dto.BrandDTO;
 import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.service.IBrandService;
@@ -42,21 +43,33 @@ public class HomeController {
 		// list product newest
 		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
 		mListProductNewest = productService.getAllProductNewest();
+		for (ProductDTO product : mListProductNewest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
 		mav.addObject("listNewest", mListProductNewest);
 
 		// list product is choiced
 		List<ProductDTO> mListProductIsChoice = new ArrayList<ProductDTO>();
 		mListProductIsChoice = productService.getAllProductIsChoice();
+		for (ProductDTO product : mListProductIsChoice) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
 		mav.addObject("listIsChoice", mListProductIsChoice);
 
 		// list best product
 		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
 		mBestListProduct = productService.getBestProduct();
+		for (ProductDTO product : mBestListProduct) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
 		mav.addObject("listBest", mBestListProduct);
 
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
+		for (ProductDTO product : mListProductSalest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
 		mav.addObject("listSalest", mListProductSalest);
 		return mav;
 	}
@@ -72,16 +85,27 @@ public class HomeController {
 		// list product
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		mListProduct = productService.getAllProduct();
+		for (ProductDTO product : mListProduct) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
 		mav.addObject("listProduct", mListProduct);
 
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
+		for (ProductDTO product : mListProductSalest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
 		mav.addObject("listSalest", mListProductSalest);
 
 		// list product discount
 		List<ProductDTO> mListProductDiscount = new ArrayList<ProductDTO>();
 		mListProductDiscount = productService.getAllProductDiscount();
+		for (ProductDTO product : mListProductDiscount) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			product.setConverterDisPrice(FormatNumber.formatNumber(product.getDiscountPrice()));
+		}
+		
 		mav.addObject("listDiscount", mListProductDiscount);
 
 		// count product
@@ -95,7 +119,13 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("web/trangchu-shop_details");
 		ProductDTO productDTO = productService.getProduct(id);
 		if (productDTO.getDiscount() > 0) {
-			productDTO.setPrice(productDTO.getPrice());
+			productDTO.setPrice(productDTO.getDiscountPrice());
+		}
+		productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
+		int i = 0;
+		for(String img: productDTO.getNameLittleImg().split(",")) {
+			i++;
+			mav.addObject("img"+i , img);
 		}
 		mav.addObject("product", productDTO);
 		return mav;

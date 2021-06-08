@@ -173,13 +173,17 @@
 					</div>
 					<div class="product__details__pic__slider owl-carousel">
 						<img data-imgbigurl="img/product/details/product-details-2.jpg"
-							src="img/product/details/thumb-1.jpg" alt=""> <img
+							src="<c:url value='/template/web/img/web/product/${img1}'/>"
+							alt=""> <img
 							data-imgbigurl="img/product/details/product-details-3.jpg"
-							src="img/product/details/thumb-2.jpg" alt=""> <img
+							src="<c:url value='/template/web/img/web/product/${img2}'/>"
+							alt=""> <img
 							data-imgbigurl="img/product/details/product-details-5.jpg"
-							src="img/product/details/thumb-3.jpg" alt=""> <img
+							src="<c:url value='/template/web/img/web/product/${img3}'/>"
+							alt=""> <img
 							data-imgbigurl="img/product/details/product-details-4.jpg"
-							src="img/product/details/thumb-4.jpg" alt="">
+							src="<c:url value='/template/web/img/web/product/${img4}'/>"
+							alt="">
 					</div>
 				</div>
 			</div>
@@ -191,7 +195,7 @@
 							class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 							class="fa fa-star-half-o"></i><span>(18 reviews)</span>
 					</div>
-					<div class="product__details__price">${product.discountPrice}</div>
+					<div class="product__details__price">${product.converterPrice}</div>
 					<p>${product.des}</p>
 					<div class="product__details__quantity">
 						<div class="quantity">

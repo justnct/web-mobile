@@ -247,7 +247,7 @@
 													alt=""></div>
 												<div class="latest-product__item__text">
 													<h6>${item.name}</h6>
-													<span>${item.price}</span>
+													<span>${item.converterPrice}</span>
 												</div>
 											</a>
 										</c:forEach>
@@ -269,26 +269,25 @@
 										<c:param name="id" value="${item.id}" />
 									</c:url>
 									<div class="col-lg-4">
-										<a href="${chitiet}">
-											<div class="product__discount__item">
-												<div class="product__discount__item__pic set-bg"
-													data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
-													alt="">
-													<div class="product__discount__percent">-${item.discount}%</div>
-													<ul class="product__item__pic__hover">
-														<li><a href="#"><i class="fa fa-heart"></i></a></li>
-														<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-														<li><a href="${chitiet}"><i class="fa fa-shopping-cart"></i></a></li>
-													</ul>
-												</div>
-												<div class="product__discount__item__text">
-													<span>${item.name}</span>
-													<div class="product__item__price">
-														${item.discountPrice} VND <span> ${item.price} VND</span>
-													</div>
+										<div class="product__discount__item">
+											<div class="product__discount__item__pic set-bg"
+												data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
+												alt="">
+												<div class="product__discount__percent">-${item.discount}%</div>
+												<ul class="product__item__pic__hover">
+													<li><a href="#"><i class="fa fa-heart"></i></a></li>
+													<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+													<li><a href="${chitiet}"><i
+															class="fa fa-shopping-cart"></i></a></li>
+												</ul>
+											</div>
+											<div class="product__discount__item__text">
+												<span>${item.name}</span>
+												<div class="product__item__price">
+													${item.converterPrice} <span> ${item.converterDisPrice}</span>
 												</div>
 											</div>
-											</a>
+										</div>
 									</div>
 								</c:forEach>
 							</div>
@@ -320,6 +319,9 @@
 					</div>
 					<div class="row">
 						<c:forEach var="item" items="${listProduct}">
+							<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
+								<c:param name="id" value="${item.id}" />
+							</c:url>
 							<div class="col-lg-4 col-md-6 col-sm-6">
 								<div class="product__item">
 									<div class="product__item__pic set-bg"
@@ -333,9 +335,9 @@
 									</div>
 									<div class="product__item__text">
 										<h6>
-											<a href="#">${item.name}</a>
+											<a href="${chitiet}">${item.name}</a>
 										</h6>
-										<h5>${item.price}VND</h5>
+										<h5>${item.converterPrice}</h5>
 									</div>
 								</div>
 							</div>
