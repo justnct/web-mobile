@@ -11,7 +11,6 @@ public class ProductDTO {
 	private int price;
 	private int discount;
 	private int discountPrice;
-
 	private String des;
 	private String converterPrice;
 	private String converterDisPrice;

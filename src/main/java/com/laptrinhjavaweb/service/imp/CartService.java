@@ -46,7 +46,6 @@ public class CartService implements ICartService {
 	public void delete(Long id) {
 		CartEntity cartEntity = cartRepository.findOneByName(SecurityUtils.getPrincipal().getUsername());
 		String listAfter = "";
-		boolean match = false;
 		for(String result: cartEntity.getList_product().split(",")) {
 			
 		}

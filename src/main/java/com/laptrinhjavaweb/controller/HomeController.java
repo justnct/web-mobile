@@ -142,20 +142,22 @@ public class HomeController {
 	public ModelAndView shopCartPageWeb() {
 		ModelAndView mav = new ModelAndView("web/trangchu-shop_cart");
 		String list = cartService.getData().getList_product();
-		ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
-		for (String result : list.split(",")) {
-			ProductDTO productDTO = productService.getProduct(Long.valueOf(result));
-			if (productDTO.getDiscount() == 0) {
-				productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
-			} else {
-				productDTO.setPrice(productDTO.getDiscountPrice());
-				productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getDiscount()));
+		if(!list.equals("")) {
+			ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
+			for (String result : list.split(",")) {
+				ProductDTO productDTO = productService.getProduct(Long.valueOf(result));
+				if (productDTO.getDiscount() == 0) {
+					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
+				} else {
+					productDTO.setPrice(productDTO.getDiscountPrice());
+					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getDiscountPrice()));
+				}
+				listProduct.add(productDTO);
 			}
-			listProduct.add(productDTO);
+			int price = totalPrice(listProduct);
+			mav.addObject("listProduct", listProduct);
+			mav.addObject("totalPrice", FormatNumber.formatNumber(price));
 		}
-		int price = totalPrice(listProduct);
-		mav.addObject("listProduct", listProduct);
-		mav.addObject("totalPrice", FormatNumber.formatNumber(price));
 		return mav;
 	}
 

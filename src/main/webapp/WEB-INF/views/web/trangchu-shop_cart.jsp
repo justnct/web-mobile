@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:url var="addProduct" value="/api/product" />
+<c:url var="deleteProduct" value="/api/product" />
 
 
 <!DOCTYPE html>
@@ -195,6 +195,7 @@
 										</td>
 										<td class="shoping__cart__total">${item.converterPrice}</td>
 										<td  class="shoping__cart__item__close"><span id="btn"
+										onclick="deleteProduct(${item.id})"
 											value ="1" class="icon_close"></span></td>
 									</tr>
 								</c:forEach>
@@ -240,19 +241,10 @@
 
 	<!-- Footer Section Begin -->
 	<script type="text/javascript">
-		$('#btn').click(function(e) {
-			e.preventDefault();
-			var data = {};
-			var name = 'id';
-		    var value = $('#btn').val();
-			data["" + name + ""] = value;
-			deleteProduct(data);
-		});
-
 		function deleteProduct(data) {
 			$.ajax({
-				url : '${addProduct}',
-				type : 'POST',
+				url : '${deleteProduct}',
+				type : 'DELETE',
 				contentType : 'application/json',
 				data : JSON.stringify(data),
 				dataType : 'json',
