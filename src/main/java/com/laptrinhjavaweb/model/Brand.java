@@ -7,8 +7,8 @@ public class Brand {
 	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(int i) {
+		this.id = i;
 	}
 	public String getName() {
 		return name;

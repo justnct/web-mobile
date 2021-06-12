@@ -2,6 +2,7 @@ package com.laptrinhjavaweb.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,15 +14,19 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.laptrinhjavaweb.dto.BrandDTO;
 import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.service.IBrandService;
 import com.laptrinhjavaweb.service.IProductService;
+import com.laptrinhjavaweb.util.MessageUtil;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private MessageUtil messageUtil;
 
 	@Autowired
 	private IBrandService brandService;
@@ -51,7 +56,7 @@ public class HomeController {
 		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
 		mBestListProduct = productService.getBestProduct();
 		mav.addObject("listBest", mBestListProduct);
-		
+
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
@@ -121,6 +126,64 @@ public class HomeController {
 	@RequestMapping(value = "/quan-tri", method = RequestMethod.GET)
 	public ModelAndView adminWeb() {
 		ModelAndView mav = new ModelAndView("admin/home");
+		return mav;
+	}
+
+	@RequestMapping(value = "/quan-tri/danh-sach-sp", method = RequestMethod.GET)
+	public ModelAndView adminListProduct(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/list-product");
+		// list product
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		mListProduct = productService.getAllProduct();
+
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+			mav.addObject("message", message.get("message"));
+			mav.addObject("alert", message.get("alert"));
+		}
+		mav.addObject("listProduct", mListProduct);
+		return mav;
+	}
+
+	@RequestMapping(value = "/quan-tri/danh-sach-user", method = RequestMethod.GET)
+	public ModelAndView adminListUser() {
+		ModelAndView mav = new ModelAndView("admin/list-user");
+		return mav;
+	}
+
+	@RequestMapping(value = "/quan-tri/danh-sach-don-hang", method = RequestMethod.GET)
+	public ModelAndView adminListOrder() {
+		ModelAndView mav = new ModelAndView("admin/list-order");
+		return mav;
+	}
+
+	@RequestMapping(value = "/quan-tri/chinh-sua-sp", method = RequestMethod.GET)
+	public ModelAndView adminEditSP(@RequestParam(value = "id", required = false) Long id,
+			HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/edit-product");
+		ProductDTO model = new ProductDTO();
+		if (id != null) {
+			model = productService.findById(id);
+		}
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+			mav.addObject("message", message.get("message"));
+			mav.addObject("alert", message.get("alert"));
+		}
+		mav.addObject("model", model);
+		return mav;
+	}
+	@RequestMapping(value = "/quan-tri/them-sp", method = RequestMethod.GET)
+	public ModelAndView adminAddSP(@RequestParam(value = "id", required = false) Long id,
+			HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/insert-product");
+		ProductDTO model = new ProductDTO();
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+			mav.addObject("message", message.get("message"));
+			mav.addObject("alert", message.get("alert"));
+		}
+		mav.addObject("model", model);
 		return mav;
 	}
 

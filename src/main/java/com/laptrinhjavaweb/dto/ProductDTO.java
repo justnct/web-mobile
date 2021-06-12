@@ -11,6 +11,7 @@ public class ProductDTO {
 	private int price;
 	private int discount;
 	private int discountPrice;
+	private String description;
 
 	public void setId(long id) {
 		this.id = id;
@@ -90,5 +91,13 @@ public class ProductDTO {
 
 	public void setNameLittleImg(String nameLittleImg) {
 		this.nameLittleImg = nameLittleImg;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

@@ -41,6 +41,17 @@ public class ProductEntity {
 	
 	@Column(name = "discountPrice")
 	private int discountPrice;
+	
+	@Column(name = "description", columnDefinition = "TEXT")
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public long getId_product() {
 		return id_product;

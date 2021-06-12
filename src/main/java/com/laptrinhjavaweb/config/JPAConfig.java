@@ -49,15 +49,15 @@ public class JPAConfig {
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/giuaky");
 		dataSource.setUsername("root");
-		dataSource.setPassword("root");
+		dataSource.setPassword("1234");
 		return dataSource;
 	}
 
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-//		properties.setProperty("hibernate.hbm2ddl.auto", "create");
-//		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		 properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		//properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		//properties.setProperty("hibernate.hbm2ddl.auto", "update");
+	    properties.setProperty("hibernate.hbm2ddl.auto", "none");
 		properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 
 		return properties;
