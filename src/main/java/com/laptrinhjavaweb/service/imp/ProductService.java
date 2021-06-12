@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laptrinhjavaweb.converter.ProductConverter;
-<<<<<<< HEAD
-=======
+
 import com.laptrinhjavaweb.dto.BrandDTO;
->>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
 import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.entity.ProductEntity;
 import com.laptrinhjavaweb.repository.ProductRepository;
@@ -22,8 +20,7 @@ public class ProductService implements IProductService{
 	@Autowired
 	private ProductRepository productRepository;
 	
-	@Autowired
-	private ProductConverter productConverter;
+	
 
 	@Autowired
 	private ProductConverter productConverter;
@@ -33,11 +30,9 @@ public class ProductService implements IProductService{
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		List<ProductEntity> mListProductEntities = productRepository.findAll();
 		for(ProductEntity item : mListProductEntities) {
-<<<<<<< HEAD
-			ProductDTO product = productConverter.toDto(item);
-=======
+
 			ProductDTO product = productConverter.converterToDTO(item);
->>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
+
 			mListProduct.add(product);
 		}
 		return mListProduct;
@@ -119,7 +114,6 @@ public class ProductService implements IProductService{
 
 
 	@Override
-<<<<<<< HEAD
 	public ProductDTO findById(Long id) {
 		ProductEntity entity = productRepository.findOne(id);
 		return productConverter.toDto(entity);
@@ -164,12 +158,11 @@ public class ProductService implements IProductService{
 
 
 	
-=======
+
 	public ProductDTO getProduct(long id) {
 		// TODO Auto-generated method stub
 		ProductEntity productEntity = productRepository.findOne(id);
 		ProductDTO product = productConverter.converterToDTO(productEntity);
 		return product;
 	}
->>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
 }

@@ -7,7 +7,7 @@ import com.laptrinhjavaweb.entity.ProductEntity;
 
 @Component
 public class ProductConverter {
-<<<<<<< HEAD
+
 	
 	public ProductDTO toDto(ProductEntity entity) {
 		ProductDTO result = new ProductDTO();
@@ -21,7 +21,7 @@ public class ProductConverter {
 		result.setIsChoice(entity.getIsChoice());
 		result.setNewest(entity.getNewest());
 		result.setSalest(entity.getSalest());
-		result.setDescription(entity.getDescription());
+		result.setDes(entity.getDescrip());
 		return result;
 	}
 	
@@ -37,7 +37,7 @@ public class ProductConverter {
 		result.setIsChoice(dto.getIsChoice());
 		result.setNewest(dto.getNewest());
 		result.setSalest(dto.getSalest());
-		result.setDescription(dto.getDescription());
+		result.setDescrip(dto.getDes());
 		return result;
 	}
 	
@@ -52,9 +52,9 @@ public class ProductConverter {
 		result.setIsChoice(dto.getIsChoice());
 		result.setNewest(dto.getNewest());
 		result.setSalest(dto.getSalest());
-		result.setDescription(dto.getDescription());
+		result.setDescrip(dto.getDes());
 		return result;
-=======
+	}
 	public ProductDTO converterToDTO(ProductEntity productEntity) {
 		ProductDTO product = new ProductDTO();
 		product.setId(productEntity.getId_product());
@@ -86,6 +86,5 @@ public class ProductConverter {
 		product.setDiscountPrice(productDTO.getDiscountPrice());
 		product.setDescrip(productDTO.getDes());
 		return product;
->>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
 	}
 }

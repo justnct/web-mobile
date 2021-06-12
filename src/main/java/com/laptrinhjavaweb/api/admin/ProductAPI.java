@@ -18,18 +18,18 @@ public class ProductAPI {
 	@Autowired
 	private IProductService productService;
 	
-	@PostMapping("/api/product")
+	@PostMapping("/apiad/product")
 	public ProductDTO createProduct(@RequestBody ProductDTO dto) {
 		return productService.insert(dto);
 	}
 	
 	
-	@PutMapping("/api/product")
+	@PutMapping("/apiad/product")
 	public ProductDTO updateProduct(@RequestBody ProductDTO dto) {
 		return productService.update(dto);
 	}
 	
-	@DeleteMapping("/api/product")
+	@DeleteMapping("/apiad/product")
 	public void deleteProduct(@RequestBody long[] ids) {
 		productService.delete(ids);
 	}

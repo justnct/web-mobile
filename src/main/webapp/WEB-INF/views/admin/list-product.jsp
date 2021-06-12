@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:url var="productAPI" value="/api/product" />
+<c:url var="productAPI" value="/apiad/product" />
 <c:url var="productURL" value="/quan-tri/danh-sach-sp" />
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +94,7 @@
 									<td>${item.price}</td>
 									<td>${item.isChoice}</td>
 									<td>${item.salest}</td>
-									<td>${item.description}</td>
+									<td>${item.des}</td>
 									<td><c:url var="updateProductURL"
 											value="/quan-tri/chinh-sua-sp">
 											<c:param name="id" value="${item.id}"></c:param>

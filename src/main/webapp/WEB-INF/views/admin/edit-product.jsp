@@ -3,7 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="productURL" value="/quan-tri/danh-sach-sp" />
 <c:url var="editProductURL" value="/quan-tri/chinh-sua-sp" />
-<c:url var="productAPI" value="/api/product" />
+<c:url var="productAPI" value="/apiad/product" />
 <!DOCTYPE html>
 <html>
 
@@ -77,10 +77,10 @@
 				</div>
 				<div class="row">
 					<div class="col-25">
-						<label for="description">Mô tả</label>
+						<label for="des">Mô tả</label>
 					</div>
 					<div class="col-75">
-						<form:textarea rows="5" path="description" />
+						<form:textarea rows="5" path="des" />
 					</div>
 					<form:hidden path="id" id="id_product" />
 					<div class="col-25">

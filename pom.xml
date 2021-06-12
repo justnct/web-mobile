@@ -82,7 +82,7 @@
 			<artifactId>spring-security-acl</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-		
+
 		<!-- spring secuirty taglibs -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -148,10 +148,8 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring.data}</version>
 		</dependency>
-<<<<<<< HEAD
-<!-- json -->
-=======
-		
+
+		<!-- json -->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

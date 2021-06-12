@@ -18,7 +18,7 @@ public interface IProductService {
 	List<ProductDTO> getAllProductDiscount();
 
 	List<ProductDTO> getBestProduct();
-<<<<<<< HEAD
+
 
 	ProductDTO findById(Long id);
 
@@ -27,8 +27,7 @@ public interface IProductService {
 	ProductDTO update(ProductDTO dto);
 
 	void delete(long[] ids); 
-=======
+
 	
 	ProductDTO getProduct(long id);
->>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
 }

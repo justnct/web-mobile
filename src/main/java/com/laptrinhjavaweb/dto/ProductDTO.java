@@ -11,9 +11,7 @@ public class ProductDTO {
 	private int price;
 	private int discount;
 	private int discountPrice;
-<<<<<<< HEAD
-	private String description;
-=======
+
 	private String des;
 	private String converterPrice;
 	private String converterDisPrice;
@@ -41,7 +39,7 @@ public class ProductDTO {
 	public void setDes(String des) {
 		this.des = des;
 	}
->>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
+
 
 	public void setId(long id) {
 		this.id = id;
@@ -123,11 +121,5 @@ public class ProductDTO {
 		this.nameLittleImg = nameLittleImg;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 }
