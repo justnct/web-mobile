@@ -194,8 +194,8 @@
 											</div>
 										</td>
 										<td class="shoping__cart__total">${item.converterPrice}</td>
-										<td class="shoping__cart__item__close"><span id="btn"
-											class="icon_close"></span></td>
+										<td  class="shoping__cart__item__close"><span id="btn"
+											value ="1" class="icon_close"></span></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -244,7 +244,7 @@
 			e.preventDefault();
 			var data = {};
 			var name = 'id';
-			var value = '${item.id}';
+		    var value = $('#btn').val();
 			data["" + name + ""] = value;
 			deleteProduct(data);
 		});
