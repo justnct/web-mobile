@@ -29,6 +29,9 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<c:url value='/template/web/css/style.css' />" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 

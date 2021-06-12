@@ -11,7 +11,37 @@ public class ProductDTO {
 	private int price;
 	private int discount;
 	private int discountPrice;
+<<<<<<< HEAD
 	private String description;
+=======
+	private String des;
+	private String converterPrice;
+	private String converterDisPrice;
+
+	public String getConverterDisPrice() {
+		return converterDisPrice;
+	}
+
+	public void setConverterDisPrice(String converterDisPrice) {
+		this.converterDisPrice = converterDisPrice;
+	}
+
+	public String getConverterPrice() {
+		return converterPrice;
+	}
+
+	public void setConverterPrice(String converterPrice) {
+		this.converterPrice = converterPrice;
+	}
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
+	}
+>>>>>>> ad42afb8038d3b2d03f67f8f3dbd5317a4193497
 
 	public void setId(long id) {
 		this.id = id;
