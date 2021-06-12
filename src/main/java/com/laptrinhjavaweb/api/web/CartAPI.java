@@ -27,9 +27,9 @@ public class CartAPI {
 		return productDTO;
 	}
 	
-	@DeleteMapping("/api/product")
+	@PostMapping("/api/removeproduct")
 	public void deleteProduct(@RequestBody long id) {
-		
+		cartService.delete(id);
 	}
 
 }

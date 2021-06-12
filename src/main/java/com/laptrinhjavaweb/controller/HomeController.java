@@ -142,7 +142,7 @@ public class HomeController {
 	public ModelAndView shopCartPageWeb() {
 		ModelAndView mav = new ModelAndView("web/trangchu-shop_cart");
 		String list = cartService.getData().getList_product();
-		if(!list.equals("")) {
+		if (!list.equals("")) {
 			ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
 			for (String result : list.split(",")) {
 				ProductDTO productDTO = productService.getProduct(Long.valueOf(result));
@@ -163,7 +163,7 @@ public class HomeController {
 
 	private int totalPrice(ArrayList<ProductDTO> listProduct) {
 		int total = 0;
-		for(int i = 0 ; i < listProduct.size();i++) {
+		for (int i = 0; i < listProduct.size(); i++) {
 			total += listProduct.get(i).getPrice();
 		}
 		return total;
@@ -174,7 +174,6 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("web/trangchu-contact");
 		return mav;
 	}
-
 
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.GET)
 	public ModelAndView loginWeb() {
@@ -217,8 +216,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/quan-tri/chinh-sua-sp", method = RequestMethod.GET)
-	public ModelAndView adminEditSP(@RequestParam(value = "id", required = false) Long id,
-			HttpServletRequest request) {
+	public ModelAndView adminEditSP(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/edit-product");
 		ProductDTO model = new ProductDTO();
 		if (id != null) {
@@ -232,9 +230,9 @@ public class HomeController {
 		mav.addObject("model", model);
 		return mav;
 	}
+
 	@RequestMapping(value = "/quan-tri/them-sp", method = RequestMethod.GET)
-	public ModelAndView adminAddSP(@RequestParam(value = "id", required = false) Long id,
-			HttpServletRequest request) {
+	public ModelAndView adminAddSP(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/insert-product");
 		ProductDTO model = new ProductDTO();
 		if (request.getParameter("message") != null) {

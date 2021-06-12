@@ -1,5 +1,7 @@
 package com.laptrinhjavaweb.service.imp;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,7 @@ public class CartService implements ICartService {
 	public CartDTO saveProduct(Long id) {
 		CartEntity cartEntity = cartRepository.findOneByName(SecurityUtils.getPrincipal().getUsername());
 		String list = cartEntity.getList_product();
-		if(list.equals("")) {
+		if (list.equals("")) {
 			list += String.valueOf(id);
 		} else {
 			list += "," + String.valueOf(id);
@@ -45,9 +47,21 @@ public class CartService implements ICartService {
 	@Override
 	public void delete(Long id) {
 		CartEntity cartEntity = cartRepository.findOneByName(SecurityUtils.getPrincipal().getUsername());
-		String listAfter = "";
-		for(String result: cartEntity.getList_product().split(",")) {
-			
+		String result = "";
+		ArrayList<String> arr = new ArrayList<String>();
+		for (String charAt : cartEntity.getList_product().split(",")) {
+			arr.add(charAt);
 		}
+		arr.remove(String.valueOf(id));
+		if (arr.size() == 0) {
+			cartEntity.setList_product("");
+		} else {
+			for (int i = 0; i < arr.size(); i++) {
+				result += arr.get(i) + ",";
+			}
+			result = result.substring(0, result.length() - 1);
+			cartEntity.setList_product(result);
+		}
+		cartRepository.save(cartEntity);
 	}
 }

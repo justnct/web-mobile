@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:url var="deleteProduct" value="/api/product" />
+<c:url var="deleteProduct" value="/api/removeproduct" />
+<c:url var="cuahang" value="/khach-hang/gio-hang" />
 
 
 <!DOCTYPE html>
@@ -244,15 +245,15 @@
 		function deleteProduct(data) {
 			$.ajax({
 				url : '${deleteProduct}',
-				type : 'DELETE',
+				type : 'POST',
 				contentType : 'application/json',
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(result) {
-					window.location.href = "/khach-hang/gio-hang";
+					window.location.href = "${cuahang}";
 				},
 				error : function(error) {
-					/* window.location.href = "/khach-hang/cua-hang"; */
+					window.location.href = "${cuahang}";
 				}
 			});
 		}
