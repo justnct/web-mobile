@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import com.laptrinhjavaweb.dto.MyUser;
 
+@Component
 public class SecurityUtils {
 	
 	public static MyUser getPrincipal() {

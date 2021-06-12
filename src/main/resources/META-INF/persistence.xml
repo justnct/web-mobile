@@ -8,5 +8,6 @@
 		<class>com.laptrinhjavaweb.entity.ProductEntity</class>
 		<class>com.laptrinhjavaweb.entity.RoleEntity</class>
 		<class>com.laptrinhjavaweb.entity.UserEntity</class>
+		<class>com.laptrinhjavaweb.entity.CartEntity</class>
 	</persistence-unit>
 </persistence>

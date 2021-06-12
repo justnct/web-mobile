@@ -5,8 +5,18 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class MyUser extends User{
+public class MyUser extends User {
 	private String fullName;
+	private String userName;
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getFullName() {
 		return fullName;
@@ -22,6 +32,5 @@ public class MyUser extends User{
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		// TODO Auto-generated constructor stub
 	}
-	
 
 }

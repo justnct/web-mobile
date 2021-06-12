@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ page import="com.laptrinhjavaweb.util.SecurityUtils"%>
+<c:url var="addProduct" value="/api/product"/>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -204,7 +208,8 @@
 							</div>
 						</div>
 					</div>
-					<a href="#" class="primary-btn">THÊM VÀO GIỎ HÀNG</a>
+					<button id="addCart" type="button" class="primary-btn">THÊM
+						VÀO GIỎ HÀNG</button>
 					<!-- <a href="#"
 						class="heart-icon"><span class="icon_heart_alt"></span></a>
 					<ul>
@@ -267,7 +272,33 @@
 
 <!-- Footer Section Begin -->
 
-
+<script type="text/javascript">
+$('#addCart').click(function(e) {
+		e.preventDefault();
+		var data = {};
+		var name = 'id';
+		var value = '${product.id}';
+		data[""+name+""] = value;
+		addProduct(data);
+	}); 
+	
+	
+	function addProduct(data) {
+		$.ajax({
+            url: '${addProduct}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+            	window.location.href = "/khach-hang/cua-hang";
+            },
+            error: function (error) {
+            	/* window.location.href = "/khach-hang/cua-hang"; */
+            }
+        });
+	}
+</script>
 
 </body>
 </html>

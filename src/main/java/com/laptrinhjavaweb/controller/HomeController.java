@@ -21,7 +21,9 @@ import com.laptrinhjavaweb.FormatNumber;
 import com.laptrinhjavaweb.dto.BrandDTO;
 import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.service.IBrandService;
+import com.laptrinhjavaweb.service.ICartService;
 import com.laptrinhjavaweb.service.IProductService;
+import com.laptrinhjavaweb.service.imp.CartService;
 
 @Controller
 public class HomeController {
@@ -31,6 +33,9 @@ public class HomeController {
 
 	@Autowired
 	private IProductService productService;
+
+	@Autowired
+	private ICartService cartService;
 
 	@RequestMapping(value = "/khach-hang/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePageWeb() {
@@ -105,7 +110,7 @@ public class HomeController {
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
 			product.setConverterDisPrice(FormatNumber.formatNumber(product.getDiscountPrice()));
 		}
-		
+
 		mav.addObject("listDiscount", mListProductDiscount);
 
 		// count product
@@ -123,9 +128,9 @@ public class HomeController {
 		}
 		productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
 		int i = 0;
-		for(String img: productDTO.getNameLittleImg().split(",")) {
+		for (String img : productDTO.getNameLittleImg().split(",")) {
 			i++;
-			mav.addObject("img"+i , img);
+			mav.addObject("img" + i, img);
 		}
 		mav.addObject("product", productDTO);
 		return mav;
@@ -134,7 +139,30 @@ public class HomeController {
 	@RequestMapping(value = "/khach-hang/gio-hang", method = RequestMethod.GET)
 	public ModelAndView shopCartPageWeb() {
 		ModelAndView mav = new ModelAndView("web/trangchu-shop_cart");
+		String list = cartService.getData().getList_product();
+		ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
+		for (String result : list.split(",")) {
+			ProductDTO productDTO = productService.getProduct(Long.valueOf(result));
+			if (productDTO.getDiscount() == 0) {
+				productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
+			} else {
+				productDTO.setPrice(productDTO.getDiscountPrice());
+				productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getDiscount()));
+			}
+			listProduct.add(productDTO);
+		}
+		int price = totalPrice(listProduct);
+		mav.addObject("listProduct", listProduct);
+		mav.addObject("totalPrice", FormatNumber.formatNumber(price));
 		return mav;
+	}
+
+	private int totalPrice(ArrayList<ProductDTO> listProduct) {
+		int total = 0;
+		for(int i = 0 ; i < listProduct.size();i++) {
+			total += listProduct.get(i).getPrice();
+		}
+		return total;
 	}
 
 	@RequestMapping(value = "/khach-hang/lien-he", method = RequestMethod.GET)
@@ -143,11 +171,6 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ModelAndView Web() {
-		ModelAndView mav = new ModelAndView("test");
-		return mav;
-	}
 
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.GET)
 	public ModelAndView loginWeb() {
