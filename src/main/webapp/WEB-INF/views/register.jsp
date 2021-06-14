@@ -74,33 +74,33 @@
 
 	</div>
 	<script type="text/javascript">
-
-$('#btnRegister').click(function(e) {
-	e.preventDefault();
-	var data = {};
-	var formData = $('#formSubmit').serializeArray();
-	$.each(formData, function(i, v) {
-		data["" + v.name + ""] = v.value;
-	});
-	register(data);
-});
-
-function register(data) {
-	$.ajax({
-				url : '/api/register',
-				type : 'POST',
-				contentType : 'application/json',
-				data : JSON.stringify(data),
-				dataType : 'json',
-				success : function(result) {
-					window.location.href = "${loginURL};
-				},
-				error : function(error) {
-					window.location.href = "${sigupURL};
-				}
+		$('#btnRegister').click(function(e) {
+			e.preventDefault();
+			var data = {};
+			var formData = $('#formSubmit').serializeArray();
+			$.each(formData, function(i, v) {
+				data["" + v.name + ""] = v.value;
 			});
-}
-</script>
+			register(data);
+		});
+
+		function register(data) {
+			$
+					.ajax({
+						url : '${registerAPI}',
+						type : 'POST',
+						contentType : 'application/json',
+						data : JSON.stringify(data),
+						dataType : 'json',
+						success : function(result) {
+							window.location.href = "${loginURL}";
+						},
+						error : function(error) {
+							window.location.href = "${sigupURL}";
+						}
+					});
+		}
+	</script>
 
 </body>
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.service.IUser;
 
-@RestController()
+@RestController(value = "registerAPI")
 public class RegisterAPI {
 	@Autowired
 	private IUser userService;

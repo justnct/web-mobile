@@ -186,7 +186,6 @@ public class HomeController {
 	public ModelAndView registerWeb() {
 		ModelAndView mav = new ModelAndView("register");
 		UserDTO model = new UserDTO();
-//		BrandDTO model = new BrandDTO();
 		mav.addObject("model",model);
 		return mav;
 	}
