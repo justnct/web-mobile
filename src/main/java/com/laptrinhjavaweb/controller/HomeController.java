@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.laptrinhjavaweb.FormatNumber;
 import com.laptrinhjavaweb.dto.BrandDTO;
 import com.laptrinhjavaweb.dto.ProductDTO;
+import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.service.IBrandService;
 import com.laptrinhjavaweb.service.ICartService;
 import com.laptrinhjavaweb.service.IProductService;
@@ -180,6 +181,16 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
+	public ModelAndView registerWeb() {
+		ModelAndView mav = new ModelAndView("register");
+		UserDTO model = new UserDTO();
+//		BrandDTO model = new BrandDTO();
+		mav.addObject("model",model);
+		return mav;
+	}
+
 
 	@RequestMapping(value = "/quan-tri", method = RequestMethod.GET)
 	public ModelAndView adminWeb() {

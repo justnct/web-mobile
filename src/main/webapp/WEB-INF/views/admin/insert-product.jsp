@@ -64,9 +64,8 @@
 					<div class="col-75">
 						<input type="file" class="col-xs-10 col-sm-5" id="uploadFile"
 							name="uploadFile" value="${model.nameImg}" />
-						<input type="text" class="col-xs-10 col-sm-5" id="nameImg"
-							name="nameImg" value="uploadFile" />
-					</div>
+						
+					</div> 
 					
 					<!-- <div class="col-25">
 						<label for="smallImg">Hình ảnh nhỏ</label>

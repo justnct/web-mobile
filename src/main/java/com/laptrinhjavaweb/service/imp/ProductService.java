@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.laptrinhjavaweb.converter.ProductConverter;
-
-import com.laptrinhjavaweb.dto.BrandDTO;
 import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.entity.ProductEntity;
 import com.laptrinhjavaweb.repository.ProductRepository;
@@ -145,19 +143,6 @@ public class ProductService implements IProductService{
 		}
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public ProductDTO save(ProductDTO dto) { ProductEntity entity
-	 * = new ProductEntity(); if(dto.getId() > 0) { ProductEntity oldProduct =
-	 * productRepository.findOne(dto.getId()); entity =
-	 * productConverter.toEntity(oldProduct,dto); }else { entity =
-	 * productConverter.toEntity(dto); } return
-	 * productConverter.toDto(productRepository.save(entity)); }
-	 */
-
-
-	
 
 	public ProductDTO getProduct(long id) {
 		// TODO Auto-generated method stub

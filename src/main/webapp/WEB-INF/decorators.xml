@@ -13,4 +13,7 @@
 		<pattern>/quan-tri*</pattern>
 	</decorator>
 	
+	<decorator name="register" page="register.jsp">
+        <pattern>/dang-ky</pattern>
+    </decorator>
 </decorators>

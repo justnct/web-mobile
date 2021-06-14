@@ -180,7 +180,7 @@
 					<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 						<c:param name="id" value="${item.id}" />
 					</c:url>
-					<a href="${chitiet}">
+					
 						<div class="col-lg-4 col-md-6 col-sm-6">
 							<div class="product__item">
 								<div class="product__item__pic set-bg"

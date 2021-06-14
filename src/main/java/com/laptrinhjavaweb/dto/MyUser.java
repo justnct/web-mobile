@@ -9,7 +9,6 @@ public class MyUser extends User {
 	private String fullName;
 	private String userName;
 
-
 	public String getUserName() {
 		return userName;
 	}

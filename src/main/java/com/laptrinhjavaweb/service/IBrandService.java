@@ -6,4 +6,5 @@ import com.laptrinhjavaweb.dto.BrandDTO;
 
 public interface IBrandService {
 	List<BrandDTO> getAllBrand();
+	BrandDTO test(BrandDTO dto);
 }
