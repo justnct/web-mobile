@@ -79,6 +79,7 @@ public class HomeController {
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
 		}
 		mav.addObject("listSalest", mListProductSalest);
+		cart(mav);
 		return mav;
 	}
 
@@ -118,6 +119,7 @@ public class HomeController {
 
 		// count product
 		mav.addObject("countProduct", mListProduct.size());
+		cart(mav);
 
 		return mav;
 	}
@@ -136,29 +138,14 @@ public class HomeController {
 			mav.addObject("img" + i, img);
 		}
 		mav.addObject("product", productDTO);
+		cart(mav);
 		return mav;
 	}
 
 	@RequestMapping(value = "/khach-hang/gio-hang", method = RequestMethod.GET)
 	public ModelAndView shopCartPageWeb() {
 		ModelAndView mav = new ModelAndView("web/trangchu-shop_cart");
-		String list = cartService.getData().getList_product();
-		if (!list.equals("")) {
-			ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
-			for (String result : list.split(",")) {
-				ProductDTO productDTO = productService.getProduct(Long.valueOf(result));
-				if (productDTO.getDiscount() == 0) {
-					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
-				} else {
-					productDTO.setPrice(productDTO.getDiscountPrice());
-					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getDiscountPrice()));
-				}
-				listProduct.add(productDTO);
-			}
-			int price = totalPrice(listProduct);
-			mav.addObject("listProduct", listProduct);
-			mav.addObject("totalPrice", FormatNumber.formatNumber(price));
-		}
+		cart(mav);
 		return mav;
 	}
 
@@ -266,6 +253,30 @@ public class HomeController {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return new ModelAndView("redirect:/dang-nhap");
+	}
+	
+	public void cart(ModelAndView mav) {
+		String list = cartService.getData().getList_product();
+		if (!list.equals("")) {
+			ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
+			for (String result : list.split(",")) {
+				ProductDTO productDTO = productService.getProduct(Long.valueOf(result));
+				if (productDTO.getDiscount() == 0) {
+					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
+				} else {
+					productDTO.setPrice(productDTO.getDiscountPrice());
+					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getDiscountPrice()));
+				}
+				listProduct.add(productDTO);
+			}
+			int price = totalPrice(listProduct);
+			mav.addObject("listProduct", listProduct);
+			mav.addObject("count", listProduct.size());
+			mav.addObject("totalPrice", FormatNumber.formatNumber(price));
+		} else {
+			mav.addObject("count", 0);
+			mav.addObject("totalPrice", FormatNumber.formatNumber(0));
+		}
 	}
 
 }

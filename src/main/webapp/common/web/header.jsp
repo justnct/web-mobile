@@ -79,10 +79,10 @@
 					<div class="header__cart">
 						<ul>
 							<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+							<li><a href="<c:url value='/khach-hang/gio-hang'/>"><i class="fa fa-shopping-bag"></i> <span>${count}</span></a></li>
 						</ul>
 						<div class="header__cart__price">
-							Tổng tiền: <span>$150.00</span>
+							Tổng tiền: <span>${totalPrice}</span>
 						</div>
 					</div>
 				</div>
