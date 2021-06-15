@@ -97,7 +97,7 @@ public class HomeController {
 		for (ProductDTO product : mListProduct) {
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
 		}
-		mav.addObject("listProduct", mListProduct);
+		mav.addObject("listProduct123", mListProduct);
 
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();

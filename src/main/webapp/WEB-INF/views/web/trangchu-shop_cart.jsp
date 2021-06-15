@@ -261,7 +261,7 @@
 		}
 		
 		$('#btnThanhToan').click(function (e) {
-			alert("Xác nhận thanh toán đơn hàng !!!");
+			alert("Xác nhận thanh toán đơn hàng có giá trị ${totalPrice} !!!");
 			var data = {};
 		 	deleteAllProduct(data);
 		});

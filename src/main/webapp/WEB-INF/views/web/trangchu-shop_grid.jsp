@@ -318,7 +318,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<c:forEach var="item" items="${listProduct}">
+						<c:forEach var="item" items="${listProduct123}">
 							<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 								<c:param name="id" value="${item.id}" />
 							</c:url>

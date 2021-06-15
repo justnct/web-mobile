@@ -28,9 +28,7 @@ public class ProductService implements IProductService{
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		List<ProductEntity> mListProductEntities = productRepository.findAll();
 		for(ProductEntity item : mListProductEntities) {
-
 			ProductDTO product = productConverter.converterToDTO(item);
-
 			mListProduct.add(product);
 		}
 		return mListProduct;

@@ -291,10 +291,11 @@ $('#addCart').click(function(e) {
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-            	window.location.href = "/khach-hang/cua-hang";
+            	alert("Sản phẩm đã được thêm vào giỏ...")
+            	window.location.href = "/khach-hang/chi-tiet-san-pham?id=" + result.id;
             },
             error: function (error) {
-            	/* window.location.href = "/khach-hang/cua-hang"; */
+            	window.location.href = "/khach-hang/chi-tiet-san-pham?id=" + result.id;
             }
         });
 	}
