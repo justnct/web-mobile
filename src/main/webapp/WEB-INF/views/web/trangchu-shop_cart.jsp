@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="deleteProduct" value="/api/removeproduct" />
+<c:url var="deleteAllProduct" value="/api/removeAllProduct" />
 <c:url var="cuahang" value="/khach-hang/gio-hang" />
+<c:url var="trangchu" value="/khach-hang/trang-chu" />
 
 
 <!DOCTYPE html>
@@ -195,9 +197,9 @@
 											</div>
 										</td>
 										<td class="shoping__cart__total">${item.converterPrice}</td>
-										<td  class="shoping__cart__item__close"><span id="btn"
-										onclick="deleteProduct(${item.id})"
-											value ="1" class="icon_close"></span></td>
+										<td class="shoping__cart__item__close"><span id="btn"
+											onclick="deleteProduct(${item.id})" value="1"
+											class="icon_close"></span></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -208,10 +210,10 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="shoping__cart__btns">
-						<a href="<c:url value='/khach-hang/trang-chu'/>"
-							class="primary-btn cart-btn">TIẾP TỤC MUA HÀNG</a> <a href="#"
-							class="primary-btn cart-btn cart-btn-right"><span
-							class="icon_loading"></span> Cập nhật giỏ hàng</a>
+						<button id="back" class="primary-btn cart-btn">TIẾP TỤC
+							MUA HÀNG</button>
+						<button id="btnThanhToan"
+							class="primary-btn cart-btn cart-btn-right">THANH TOÁN</button>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -257,6 +259,34 @@
 				}
 			});
 		}
+		
+		$('#btnThanhToan').click(function (e) {
+			alert("Xác nhận thanh toán đơn hàng !!!");
+			var data = {};
+		 	deleteAllProduct(data);
+		});
+		
+		function deleteAllProduct(data) {
+			$.ajax({
+				url : '${deleteAllProduct}',
+				type : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				success : function(result) {
+					window.location.href = "${cuahang}";
+				},
+				error : function(error) {
+					window.location.href = "${cuahang}";
+				}
+			});
+		}
+		
+		$('#back').click(function (e) {
+			window.location.href = "${trangchu}";
+		});
+		
+		
 	</script>
 </body>
 </html>

@@ -31,5 +31,10 @@ public class CartAPI {
 	public void deleteProduct(@RequestBody long id) {
 		cartService.delete(id);
 	}
+	
+	@PostMapping("/api/removeAllProduct")
+	public void removeAllProduct() {
+		cartService.deleteAll();
+	}
 
 }

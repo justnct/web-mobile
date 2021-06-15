@@ -64,4 +64,11 @@ public class CartService implements ICartService {
 		}
 		cartRepository.save(cartEntity);
 	}
+
+	@Override
+	public void deleteAll() {
+		CartEntity cartEntity = cartRepository.findOneByName(SecurityUtils.getPrincipal().getUsername());
+		cartEntity.setList_product("");
+		cartRepository.save(cartEntity);
+	}
 }
