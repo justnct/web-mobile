@@ -3,7 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <%@ page import="com.laptrinhjavaweb.util.SecurityUtils"%>
 <c:url var="addProduct" value="/api/product"/>
-
+<c:url var="chitietURL" value="/khach-hang/chi-tiet-san-pham" />
 
 
 <!DOCTYPE html>
@@ -292,7 +292,7 @@ $('#addCart').click(function(e) {
             dataType: 'json',
             success: function (result) {
             	alert("Sản phẩm đã được thêm vào giỏ...")
-            	window.location.href = "/khach-hang/chi-tiet-san-pham?id=" + result.id;
+            	window.location.href = "${chitietURL}?id=" + result.id;
             },
             error: function (error) {
             	window.location.href = "/khach-hang/chi-tiet-san-pham?id=" + result.id;
