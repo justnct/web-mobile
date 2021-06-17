@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<%@ page import="com.laptrinhjavaweb.FormatNumber"%>
+<c:url var="homeAPI" value="/api/homeList" />
+<c:url var="trangchu" value="/khach-hang/trang-chu" />
 
 
 <!DOCTYPE html>
@@ -166,8 +167,12 @@
 					</div>
 					<div class="featured__controls">
 						<ul>
+							<li data-filter="all"><a href="/khach-hang/trang-chu?nameBrand=all">All</a></li>
 							<c:forEach var="item" items="${list}">
-								<li class="active" data-filter=".${item.name}">${item.name}</li>
+								<c:url var="chitiet" value="/khach-hang/trang-chu">
+									<c:param name="nameBrand" value="${item.name}" />
+								</c:url>
+								<li data-filter=".${item.name}"><a href="${chitiet}">${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -180,27 +185,26 @@
 					<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 						<c:param name="id" value="${item.id}" />
 					</c:url>
-					
-						<div class="col-lg-4 col-md-6 col-sm-6">
-							<div class="product__item">
-								<div class="product__item__pic set-bg"
-									data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
-									alt="">
-									<ul class="product__item__pic__hover">
-										<li><a href="#"><i class="fa fa-heart"></i></a></li>
-										<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-										<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-									</ul>
-								</div>
-								<div class="product__item__text">
-									<h6>
-										<a href="${chitiet}">${item.name}</a>
-									</h6>
-									<h5>${item.converterPrice}</h5>
 
-								</div>
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="product__item">
+							<div class="product__item__pic set-bg"
+								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
+								alt="">
+								<ul class="product__item__pic__hover">
+									<li><a href="#"><i class="fa fa-heart"></i></a></li>
+									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+								</ul>
+							</div>
+							<div class="product__item__text">
+								<h6>
+									<a href="${chitiet}">${item.name}</a>
+								</h6>
+								<h5>${item.converterPrice}</h5>
 							</div>
 						</div>
+					</div>
 					</a>
 				</c:forEach>
 			</div>
@@ -311,8 +315,6 @@
 	<!-- Blog Section End -->
 
 	<!-- Footer Section Begin -->
-
-
 
 
 </body>

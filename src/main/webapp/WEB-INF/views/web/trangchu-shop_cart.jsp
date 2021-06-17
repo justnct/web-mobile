@@ -4,7 +4,7 @@
 <c:url var="deleteProduct" value="/api/removeproduct" />
 <c:url var="deleteAllProduct" value="/api/removeAllProduct" />
 <c:url var="cuahang" value="/khach-hang/gio-hang" />
-<c:url var="trangchu" value="/khach-hang/trang-chu" />
+<c:url var="trangchu" value="/khach-hang/trang-chu?nameBrand=all" />
 
 
 <!DOCTYPE html>

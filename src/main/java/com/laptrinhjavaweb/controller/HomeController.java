@@ -41,7 +41,7 @@ public class HomeController {
 	private ICartService cartService;
 
 	@RequestMapping(value = "/khach-hang/trang-chu", method = RequestMethod.GET)
-	public ModelAndView homePageWeb() {
+	public ModelAndView homePageWeb(@RequestParam(value = "nameBrand") String name) {
 		ModelAndView mav = new ModelAndView("web/trangchu-home");
 		// list brand
 		List<BrandDTO> mListBrand = new ArrayList<BrandDTO>();
@@ -66,11 +66,20 @@ public class HomeController {
 
 		// list best product
 		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
-		mBestListProduct = productService.getBestProduct();
-		for (ProductDTO product : mBestListProduct) {
-			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		if(name.equals("all")) {
+			mBestListProduct = productService.getBestProduct("all");
+			for (ProductDTO product : mBestListProduct) {
+				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			}
+			mav.addObject("listBest", mBestListProduct);
+		} else {
+			mBestListProduct = productService.getBestProduct(name);
+			for (ProductDTO product : mBestListProduct) {
+				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			}
+			mav.addObject("listBest", mBestListProduct);
 		}
-		mav.addObject("listBest", mBestListProduct);
+		
 
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();

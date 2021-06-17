@@ -14,107 +14,109 @@ import com.laptrinhjavaweb.repository.ProductRepository;
 import com.laptrinhjavaweb.service.IProductService;
 
 @Service
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
 	@Autowired
 	private ProductRepository productRepository;
-	
-	
 
 	@Autowired
 	private ProductConverter productConverter;
-	
+
 	@Override
 	public List<ProductDTO> getAllProduct() {
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		for(ProductEntity item : mListProductEntities) {
+		for (ProductEntity item : mListProductEntities) {
 			ProductDTO product = productConverter.converterToDTO(item);
 			mListProduct.add(product);
 		}
 		return mListProduct;
 	}
 
-	
 	@Override
 	public List<ProductDTO> getAllProductNewest() {
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		for(ProductEntity item : mListProductEntities) {
-			if(item.getNewest() == 1) {
-			ProductDTO product = productConverter.converterToDTO(item);
-			mListProduct.add(product);
-			}
-		}
-		return mListProduct;
-	}
-	@Override
-	public List<ProductDTO> getAllProductIsChoice() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		for(ProductEntity item : mListProductEntities) {
-			if(item.getIsChoice() == 1) {
-			ProductDTO product = productConverter.converterToDTO(item);
-			mListProduct.add(product);
-			}
-		}
-		return mListProduct;
-	}
-	
-	
-	@Override
-	public List<ProductDTO> getAllProductSalest() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		for(ProductEntity item : mListProductEntities) {
-			if(item.getSalest() == 1) {
-			ProductDTO product = productConverter.converterToDTO(item);
-			mListProduct.add(product);
+		for (ProductEntity item : mListProductEntities) {
+			if (item.getNewest() == 1) {
+				ProductDTO product = productConverter.converterToDTO(item);
+				mListProduct.add(product);
 			}
 		}
 		return mListProduct;
 	}
 
+	@Override
+	public List<ProductDTO> getAllProductIsChoice() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		for (ProductEntity item : mListProductEntities) {
+			if (item.getIsChoice() == 1) {
+				ProductDTO product = productConverter.converterToDTO(item);
+				mListProduct.add(product);
+			}
+		}
+		return mListProduct;
+	}
+
+	@Override
+	public List<ProductDTO> getAllProductSalest() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		for (ProductEntity item : mListProductEntities) {
+			if (item.getSalest() == 1) {
+				ProductDTO product = productConverter.converterToDTO(item);
+				mListProduct.add(product);
+			}
+		}
+		return mListProduct;
+	}
 
 	@Override
 	public int countProduct() {
 		return getAllProduct().size();
 	}
 
-
 	@Override
 	public List<ProductDTO> getAllProductDiscount() {
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		for(ProductEntity item : mListProductEntities) {
-			if(item.getDiscount() > 0) {
-			ProductDTO product = productConverter.converterToDTO(item);
-			mListProduct.add(product);
+		for (ProductEntity item : mListProductEntities) {
+			if (item.getDiscount() > 0) {
+				ProductDTO product = productConverter.converterToDTO(item);
+				mListProduct.add(product);
 			}
 		}
 		return mListProduct;
 	}
-
 
 	@Override
-	public List<ProductDTO> getBestProduct() {
+	public List<ProductDTO> getBestProduct(String brand) {
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		for(ProductEntity item : mListProductEntities) {
-			if(item.getPrice() > 20000000) {
-			ProductDTO product = productConverter.converterToDTO(item);
-			mListProduct.add(product);
+		if (brand.equals("all")) {
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getPrice() > 20000000) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
+		} else {
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getPrice() > 20000000 && item.getName().toLowerCase().contains(brand.toLowerCase())) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
 			}
 		}
+
 		return mListProduct;
 	}
-
 
 	@Override
 	public ProductDTO findById(Long id) {
 		ProductEntity entity = productRepository.findOne(id);
 		return productConverter.toDto(entity);
 	}
-
 
 	@Override
 	@Transactional
@@ -123,24 +125,21 @@ public class ProductService implements IProductService{
 		return productConverter.toDto(productRepository.save(entity));
 	}
 
-
 	@Override
 	@Transactional
 	public ProductDTO update(ProductDTO dto) {
 		ProductEntity oldProduct = productRepository.findOne(dto.getId());
-		ProductEntity updateProduct = productConverter.toEntity(oldProduct,dto);
+		ProductEntity updateProduct = productConverter.toEntity(oldProduct, dto);
 		return productConverter.toDto(productRepository.save(updateProduct));
 	}
-
 
 	@Override
 	@Transactional
 	public void delete(long[] ids) {
-		for (long id: ids) {
+		for (long id : ids) {
 			productRepository.delete(id);
 		}
 	}
-
 
 	public ProductDTO getProduct(long id) {
 		// TODO Auto-generated method stub

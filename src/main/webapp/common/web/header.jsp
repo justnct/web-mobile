@@ -65,7 +65,7 @@
 					<nav class="header__menu">
 						<ul>
 							<li class="active"><a
-								href="<c:url value='/khach-hang/trang-chu'/>">Trang chủ</a></li>
+								href="<c:url value='/khach-hang/trang-chu?nameBrand=all'/>">Trang chủ</a></li>
 							<li><a href="<c:url value='/khach-hang/cua-hang'/>">Cửa
 									hàng</a></li>
 							<li><a href="<c:url value='/khach-hang/gio-hang'/>">Giỏ

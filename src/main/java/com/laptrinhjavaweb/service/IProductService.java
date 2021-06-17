@@ -17,7 +17,7 @@ public interface IProductService {
 
 	List<ProductDTO> getAllProductDiscount();
 
-	List<ProductDTO> getBestProduct();
+	List<ProductDTO> getBestProduct(String name);
 
 
 	ProductDTO findById(Long id);
