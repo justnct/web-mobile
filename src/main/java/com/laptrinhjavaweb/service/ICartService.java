@@ -8,4 +8,5 @@ public interface ICartService {
 	CartDTO getData();
 	void delete(Long id);
 	void deleteAll();
+	void addCart(String name);
 }

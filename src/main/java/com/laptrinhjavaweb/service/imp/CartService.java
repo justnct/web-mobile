@@ -71,4 +71,13 @@ public class CartService implements ICartService {
 		cartEntity.setList_product("");
 		cartRepository.save(cartEntity);
 	}
+
+	@Override
+	public void addCart(String name) {
+		// TODO Auto-generated method stub
+		CartEntity cartEntity = new CartEntity();
+		cartEntity.setName(name);
+		cartEntity.setList_product("");
+		cartRepository.save(cartEntity);
+	}
 }
