@@ -66,10 +66,8 @@
 	<!-- Footer Section End -->
 
 	<!-- Js Plugins -->
-	<script src="<c:url value='/template/web/js/jquery-3.3.1.min.js'/>"></script>
-	<script src="<c:url value='/template/web/js/bootstrap.min.js'/>"></script>
 	<script
-		src="<c:url value='/template/web/js/jquery.nice-select.min.js'/>s"></script>
+		src="<c:url value='/template/web/js/jquery.nice-select.min.js'/>"></script>
 	<script src="<c:url value='/template/web/js/jquery-ui.min.js'/>"></script>
 	<script src="<c:url value='/template/web/js/jquery.slicknav.js'/>"></script>
 	<script src="<c:url value='/template/web/js/mixitup.min.js'/>"></script>

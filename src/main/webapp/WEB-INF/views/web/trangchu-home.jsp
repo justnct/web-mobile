@@ -109,7 +109,7 @@
 						</div>
 						<ul>
 							<c:forEach var="item" items="${list}">
-								<li><a href="#">Điện thoại ${item.name}</a></li>
+								<li><a href="#product">Điện thoại ${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -163,7 +163,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<h2>Sản Phẩm Nổi Bật</h2>
+						<h2 id="product">Sản Phẩm Nổi Bật</h2>
 					</div>
 					<div class="featured__controls">
 						<ul>

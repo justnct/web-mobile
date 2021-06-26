@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Trang chủ</title>
+<title>T&T Shop</title>
 </head>
 <body>
 	<header class="header">
@@ -66,7 +66,7 @@
 						<ul>
 							<li class="active"><a
 								href="<c:url value='/khach-hang/trang-chu?nameBrand=all'/>">Trang chủ</a></li>
-							<li><a href="<c:url value='/khach-hang/cua-hang'/>">Cửa
+							<li><a href="<c:url value='/customer/cua-hang?page=1&limit=9'/>">Cửa
 									hàng</a></li>
 							<li><a href="<c:url value='/khach-hang/gio-hang'/>">Giỏ
 									hàng</a></li>

@@ -1,107 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Trang chủ</title>
-
-<meta charset="UTF-8">
-<meta name="description" content="Ogani Template">
-<meta name="keywords" content="Ogani, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <title>jQuery Pagination plugin</title>
+   <link rel="stylesheet"
+	href="<c:url value='/template/web/css/bootstrap.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/font-awesome.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/elegant-icons.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/nice-select.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/jquery-ui.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/owl.carousel.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/slicknav.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/style.css' />" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-<script
 	src='<c:url value='/template/web/pagging/jquery.twbsPagination.js'/>'
 	type="text/javascript"></script>
-
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
-
-<!-- Css Styles -->
-
-
-
 </head>
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
-	<!-- Humberger Begin -->
-	<div class="humberger__menu__overlay"></div>
-	<div class="humberger__menu__wrapper">
-		<div class="humberger__menu__logo">
-			<a href="#"><img src="img/logo.png" alt=""></a>
-		</div>
-		<div class="humberger__menu__cart">
-			<ul>
-				<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-				<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-			</ul>
-			<div class="header__cart__price">
-				item: <span>$150.00</span>
-			</div>
-		</div>
-		<div class="humberger__menu__widget">
-			<div class="header__top__right__language">
-				<img src="img/language.png" alt="">
-				<div>English</div>
-				<span class="arrow_carrot-down"></span>
-				<ul>
-					<li><a href="#">Spanish</a></li>
-					<li><a href="#">English</a></li>
-				</ul>
-			</div>
-			<div class="header__top__right__auth">
-				<a href="#"><i class="fa fa-user"></i> Login</a>
-			</div>
-		</div>
-		<nav class="humberger__menu__nav mobile-menu">
-			<ul>
-				<li class="active"><a href="./index.html">Home</a></li>
-				<li><a href="./shop-grid.html">Shop</a></li>
-				<li><a href="#">Pages</a>
-					<ul class="header__menu__dropdown">
-						<li><a href="./shop-details.html">Shop Details</a></li>
-						<li><a href="./shoping-cart.html">Shoping Cart</a></li>
-						<li><a href="./checkout.html">Check Out</a></li>
-						<li><a href="./blog-details.html">Blog Details</a></li>
-					</ul></li>
-				<li><a href="./blog.html">Blog</a></li>
-				<li><a href="./contact.html">Contact</a></li>
-			</ul>
-		</nav>
-		<div id="mobile-menu-wrap"></div>
-		<div class="header__top__right__social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a>
-			<a href="#"><i class="fa fa-pinterest-p"></i></a>
-		</div>
-		<div class="humberger__menu__contact">
-			<ul>
-				<li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-				<li>Free Shipping for all Order of $99</li>
-			</ul>
-		</div>
-	</div>
-	<!-- Humberger End -->
-
-	<!-- Header Section Begin -->
-
-	<!-- Header Section End -->
-
-	<!-- Hero Section Begin -->
+	<%@ include file="/common/web/header.jsp"%>
 	<section class="hero hero-normal">
 		<div class="container">
 			<div class="row">
@@ -142,27 +79,6 @@
 			</div>
 		</div>
 	</section>
-	<!-- Hero Section End -->
-
-	<!-- Breadcrumb Section Begin -->
-	<!-- <section class="breadcrumb-section set-bg"
-		data-setbg="img/breadcrumb.jpg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="breadcrumb__text">
-						<h2>Organi Shop</h2>
-						<div class="breadcrumb__option">
-							<a href="./index.html">Home</a> <span>Shop</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!-- Breadcrumb Section End -->
-
-	<!-- Product Section Begin -->
 	<section class="product spad">
 		<div class="container">
 			<div class="row">
@@ -345,23 +261,19 @@
 						</c:forEach>
 					</div>
 				</div>
-
-
+				
 			</div>
 		</div>
+
 	</section>
-
-	<div class="product__pagination">
-		<nav aria-label="Page navigation">
-			<ul id="pagination" class="pagination"></ul>
-		</nav>
-	</div>
-	<!-- Product Section End -->
-
-	<!-- Footer Section Begin -->
-
-
-	<script>
+<div class="container">
+    <nav aria-label="Page navigation">
+        <ul class="pagination" id="pagination">
+        </ul>
+    </nav>
+</div>
+	<%@ include file="/common/web/footer.jsp"%>
+<script type="text/javascript">
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: 35,
@@ -369,10 +281,10 @@
             onPageClick: function (event, page) {
                 console.info(page + ' (from options)');
             }
-        })
+        }).on('page', function (event, page) {
+            console.info(page + ' (from event listening)');
         });
     });
 </script>
-
 </body>
 </html>

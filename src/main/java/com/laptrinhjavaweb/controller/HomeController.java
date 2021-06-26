@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -66,7 +69,7 @@ public class HomeController {
 
 		// list best product
 		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
-		if(name.equals("all")) {
+		if (name.equals("all")) {
 			mBestListProduct = productService.getBestProduct("all");
 			for (ProductDTO product : mBestListProduct) {
 				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -79,7 +82,6 @@ public class HomeController {
 			}
 			mav.addObject("listBest", mBestListProduct);
 		}
-		
 
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
@@ -177,15 +179,60 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
 	public ModelAndView registerWeb() {
 		ModelAndView mav = new ModelAndView("register");
 		UserDTO model = new UserDTO();
-		mav.addObject("model",model);
+		mav.addObject("model", model);
 		return mav;
 	}
 
+	@RequestMapping(value = "/customer/cua-hang", method = RequestMethod.GET)
+	public ModelAndView test(@RequestParam("page") int page, @RequestParam("limit") int limit) {
+		ModelAndView mav = new ModelAndView("test");
+		Pageable pageable = new PageRequest(page - 1, limit);
+		mav.addObject("page", page);
+
+		// list brand
+		List<BrandDTO> mListBrand = new ArrayList<BrandDTO>();
+		mListBrand = brandService.getAllBrand();
+		mav.addObject("list", mListBrand);
+
+		// list product
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		mListProduct = productService.getAllProduct(pageable);
+		mav.addObject("totalPage", Math.ceil((double) productService.getTotalItem() / limit));
+		for (ProductDTO product : mListProduct) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
+		mav.addObject("listProduct123", mListProduct);
+
+		// list product salest
+		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
+		mListProductSalest = productService.getAllProductSalest();
+		for (ProductDTO product : mListProductSalest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
+		mav.addObject("listSalest", mListProductSalest);
+
+		// list product discount
+		List<ProductDTO> mListProductDiscount = new ArrayList<ProductDTO>();
+		mListProductDiscount = productService.getAllProductDiscount();
+		for (ProductDTO product : mListProductDiscount) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			product.setConverterDisPrice(FormatNumber.formatNumber(product.getDiscountPrice()));
+		}
+
+		mav.addObject("listDiscount", mListProductDiscount);
+
+		// count product
+		mav.addObject("countProduct", mListProduct.size());
+		cart(mav);
+
+//				Pageable pageable = new PageRequest(page, limit);
+		return mav;
+	}
 
 	@RequestMapping(value = "/quan-tri", method = RequestMethod.GET)
 	public ModelAndView adminWeb() {
@@ -212,6 +259,12 @@ public class HomeController {
 	@RequestMapping(value = "/quan-tri/danh-sach-user", method = RequestMethod.GET)
 	public ModelAndView adminListUser() {
 		ModelAndView mav = new ModelAndView("admin/list-user");
+		return mav;
+	}
+
+	@RequestMapping(value = "/huhu", method = RequestMethod.GET)
+	public ModelAndView adminListUse() {
+		ModelAndView mav = new ModelAndView("huhu");
 		return mav;
 	}
 
@@ -263,7 +316,7 @@ public class HomeController {
 		}
 		return new ModelAndView("redirect:/dang-nhap");
 	}
-	
+
 	public void cart(ModelAndView mav) {
 		String list = cartService.getData().getList_product();
 		if (!list.equals("")) {

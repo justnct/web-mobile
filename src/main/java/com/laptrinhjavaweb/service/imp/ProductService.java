@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -147,4 +148,21 @@ public class ProductService implements IProductService {
 		ProductDTO product = productConverter.converterToDTO(productEntity);
 		return product;
 	}
+
+	@Override
+	public List<ProductDTO> getAllProduct(Pageable pageable) {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll(pageable).getContent();
+		for (ProductEntity item : mListProductEntities) {
+			ProductDTO product = productConverter.converterToDTO(item);
+			mListProduct.add(product);
+		}
+		return mListProduct;
+	}
+	
+	@Override
+	public int getTotalItem() {
+		return (int) productRepository.count();
+	}
+
 }
