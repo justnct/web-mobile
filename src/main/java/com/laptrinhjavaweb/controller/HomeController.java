@@ -227,10 +227,9 @@ public class HomeController {
 		mav.addObject("listDiscount", mListProductDiscount);
 
 		// count product
-		mav.addObject("countProduct", mListProduct.size());
+		mav.addObject("countProduct", productService.getTotalItem());
 		cart(mav);
 
-//				Pageable pageable = new PageRequest(page, limit);
 		return mav;
 	}
 
