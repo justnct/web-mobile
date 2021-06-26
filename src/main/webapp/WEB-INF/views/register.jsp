@@ -34,6 +34,9 @@
 							</div>
 							<form:form id="formSubmit" modelAttribute="model">
 								<!--  <div class="form-group row"> -->
+								<c:if test="${duplicated != null}">
+									<div id="asd" class="alert alert-danger">Tài khoản đã tồn tại</div>
+								</c:if>
 								<div class="col-25">
 									<label for="fullName">Họ và tên</label>
 								</div>
@@ -74,20 +77,18 @@
 
 	</div>
 	<script type="text/javascript">
+		$('#btnRegister').click(function(e) {
+			e.preventDefault();
+			var data = {};
+			var formData = $('#formSubmit').serializeArray();
+			$.each(formData, function(i, v) {
+				data["" + v.name + ""] = v.value;
+			});
+			register(data);
+		});
 
-$('#btnRegister').click(function(e) {
-	e.preventDefault();
-	var data = {};
-	var formData = $('#formSubmit').serializeArray();
-	$.each(formData, function(i, v) {
-		data["" + v.name + ""] = v.value;
-	});
-	register(data);
-});
-
-function register(data) {
-	$
-			.ajax({
+		function register(data) {
+			$.ajax({
 				url : '${registerAPI}',
 				type : 'POST',
 				contentType : 'application/json',
@@ -97,11 +98,11 @@ function register(data) {
 					window.location.href = "${loginURL}";
 				},
 				error : function(error) {
-					window.location.href = "${sigupURL}";
+					window.location.href = "${signupURL}";
 				}
 			});
-}
-</script>
+		}
+	</script>
 
 </body>
 

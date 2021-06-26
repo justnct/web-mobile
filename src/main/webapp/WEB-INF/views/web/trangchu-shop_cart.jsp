@@ -3,7 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="deleteProduct" value="/api/removeproduct" />
 <c:url var="deleteAllProduct" value="/api/removeAllProduct" />
-<c:url var="cuahang" value="/customer/cua-hang" />
+<c:url var="cuahang" value="/customer/cua-hang?page=1&limit=9" />
 <c:url var="trangchu" value="/khach-hang/trang-chu?nameBrand=all" />
 
 

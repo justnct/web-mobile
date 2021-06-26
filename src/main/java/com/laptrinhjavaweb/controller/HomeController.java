@@ -69,7 +69,7 @@ public class HomeController {
 
 		// list best product
 		List<ProductDTO> mBestListProduct = new ArrayList<ProductDTO>();
-		if (name.equals("all")) {
+		if (name.equals("All")) {
 			mBestListProduct = productService.getBestProduct("all");
 			for (ProductDTO product : mBestListProduct) {
 				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -181,8 +181,11 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
-	public ModelAndView registerWeb() {
+	public ModelAndView registerWeb(@RequestParam(value = "duplicated", required = false) String name) {
 		ModelAndView mav = new ModelAndView("register");
+		if(name != null) {
+			mav.addObject("duplicated", "asd");
+		}
 		UserDTO model = new UserDTO();
 		mav.addObject("model", model);
 		return mav;

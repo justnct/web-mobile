@@ -167,12 +167,11 @@
 					</div>
 					<div class="featured__controls">
 						<ul>
-							<li data-filter="all"><a href="/khach-hang/trang-chu?nameBrand=all">All</a></li>
 							<c:forEach var="item" items="${list}">
 								<c:url var="chitiet" value="/khach-hang/trang-chu">
 									<c:param name="nameBrand" value="${item.name}" />
 								</c:url>
-								<li data-filter=".${item.name}"><a href="${chitiet}">${item.name}</a></li>
+								<li data-filter=".${item.name}"><a href="${chitiet}#product">${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -180,7 +179,7 @@
 			</div>
 
 
-			<div class="row featured__filter">
+			<div class="row featured__filter" >
 				<c:forEach var="item" items="${listBest}">
 					<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 						<c:param name="id" value="${item.id}" />

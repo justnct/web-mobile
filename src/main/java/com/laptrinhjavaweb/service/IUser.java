@@ -4,5 +4,5 @@ import com.laptrinhjavaweb.dto.UserDTO;
 
 public interface IUser{
 
-	void register(UserDTO user);
+	boolean register(UserDTO user);
 }

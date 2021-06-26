@@ -12,6 +12,10 @@
 		disable-url-rewriting="true">
 		<intercept-url pattern="/quan-tri/*"
 			access="hasAnyRole('ADMIN')" />
+			<intercept-url pattern="/khach-hang/*"
+			access="hasAnyRole('USER')" />
+			<intercept-url pattern="/customer/*"
+			access="hasAnyRole('USER')" />
 		<access-denied-handler
 			error-page="/accessDenied" />
 		<form-login login-page="/dang-nhap"

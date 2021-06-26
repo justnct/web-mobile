@@ -216,7 +216,7 @@
 
 					</div>
 					<div class="filter__item">
-						<div class="row">
+						<div class="row" id="haha">
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
 									<span>Sắp xếp theo</span> <select>
@@ -265,11 +265,6 @@
 						</c:forEach>
 					</div>
 				</div>
-				<!-- <div class="product__pagination">
-					<nav aria-label="Page navigation">
-						<ul class="pagination" id="pagination"></ul>
-					</nav>
-				</div> -->
 			</div>
 		</div>
 
@@ -296,7 +291,7 @@
             	if (currentPage != page) {
             		$('#limit').val(9);
 					$('#page').val(page);
-					window.location.href = "${cuahang}?page=" +page+"&limit=9" ;
+					window.location.href = "${cuahang}?page=" +page+"&limit=9#haha" ;
 				}
             }
         });

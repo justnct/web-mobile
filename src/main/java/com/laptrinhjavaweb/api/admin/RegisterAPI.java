@@ -29,9 +29,10 @@ public class RegisterAPI {
 	@PostMapping("/api/register")
 	public UserDTO createUser(@RequestBody UserDTO user) {
 		user.setPassword(String.valueOf(passwordEncoder.encode(user.getPassword())));
-		userService.register(user);
-		roleService.addRole();
-		cartService.addCart(user.getUserName());
+		if(userService.register(user)) {
+			roleService.addRole();
+			cartService.addCart(user.getUserName());
+		}		
 		return user;
 	}
 }

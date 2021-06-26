@@ -7,39 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Đăng nhập</title>
 </head>
-<%-- <body>
-	<div class="container">
-		<!-- <h1 class="form-heading">login Form</h1> -->
-		<div class="login-form">
-			<div class="main-div">
-				<c:if test="${param.incorrectAccount != null}">
-					<div class="alert alert-danger">	
-							Tài khoản hoặc tên đăng nhập sai
-					</div>
-				</c:if>
-				<c:if test="${param.accessDenied != null}">
-					<div class="alert alert-danger">	
-							Bạn không có quyền truy cập
-					</div>
-				</c:if>
-				<form action="j_spring_security_check" id="formLogin" method="post">
-					<div class="form-group">
-						<input type="text" class="form-control" id="userName" name="j_username" placeholder="Tên đăng nhập">
-					</div>
-
-					<div class="form-group">
-						<input type="password" class="form-control" id="password" name="j_password" placeholder="Mật khẩu">
-					</div>
-					<button type="submit" class="btn btn-primary" >Đăng nhập</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-</body> --%>
 
 <body class="bg-gradient-primary">
 
@@ -86,7 +53,7 @@
 										</form>
 										<hr>
 										<div class="text-center">
-											<a class="small" href="forgot-password.html">Quên Mật Khẩu</a>
+											<a class="small" href="">Quên Mật Khẩu</a>
 										</div>
 										<div class="text-center">
 											<a class="small" href='<c:url value="/dang-ky"/>'>Tạo Tài Khoản Mới</a>
@@ -101,6 +68,7 @@
 
 			</div>
 
+		</div>
 		</div>
 </body>
 

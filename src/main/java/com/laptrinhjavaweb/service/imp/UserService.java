@@ -29,14 +29,19 @@ public class UserService implements IUser {
 
 	@Override
 	@Transactional
-	public void register(UserDTO user) {
-		List<RoleEntity> list = new ArrayList<RoleEntity>();
-		RoleEntity roleEntity = roleRepository.findFirstByCode("USER");
-		list.add(roleEntity);
-		UserEntity entity = userConverter.toEntity(user);
-		entity.setRoles(list);
-		entity.setStatus(1);
-		userRepository.save(entity);
+	public boolean register(UserDTO user) {
+		UserEntity checkUser = userRepository.findOneByUserNameAndStatus(user.getUserName(), 1);
+		if(checkUser == null) {
+			List<RoleEntity> list = new ArrayList<RoleEntity>();
+			RoleEntity roleEntity = roleRepository.findFirstByCode("USER");
+			list.add(roleEntity);
+			checkUser = userConverter.toEntity(user);
+			checkUser.setRoles(list);
+			checkUser.setStatus(1);
+			userRepository.save(checkUser);
+			return true;
+		}
+		return false;
 	}
 
 }
