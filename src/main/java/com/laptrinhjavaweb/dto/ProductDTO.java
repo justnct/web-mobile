@@ -14,6 +14,24 @@ public class ProductDTO {
 	private String des;
 	private String converterPrice;
 	private String converterDisPrice;
+	private int count;
+	private String totalPrice;
+
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public String getConverterDisPrice() {
 		return converterDisPrice;

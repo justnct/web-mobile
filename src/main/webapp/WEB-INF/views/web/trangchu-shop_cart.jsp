@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="deleteProduct" value="/api/removeproduct" />
+<c:url var="updateProduct" value="/api/updateProduct" />
 <c:url var="deleteAllProduct" value="/api/removeAllProduct" />
 <c:url var="cuahang" value="/customer/cua-hang?page=1&limit=9" />
 <c:url var="trangchu" value="/khach-hang/trang-chu?nameBrand=all" />
+<c:url var="giohang" value="/khach-hang/gio-hang" />
 
 
 <!DOCTYPE html>
@@ -27,8 +29,6 @@
 
 
 <body>
-	
-
 	<!-- Shoping Cart Section Begin -->
 	<section class="shoping-cart spad">
 		<div class="container">
@@ -50,19 +50,21 @@
 								<c:forEach var="item" items="${listProduct}">
 									<tr>
 										<td class="shoping__cart__price"><img
-										src='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
-										width="80px" height="80px"></td>
+											src='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
+											width="80px" height="80px"></td>
 										<td class="shoping__cart__product">
-											<h5>${item.name}</h5></td>
+											<h5>${item.name}</h5>
+										</td>
 										<td class="shoping__cart__total">${item.converterPrice}</td>
 										<td class="shoping__cart__quantity">
 											<div class="quantity">
-												<div class="pro-qty">
-													<input type="text" value="1">
+												<div id ="catchme${item.id}" class="pro-qty">
+													<input id="quantity${item.id}" type="text" value="${item.count}"
+														onchange="changeQuantity(${item.id})">
 												</div>
 											</div>
 										</td>
-										<td class="shoping__cart__total">${item.converterPrice}</td>
+										<td class="shoping__cart__total">${item.totalPrice}</td>
 										<td class="shoping__cart__item__close"><span id="btn"
 											onclick="deleteProduct(${item.id})" value="1"
 											class="icon_close"></span></td>
@@ -100,7 +102,7 @@
 							<li>Tổng cộng <span>${totalPrice}</span></li>
 							<li>Thành tiền <span>${totalPrice}</span></li>
 						</ul>
-						<a href="#" class="primary-btn">THANH TOÁN</a>
+						<a class="primary-btn">THANH TOÁN</a>
 					</div>
 				</div>
 			</div>
@@ -110,6 +112,38 @@
 
 	<!-- Footer Section Begin -->
 	<script type="text/javascript">
+	
+		function changeQuantity(data) {
+			var data1 = {};
+			var name1 = 'id';
+			var value1 = data;
+			var name2 = 'count';
+			var value2 = document.getElementById("quantity"+data).value;
+			if(value2 > 0) {
+				data1[""+name1+""] = value1;
+				data1[""+name2+""] = value2;
+				updateProduct(data1);
+			} else {
+				alert("Vui lòng nhập số vào nha chái chim dấu pé 3 !!!");
+			}
+		}
+		
+		function updateProduct(data) {
+			$.ajax({
+				url : '${updateProduct}',
+				type : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				success : function(result) {
+					window.location.href = "${giohang}";
+				},
+				error : function(error) {
+					window.location.href = "${giohang}";
+				}
+			});
+		}
+	
 		function deleteProduct(data) {
 			$.ajax({
 				url : '${deleteProduct}',
@@ -140,10 +174,10 @@
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(result) {
-					window.location.href = "${cuahang}";
+					window.location.href = "${giohang}";
 				},
 				error : function(error) {
-					window.location.href = "${cuahang}";
+					window.location.href = "${giohang}";
 				}
 			});
 		}
