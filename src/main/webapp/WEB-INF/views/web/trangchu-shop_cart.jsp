@@ -32,7 +32,7 @@
 	<!-- Shoping Cart Section Begin -->
 	<section class="shoping-cart spad">
 		<div class="container">
-			<div class="row">
+			<div class="row" id="row">
 				<div class="col-lg-12">
 					<div class="shoping__cart__table">
 						<table>
@@ -58,8 +58,9 @@
 										<td class="shoping__cart__total">${item.converterPrice}</td>
 										<td class="shoping__cart__quantity">
 											<div class="quantity">
-												<div id ="catchme${item.id}" class="pro-qty">
-													<input id="quantity${item.id}" type="text" value="${item.count}"
+												<div class="pro-qty">
+													<input id="quantity${item.id}" type="text"
+														value="${item.count}"
 														onchange="changeQuantity(${item.id})">
 												</div>
 											</div>
@@ -80,8 +81,9 @@
 					<div class="shoping__cart__btns">
 						<button id="back" class="primary-btn cart-btn">TIẾP TỤC
 							MUA HÀNG</button>
-						<button id="btnThanhToan"
-							class="primary-btn cart-btn cart-btn-right">THANH TOÁN</button>
+						<button id="btnCapNhat"
+							class="primary-btn cart-btn cart-btn-right"
+							onclick="warningBeforeUpdate()">CẬP NHẬT GIỎ HÀNG</button>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -102,7 +104,7 @@
 							<li>Tổng cộng <span>${totalPrice}</span></li>
 							<li>Thành tiền <span>${totalPrice}</span></li>
 						</ul>
-						<a class="primary-btn">THANH TOÁN</a>
+						<button id="btnThanhToan" class="primary-btn">THANH TOÁN</button>
 					</div>
 				</div>
 			</div>
@@ -113,18 +115,41 @@
 	<!-- Footer Section Begin -->
 	<script type="text/javascript">
 	
+	function warningBeforeUpdate() {
+		swal({
+		  title: "Xác nhận cập nhật",
+		  text: "Bạn có chắc chắn muốn cập nhật hay không",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonClass: "btn-success",
+		  cancelButtonClass: "btn-danger",
+		  confirmButtonText: "Xác nhận",
+		  cancelButtonText: "Hủy bỏ",
+		}).then(function(isConfirm) {
+		  if (isConfirm) {
+			  var data = [];
+				<c:forEach var="item" items="${listProduct}">
+				  	var dataObject = {};
+				  	var name1 = 'id';
+					var value1 = '${item.id}';
+					var name2 = 'count';
+					var value2 = document.getElementById("quantity"+${item.id}).value;
+					dataObject[""+name1+""] = value1;
+					dataObject[""+name2+""] = value2;
+					alert(value1 + " " + value2);
+				</c:forEach>
+				updateProduct(data);
+		  }
+		});
+} 
+	
 		function changeQuantity(data) {
-			var data1 = {};
-			var name1 = 'id';
-			var value1 = data;
-			var name2 = 'count';
 			var value2 = document.getElementById("quantity"+data).value;
+			var result = document.querySelector("#quantity"+data);
 			if(value2 > 0) {
-				data1[""+name1+""] = value1;
-				data1[""+name2+""] = value2;
-				updateProduct(data1);
-			} else {
-				alert("Vui lòng nhập số vào nha chái chim dấu pé 3 !!!");
+			} else { 
+				result.value = "1";
+				alert("Vui lòng nhập số vào số dương");
 			}
 		}
 		

@@ -145,7 +145,7 @@
 								chiến
 							</h2>
 							<p>Có Tiền Mua Thì Có Điện Thoại Bán</p>
-							<a href="<c:url value='/khach-hang/cua-hang?page=1&limit=9'/>"
+							<a href="<c:url value='/customer/cua-hang?page=1&limit=9'/>"
 								class="primary-btn">MUA LIỀN ĐI</a>
 						</div>
 					</div>

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -56,7 +55,7 @@ public class HomeController {
 		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
 		mListProductNewest = productService.getAllProductNewest();
 		for (ProductDTO product : mListProductNewest) {
-			if(product.getDiscount() > 0) {
+			if (product.getDiscount() > 0) {
 				product.setPrice(product.getDiscountPrice());
 			}
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -67,7 +66,7 @@ public class HomeController {
 		List<ProductDTO> mListProductIsChoice = new ArrayList<ProductDTO>();
 		mListProductIsChoice = productService.getAllProductIsChoice();
 		for (ProductDTO product : mListProductIsChoice) {
-			if(product.getDiscount() > 0) {
+			if (product.getDiscount() > 0) {
 				product.setPrice(product.getDiscountPrice());
 			}
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -79,7 +78,7 @@ public class HomeController {
 		if (name.equals("All")) {
 			mBestListProduct = productService.getBestProduct("all");
 			for (ProductDTO product : mBestListProduct) {
-				if(product.getDiscount() > 0) {
+				if (product.getDiscount() > 0) {
 					product.setPrice(product.getDiscountPrice());
 				}
 				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -88,7 +87,7 @@ public class HomeController {
 		} else {
 			mBestListProduct = productService.getBestProduct(name);
 			for (ProductDTO product : mBestListProduct) {
-				if(product.getDiscount() > 0) {
+				if (product.getDiscount() > 0) {
 					product.setPrice(product.getDiscountPrice());
 				}
 				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -100,7 +99,7 @@ public class HomeController {
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
 		for (ProductDTO product : mListProductSalest) {
-			if(product.getDiscount() > 0) {
+			if (product.getDiscount() > 0) {
 				product.setPrice(product.getDiscountPrice());
 			}
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -180,9 +179,10 @@ public class HomeController {
 		// list product
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
 		mListProduct = productService.getAllProduct(pageable);
+		
 		mav.addObject("totalPage", Math.ceil((double) productService.getTotalItem() / limit));
 		for (ProductDTO product : mListProduct) {
-			if(product.getDiscount() > 0) {
+			if (product.getDiscount() > 0) {
 				product.setPrice(product.getDiscountPrice());
 			}
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -193,7 +193,7 @@ public class HomeController {
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
 		for (ProductDTO product : mListProductSalest) {
-			if(product.getDiscount() > 0) {
+			if (product.getDiscount() > 0) {
 				product.setPrice(product.getDiscountPrice());
 			}
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
@@ -299,22 +299,22 @@ public class HomeController {
 		if (!list.equals("")) {
 			ArrayList<ProductDTO> listProduct = new ArrayList<ProductDTO>();
 			ArrayList<ProductDTO> listProductTest = new ArrayList<ProductDTO>();
-			
-			//key is id of product
-			//integer is amount of product
+
+			// key is id of product
+			// integer is amount of product
 			Map<String, Integer> map = new TreeMap<String, Integer>();
 			for (String result : list.split(",")) {
 				ProductDTO productDTOTest = productService.getProduct(Long.valueOf(result));
-				if(productDTOTest.getDiscount() != 0) {
+				if (productDTOTest.getDiscount() != 0) {
 					productDTOTest.setPrice(productDTOTest.getDiscountPrice());
 				}
-				
-				//Put all product to list
-				//To get product quantity
-				//To get the total amount of the product
+
+				// Put all product to list
+				// To get product quantity
+				// To get the total amount of the product
 				listProductTest.add(productDTOTest);
-				
-				//Collect similar products 
+
+				// Collect similar products
 				addElement(map, result);
 			}
 			for (String key : map.keySet()) {
@@ -327,9 +327,9 @@ public class HomeController {
 					productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getDiscountPrice()));
 					productDTO.setTotalPrice(FormatNumber.formatNumber(map.get(key) * productDTO.getDiscountPrice()));
 				}
-				//put amount to object product
+				// put amount to object product
 				productDTO.setCount(map.get(key));
-				//add object to list object
+				// add object to list object
 				listProduct.add(productDTO);
 			}
 			int price = totalPrice(listProductTest);

@@ -24,9 +24,11 @@ public class CartAPI {
 	}
 
 	@PostMapping("/api/updateProduct")
-	public ProductDTO updateProduct(@RequestBody ProductDTO productDTO) {
-		cartService.updateProduct(productDTO);
-		return productDTO;
+	public ProductDTO[] updateProduct(@RequestBody ProductDTO[] listProductDTO) {
+		for(ProductDTO product:listProductDTO) {
+			cartService.updateProduct(product);
+		}
+		return listProductDTO;
 	}
 
 	@PostMapping("/api/removeproduct")
