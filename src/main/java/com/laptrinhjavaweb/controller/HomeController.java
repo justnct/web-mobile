@@ -197,12 +197,37 @@ public class HomeController {
 		} else {
 			Pageable pageable1 = new PageRequest(page - 1, limit, Direction.DESC, "price");
 			mListProduct = productService.getAllProductOrderByPrice(pageable1);
-			mav.addObject("kimochi", "	<option value=\"desc\">Giá cao -> thấp</option>"
-					+ "	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
-					+ "<option value=\"normal\">Mặc định</option>\r\n");
+			mav.addObject("kimochi",
+					"	<option value=\"desc\">Giá cao -> thấp</option>"
+							+ "	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
+							+ "<option value=\"normal\">Mặc định</option>\r\n");
 		}
 
-		mav.addObject("totalPage", Math.ceil((double) productService.getTotalItem() / limit));
+		// calc total page
+		int totalPage = (productService.getTotalItem() % limit == 0) ? productService.getTotalItem() / limit
+				: productService.getTotalItem() / limit + 1;
+		ArrayList<Integer> listPage = new ArrayList<Integer>();
+		for (int i = 0; i < totalPage; i++) {
+			listPage.add(i + 1);
+		}
+		// put list page
+		mav.addObject("listPage", listPage);
+
+		// put sort
+		mav.addObject("sort", sort);
+
+		// put totalPage
+		mav.addObject("totalPage", totalPage);
+
+		if(page != totalPage) {
+			mav.addObject("numberOfDisplays", limit);
+		} else {
+			int numberOfDisplays = (productService.getTotalItem() % limit == 0) ? limit
+					: productService.getTotalItem() - (limit*(page-1));
+			mav.addObject("numberOfDisplays", numberOfDisplays);
+		}
+		
+
 		for (ProductDTO product : mListProduct) {
 			if (product.getDiscount() > 0) {
 				product.setPrice(product.getDiscountPrice());

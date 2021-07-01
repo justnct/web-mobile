@@ -227,15 +227,14 @@
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
 									<span>Sắp xếp</span> <select id="selectCollection"
-										onchange="change()">
-										${kimochi}
+										onchange="change()"> ${kimochi}
 									</select>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
 								<div class="filter__found">
 									<h6>
-										Tổng số sản phẩm <span> ${countProduct}</span>
+										Hiển thị <span>${numberOfDisplays}</span> trong tổng số <span> ${countProduct}</span> sản phẩm. 
 									</h6>
 								</div>
 							</div>
@@ -246,35 +245,39 @@
 							</div>
 						</div>
 					</div>
-						<div class="row">
-							<c:forEach var="item" items="${listProduct123}">
-								<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
-									<c:param name="id" value="${item.id}" />
-								</c:url>
-								<div class="col-lg-4 col-md-6 col-sm-6">
-									<div class="product__item">
-										<div class="product__item__pic set-bg"
-											data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
-											alt="">
-											<ul class="product__item__pic__hover">
-												<li><a href="#"><i class="fa fa-heart"></i></a></li>
-												<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-												<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-											</ul>
-										</div>
-										<div class="product__item__text">
-											<h6>
-												<a href="${chitiet}">${item.name}</a>
-											</h6>
-											<h5>${item.converterPrice}</h5>
-										</div>
+					<div class="row">
+						<c:forEach var="item" items="${listProduct123}">
+							<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
+								<c:param name="id" value="${item.id}" />
+							</c:url>
+							<div class="col-lg-4 col-md-6 col-sm-6">
+								<div class="product__item">
+									<div class="product__item__pic set-bg"
+										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
+										alt="">
+										<ul class="product__item__pic__hover">
+											<li><a href="#"><i class="fa fa-heart"></i></a></li>
+											<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+										</ul>
+									</div>
+									<div class="product__item__text">
+										<h6>
+											<a href="${chitiet}">${item.name}</a>
+										</h6>
+										<h5>${item.converterPrice}</h5>
 									</div>
 								</div>
+							</div>
+						</c:forEach>
+						<div class="product__pagination">
+							<button onclick="moveBack()">Trang trước</button>
+							<c:forEach var="item" items="${listPage}">
+								<a onclick="choicePage(${item})">${item}</a>
 							</c:forEach>
-							<input type="hidden" value="" id="page" name="page" /> <input
-								type="hidden" value="" id="limit" name="limit" /> <input
-								type="hidden" value="" id="sort" name="sort" />
+							<button onclick="moveForward()">Trang tiếp</button>
 						</div>
+					</div>
 
 				</div>
 			</div>
@@ -293,6 +296,35 @@
 	<%@ include file="/common/web/footer.jsp"%>
 
 	<script type="text/javascript">
+	function moveForward() {
+		var page ="${page}";
+		var totalPage ="${totalPage}";
+		d = document.getElementById("selectCollection").value;
+		if(page != totalPage){
+			var currentPage = Number(page) + 1;
+			window.location.href = "${cuahang}?page="+currentPage+"&limit=9&sort=" +d +"#haha";
+		}else{
+			window.location.href = "${cuahang}?page=1&limit=9&sort=" +d +"#haha";
+		}
+	}
+		
+	
+	function moveBack() {
+		var page ="${page}";
+		var totalPage ="${totalPage}";
+		d = document.getElementById("selectCollection").value;
+		if(page > 1){
+			var currentPage = Number(page) - 1;
+			window.location.href = "${cuahang}?page="+currentPage+"&limit=9&sort=" +d +"#haha";
+		}else{
+			window.location.href = "${cuahang}?page=" + totalPage +"&limit=9&sort=" +d +"#haha";
+		}
+	}
+	
+		function choicePage(data) {
+			d = document.getElementById("selectCollection").value;
+			window.location.href = "${cuahang}?page="+data+"&limit=9&sort=" +d +"#haha";
+		}
 		var totalPages = $
 		{
 			totalPage
