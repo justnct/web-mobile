@@ -57,7 +57,6 @@ public class ProductDTO {
 		this.des = des;
 	}
 
-
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -138,5 +137,4 @@ public class ProductDTO {
 		this.nameLittleImg = nameLittleImg;
 	}
 
-	
 }

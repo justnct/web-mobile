@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -166,8 +167,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/customer/cua-hang", method = RequestMethod.GET)
-	public ModelAndView test(@RequestParam("page") int page, @RequestParam("limit") int limit) {
+	public ModelAndView test(@RequestParam("page") int page, @RequestParam("limit") int limit,
+			@RequestParam("sort") String sort) {
 		ModelAndView mav = new ModelAndView("test");
+
 		Pageable pageable = new PageRequest(page - 1, limit);
 		mav.addObject("page", page);
 
@@ -178,8 +181,27 @@ public class HomeController {
 
 		// list product
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		mListProduct = productService.getAllProduct(pageable);
-		
+		if (sort.equals("normal")) {
+			mListProduct = productService.getAllProduct(pageable);
+			mav.addObject("kimochi",
+					"<option value=\"normal\">Mặc định</option>\r\n"
+							+ "	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
+							+ "	<option value=\"desc\">Giá cao -> thấp</option>");
+		} else if (sort.equals("asc")) {
+			Pageable pageable1 = new PageRequest(page - 1, limit, Direction.ASC, "price");
+			mListProduct = productService.getAllProductOrderByPrice(pageable1);
+			mav.addObject("kimochi",
+					"	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
+							+ "<option value=\"normal\">Mặc định</option>\r\n"
+							+ "	<option value=\"desc\">Giá cao -> thấp</option>");
+		} else {
+			Pageable pageable1 = new PageRequest(page - 1, limit, Direction.DESC, "price");
+			mListProduct = productService.getAllProductOrderByPrice(pageable1);
+			mav.addObject("kimochi", "	<option value=\"desc\">Giá cao -> thấp</option>"
+					+ "	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
+					+ "<option value=\"normal\">Mặc định</option>\r\n");
+		}
+
 		mav.addObject("totalPage", Math.ceil((double) productService.getTotalItem() / limit));
 		for (ProductDTO product : mListProduct) {
 			if (product.getDiscount() > 0) {

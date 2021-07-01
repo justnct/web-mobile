@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="cuahang" value="/customer/cua-hang" />
+<c:url var="sortNormal"
+	value="/customer/cua-hang?page=1&limit=9&sort=normal#haha" />
+<c:url var="sortASC"
+	value="/customer/cua-hang?page=1&limit=9&sort=asc#haha" />
+<c:url var="sortDESC"
+	value="/customer/cua-hang?page=1&limit=9&sort=desc#haha" />
+
 
 <!DOCTYPE html>
 <html>
@@ -219,8 +226,9 @@
 						<div class="row" id="haha">
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
-									<span>Sắp xếp theo</span> <select>
-										<option value="0">Mặc định</option>
+									<span>Sắp xếp</span> <select id="selectCollection"
+										onchange="change()">
+										${kimochi}
 									</select>
 								</div>
 							</div>
@@ -238,32 +246,36 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<c:forEach var="item" items="${listProduct123}">
-							<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
-								<c:param name="id" value="${item.id}" />
-							</c:url>
-							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item">
-									<div class="product__item__pic set-bg"
-										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
-										alt="">
-										<ul class="product__item__pic__hover">
-											<li><a href="#"><i class="fa fa-heart"></i></a></li>
-											<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-										</ul>
-									</div>
-									<div class="product__item__text">
-										<h6>
-											<a href="${chitiet}">${item.name}</a>
-										</h6>
-										<h5>${item.converterPrice}</h5>
+						<div class="row">
+							<c:forEach var="item" items="${listProduct123}">
+								<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
+									<c:param name="id" value="${item.id}" />
+								</c:url>
+								<div class="col-lg-4 col-md-6 col-sm-6">
+									<div class="product__item">
+										<div class="product__item__pic set-bg"
+											data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
+											alt="">
+											<ul class="product__item__pic__hover">
+												<li><a href="#"><i class="fa fa-heart"></i></a></li>
+												<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+												<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+											</ul>
+										</div>
+										<div class="product__item__text">
+											<h6>
+												<a href="${chitiet}">${item.name}</a>
+											</h6>
+											<h5>${item.converterPrice}</h5>
+										</div>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
-					</div>
+							</c:forEach>
+							<input type="hidden" value="" id="page" name="page" /> <input
+								type="hidden" value="" id="limit" name="limit" /> <input
+								type="hidden" value="" id="sort" name="sort" />
+						</div>
+
 				</div>
 			</div>
 		</div>
@@ -273,29 +285,55 @@
 		<ul class="pagination" id="pagination">
 		</ul>
 		<input type="hidden" value="" id="page" name="page" /> <input
-			type="hidden" value="" id="limit" name="limit" />
+			type="hidden" value="" id="limit" name="limit" /> <input
+			type="hidden" value="" id="sort" name="sort" />
 	</nav>
+
 
 	<%@ include file="/common/web/footer.jsp"%>
 
 	<script type="text/javascript">
-		
-	var totalPages = ${totalPage};
-	var currentPage = ${page};
-	$(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 10,
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-            	if (currentPage != page) {
-            		$('#limit').val(9);
-					$('#page').val(page);
-					window.location.href = "${cuahang}?page=" +page+"&limit=9#haha" ;
-				}
-            }
-        });
-    });
+		var totalPages = $
+		{
+			totalPage
+		};
+		var currentPage = $
+		{
+			page
+		};
+		$(function() {
+			window.pagObj = $('#pagination')
+					.twbsPagination(
+							{
+								totalPages : totalPages,
+								visiblePages : 10,
+								startPage : currentPage,
+								onPageClick : function(event, page) {
+									if (currentPage != page) {
+										$('#limit').val(9);
+										$('#page').val(page);
+										d = document
+												.getElementById("selectCollection").value;
+										$('#sort').val(page);
+										window.location.href = "${cuahang}?page="
+												+ page
+												+ "&limit=9&sort="
+												+ d
+												+ "#haha";
+									}
+								}
+							});
+		});
+		function change() {
+			d = document.getElementById("selectCollection").value;
+			if (d == "normal") {
+				window.location.href = "${sortNormal}";
+			} else if (d == "asc") {
+				window.location.href = "${sortASC}";
+			} else {
+				window.location.href = "${sortDESC}";
+			}
+		}
 	</script>
 </body>
 </html>
