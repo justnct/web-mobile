@@ -1,6 +1,8 @@
 package com.laptrinhjavaweb.service.imp;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.laptrinhjavaweb.converter.CartConverter;
 import com.laptrinhjavaweb.dto.CartDTO;
+import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.entity.CartEntity;
 import com.laptrinhjavaweb.repository.CartRepository;
 import com.laptrinhjavaweb.service.ICartService;
@@ -52,7 +55,9 @@ public class CartService implements ICartService {
 		for (String charAt : cartEntity.getList_product().split(",")) {
 			arr.add(charAt);
 		}
-		arr.remove(String.valueOf(id));
+		ArrayList<String> arr2 = new ArrayList<String>();
+		arr2.add(String.valueOf(id));
+		arr.removeAll(arr2);
 		if (arr.size() == 0) {
 			cartEntity.setList_product("");
 		} else {
@@ -78,6 +83,37 @@ public class CartService implements ICartService {
 		CartEntity cartEntity = new CartEntity();
 		cartEntity.setName(name);
 		cartEntity.setList_product("");
+		cartRepository.save(cartEntity);
+	}
+
+	@Override
+	public void updateProduct(ProductDTO productDTO) {
+		CartEntity cartEntity = cartRepository.findOneByName(SecurityUtils.getPrincipal().getUsername());
+		ArrayList<String> list = new ArrayList<String>();
+		int count = 0;
+		String listProduct = cartEntity.getList_product();
+		for (String result : listProduct.split(",")) {
+			list.add(result);
+			if (String.valueOf(productDTO.getId()).equals(result)) {
+				count++;
+			}
+		}
+		// case amout in cart > database
+		if (productDTO.getCount() > count) {
+			for (int i = 0; i < productDTO.getCount() - count; i++) {
+				listProduct += "," + String.valueOf(productDTO.getId());
+			}
+		} else { // case amout in cart > database
+			for (int i = 0; i < count - productDTO.getCount(); i++) {
+				list.remove(String.valueOf(productDTO.getId()));
+			}
+			listProduct = "";
+			for(int i =0; i < list.size();i++) {
+				listProduct += list.get(i) +",";
+			}
+			listProduct = listProduct.substring(0, listProduct.length()-1);
+		}
+		cartEntity.setList_product(listProduct);
 		cartRepository.save(cartEntity);
 	}
 }

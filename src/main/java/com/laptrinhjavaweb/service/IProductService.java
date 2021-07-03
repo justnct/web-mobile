@@ -12,6 +12,8 @@ public interface IProductService {
 	List<ProductDTO> getAllProduct();
 
 	List<ProductDTO> getAllProduct(Pageable pageable);
+	
+	List<ProductDTO> getAllProductOrderByPrice(Pageable pageable);
 
 	List<ProductDTO> getAllProductIsChoice();
 

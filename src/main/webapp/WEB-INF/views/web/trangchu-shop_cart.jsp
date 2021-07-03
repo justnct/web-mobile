@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="deleteProduct" value="/api/removeproduct" />
+<c:url var="updateProduct" value="/api/updateProduct" />
 <c:url var="deleteAllProduct" value="/api/removeAllProduct" />
 <c:url var="cuahang" value="/customer/cua-hang?page=1&limit=9" />
 <c:url var="trangchu" value="/khach-hang/trang-chu?nameBrand=all" />
+<c:url var="giohang" value="/khach-hang/gio-hang" />
 
 
 <!DOCTYPE html>
@@ -27,12 +29,10 @@
 
 
 <body>
-	
-
 	<!-- Shoping Cart Section Begin -->
 	<section class="shoping-cart spad">
 		<div class="container">
-			<div class="row">
+			<div class="row" id="row">
 				<div class="col-lg-12">
 					<div class="shoping__cart__table">
 						<table>
@@ -50,19 +50,22 @@
 								<c:forEach var="item" items="${listProduct}">
 									<tr>
 										<td class="shoping__cart__price"><img
-										src='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
-										width="80px" height="80px"></td>
+											src='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
+											width="80px" height="80px"></td>
 										<td class="shoping__cart__product">
-											<h5>${item.name}</h5></td>
+											<h5>${item.name}</h5>
+										</td>
 										<td class="shoping__cart__total">${item.converterPrice}</td>
 										<td class="shoping__cart__quantity">
 											<div class="quantity">
 												<div class="pro-qty">
-													<input type="text" value="1">
+													<input id="quantity${item.id}" type="text"
+														value="${item.count}"
+														onchange="changeQuantity(${item.id})">
 												</div>
 											</div>
 										</td>
-										<td class="shoping__cart__total">${item.converterPrice}</td>
+										<td class="shoping__cart__total">${item.totalPrice}</td>
 										<td class="shoping__cart__item__close"><span id="btn"
 											onclick="deleteProduct(${item.id})" value="1"
 											class="icon_close"></span></td>
@@ -78,8 +81,9 @@
 					<div class="shoping__cart__btns">
 						<button id="back" class="primary-btn cart-btn">TIẾP TỤC
 							MUA HÀNG</button>
-						<button id="btnThanhToan"
-							class="primary-btn cart-btn cart-btn-right">THANH TOÁN</button>
+						<button id="btnCapNhat"
+							class="primary-btn cart-btn cart-btn-right"
+							onclick="warningBeforeUpdate()">CẬP NHẬT GIỎ HÀNG</button>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -100,7 +104,7 @@
 							<li>Tổng cộng <span>${totalPrice}</span></li>
 							<li>Thành tiền <span>${totalPrice}</span></li>
 						</ul>
-						<a href="#" class="primary-btn">THANH TOÁN</a>
+						<button id="btnThanhToan" class="primary-btn">THANH TOÁN</button>
 					</div>
 				</div>
 			</div>
@@ -110,6 +114,61 @@
 
 	<!-- Footer Section Begin -->
 	<script type="text/javascript">
+	
+	function warningBeforeUpdate() {
+		swal({
+		  title: "Xác nhận cập nhật",
+		  text: "Bạn có chắc chắn muốn cập nhật hay không",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonClass: "btn-success",
+		  cancelButtonClass: "btn-danger",
+		  confirmButtonText: "Xác nhận",
+		  cancelButtonText: "Hủy bỏ",
+		}).then(function(isConfirm) {
+		  if (isConfirm) {
+			  var data = [];
+				<c:forEach var="item" items="${listProduct}">
+				  	var dataObject = {};
+				  	var name1 = 'id';
+					var value1 = '${item.id}';
+					var name2 = 'count';
+					var value2 = document.getElementById("quantity"+${item.id}).value;
+					dataObject[""+name1+""] = value1;
+					dataObject[""+name2+""] = value2;
+					alert(value1 + " " + value2);
+				</c:forEach>
+				updateProduct(data);
+		  }
+		});
+} 
+	
+		function changeQuantity(data) {
+			var value2 = document.getElementById("quantity"+data).value;
+			var result = document.querySelector("#quantity"+data);
+			if(value2 > 0) {
+			} else { 
+				result.value = "1";
+				alert("Vui lòng nhập số vào số dương");
+			}
+		}
+		
+		function updateProduct(data) {
+			$.ajax({
+				url : '${updateProduct}',
+				type : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				success : function(result) {
+					window.location.href = "${giohang}";
+				},
+				error : function(error) {
+					window.location.href = "${giohang}";
+				}
+			});
+		}
+	
 		function deleteProduct(data) {
 			$.ajax({
 				url : '${deleteProduct}',
@@ -140,10 +199,10 @@
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(result) {
-					window.location.href = "${cuahang}";
+					window.location.href = "${giohang}";
 				},
 				error : function(error) {
-					window.location.href = "${cuahang}";
+					window.location.href = "${giohang}";
 				}
 			});
 		}

@@ -38,6 +38,12 @@
 <script
 	src='<c:url value='/template/web/pagging/jquery.twbsPagination.js'/>'
 	type="text/javascript"></script>
+<script
+	src="<c:url value='/template/admin/sweetalert/sweetalert2.min.js' />"></script>
+<link rel="stylesheet"
+	href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" />
+
+
 </head>
 <body>
 

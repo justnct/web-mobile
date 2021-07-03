@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="cuahang" value="/customer/cua-hang" />
+<c:url var="sortNormal"
+	value="/customer/cua-hang?page=1&limit=9&sort=normal#haha" />
+<c:url var="sortASC"
+	value="/customer/cua-hang?page=1&limit=9&sort=asc#haha" />
+<c:url var="sortDESC"
+	value="/customer/cua-hang?page=1&limit=9&sort=desc#haha" />
+
 
 <!DOCTYPE html>
 <html>
@@ -219,15 +226,15 @@
 						<div class="row" id="haha">
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
-									<span>Sắp xếp theo</span> <select>
-										<option value="0">Mặc định</option>
+									<span>Sắp xếp</span> <select id="selectCollection"
+										onchange="change()"> ${kimochi}
 									</select>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
 								<div class="filter__found">
 									<h6>
-										Tổng số sản phẩm <span> ${countProduct}</span>
+										Hiển thị <span>${numberOfDisplays}</span> trong tổng số <span> ${countProduct}</span> sản phẩm. 
 									</h6>
 								</div>
 							</div>
@@ -263,7 +270,15 @@
 								</div>
 							</div>
 						</c:forEach>
+						<div class="product__pagination">
+							<button onclick="moveBack()">Trang trước</button>
+							<c:forEach var="item" items="${listPage}">
+								<a onclick="choicePage(${item})">${item}</a>
+							</c:forEach>
+							<button onclick="moveForward()">Trang tiếp</button>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -273,29 +288,84 @@
 		<ul class="pagination" id="pagination">
 		</ul>
 		<input type="hidden" value="" id="page" name="page" /> <input
-			type="hidden" value="" id="limit" name="limit" />
+			type="hidden" value="" id="limit" name="limit" /> <input
+			type="hidden" value="" id="sort" name="sort" />
 	</nav>
+
 
 	<%@ include file="/common/web/footer.jsp"%>
 
 	<script type="text/javascript">
+	function moveForward() {
+		var page ="${page}";
+		var totalPage ="${totalPage}";
+		d = document.getElementById("selectCollection").value;
+		if(page != totalPage){
+			var currentPage = Number(page) + 1;
+			window.location.href = "${cuahang}?page="+currentPage+"&limit=9&sort=" +d +"#haha";
+		}else{
+			window.location.href = "${cuahang}?page=1&limit=9&sort=" +d +"#haha";
+		}
+	}
 		
-	var totalPages = ${totalPage};
-	var currentPage = ${page};
-	$(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 10,
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-            	if (currentPage != page) {
-            		$('#limit').val(9);
-					$('#page').val(page);
-					window.location.href = "${cuahang}?page=" +page+"&limit=9#haha" ;
-				}
-            }
-        });
-    });
+	
+	function moveBack() {
+		var page ="${page}";
+		var totalPage ="${totalPage}";
+		d = document.getElementById("selectCollection").value;
+		if(page > 1){
+			var currentPage = Number(page) - 1;
+			window.location.href = "${cuahang}?page="+currentPage+"&limit=9&sort=" +d +"#haha";
+		}else{
+			window.location.href = "${cuahang}?page=" + totalPage +"&limit=9&sort=" +d +"#haha";
+		}
+	}
+	
+		function choicePage(data) {
+			d = document.getElementById("selectCollection").value;
+			window.location.href = "${cuahang}?page="+data+"&limit=9&sort=" +d +"#haha";
+		}
+		var totalPages = $
+		{
+			totalPage
+		};
+		var currentPage = $
+		{
+			page
+		};
+		$(function() {
+			window.pagObj = $('#pagination')
+					.twbsPagination(
+							{
+								totalPages : totalPages,
+								visiblePages : 10,
+								startPage : currentPage,
+								onPageClick : function(event, page) {
+									if (currentPage != page) {
+										$('#limit').val(9);
+										$('#page').val(page);
+										d = document
+												.getElementById("selectCollection").value;
+										$('#sort').val(page);
+										window.location.href = "${cuahang}?page="
+												+ page
+												+ "&limit=9&sort="
+												+ d
+												+ "#haha";
+									}
+								}
+							});
+		});
+		function change() {
+			d = document.getElementById("selectCollection").value;
+			if (d == "normal") {
+				window.location.href = "${sortNormal}";
+			} else if (d == "asc") {
+				window.location.href = "${sortASC}";
+			} else {
+				window.location.href = "${sortDESC}";
+			}
+		}
 	</script>
 </body>
 </html>

@@ -109,7 +109,8 @@
 						</div>
 						<ul>
 							<c:forEach var="item" items="${list}">
-								<li><a href="#product">Điện thoại ${item.name}</a></li>
+								<li><a href="<c:url value='/khach-hang/trang-chu?nameBrand=${item.name}#product'/>
+								">Điện thoại ${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -144,7 +145,7 @@
 								chiến
 							</h2>
 							<p>Có Tiền Mua Thì Có Điện Thoại Bán</p>
-							<a href="<c:url value='/khach-hang/cua-hang'/>"
+							<a href="<c:url value='/customer/cua-hang?page=1&limit=9&sort=normal'/>"
 								class="primary-btn">MUA LIỀN ĐI</a>
 						</div>
 					</div>
@@ -171,7 +172,8 @@
 								<c:url var="chitiet" value="/khach-hang/trang-chu">
 									<c:param name="nameBrand" value="${item.name}" />
 								</c:url>
-								<li data-filter=".${item.name}"><a href="${chitiet}#product">${item.name}</a></li>
+								<li data-filter=".${item.name}"><a
+									href="${chitiet}#product">${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -179,7 +181,7 @@
 			</div>
 
 
-			<div class="row featured__filter" >
+			<div class="row featured__filter">
 				<c:forEach var="item" items="${listBest}">
 					<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 						<c:param name="id" value="${item.id}" />

@@ -204,7 +204,7 @@
 					<div class="product__details__quantity">
 						<div class="quantity">
 							<div class="pro-qty">
-								<input type="text" value="1">
+								<input id="quantity" type="text" value="1">
 							</div>
 						</div>
 					</div>
@@ -276,10 +276,18 @@
 $('#addCart').click(function(e) {
 		e.preventDefault();
 		var data = {};
-		var name = 'id';
-		var value = '${product.id}';
-		data[""+name+""] = value;
-		addProduct(data);
+		var name1 = 'id';
+		var value1 = '${product.id}';
+		var name2 = 'count';
+		var value2 = document.getElementById("quantity").value;
+		if(value2 == 0){
+        	alert("Mày thích khịa à ???")
+		} else {
+			data[""+name1+""] = value1;
+			data[""+name2+""] = value2;
+			addProduct(data); 
+		}
+		
 	}); 
 	
 	

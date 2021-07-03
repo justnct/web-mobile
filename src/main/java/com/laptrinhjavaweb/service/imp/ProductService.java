@@ -1,6 +1,7 @@
 package com.laptrinhjavaweb.service.imp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +156,9 @@ public class ProductService implements IProductService {
 		List<ProductEntity> mListProductEntities = productRepository.findAll(pageable).getContent();
 		for (ProductEntity item : mListProductEntities) {
 			ProductDTO product = productConverter.converterToDTO(item);
+			if(product.getDiscount() > 0) {
+				product.setPrice(product.getDiscountPrice());
+			}
 			mListProduct.add(product);
 		}
 		return mListProduct;
@@ -169,5 +173,19 @@ public class ProductService implements IProductService {
 	public List<ProductEntity> search(String keyword) {
 		return productRepository.search(keyword);
 	}
+	public List<ProductDTO> getAllProductOrderByPrice(Pageable pageable) {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll(pageable).getContent();
+		for (ProductEntity item : mListProductEntities) {
+			ProductDTO product = productConverter.converterToDTO(item);
+			if(product.getDiscount() > 0) {
+				product.setPrice(product.getDiscountPrice());
+			}
+			mListProduct.add(product);
+		}
+		return mListProduct;
+	}
+	
+	
 
 }
