@@ -165,4 +165,9 @@ public class ProductService implements IProductService {
 		return (int) productRepository.count();
 	}
 
+	@Override
+	public List<ProductEntity> search(String keyword) {
+		return productRepository.search(keyword);
+	}
+
 }

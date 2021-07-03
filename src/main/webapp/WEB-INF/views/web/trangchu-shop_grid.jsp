@@ -120,12 +120,12 @@
 				<div class="col-lg-9">
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="#">
+							<form method="get" action="search">
 								<div class="hero__search__categories">
 									Tất cả sản phẩm <span class="arrow_carrot-down"></span>
 								</div>
-								<input type="text" placeholder="Bạn cần tìm gì ?">
-								<button type="submit" class="site-btn">Tìm kiếm</button>
+								<input type="text" placeholder="Bạn cần tìm gì ?" name="keyword">
+								<button type="submit" class="site-btn">Tìm kiếm</button>							
 							</form>
 						</div>
 						<div class="hero__search__phone">
@@ -142,27 +142,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- Hero Section End -->
-
-	<!-- Breadcrumb Section Begin -->
-	<!-- <section class="breadcrumb-section set-bg"
-		data-setbg="img/breadcrumb.jpg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="breadcrumb__text">
-						<h2>Organi Shop</h2>
-						<div class="breadcrumb__option">
-							<a href="./index.html">Home</a> <span>Shop</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!-- Breadcrumb Section End -->
-
-	<!-- Product Section Begin -->
+	
 	<section class="product spad">
 		<div class="container">
 			<div class="row">

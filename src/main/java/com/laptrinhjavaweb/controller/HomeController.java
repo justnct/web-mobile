@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -21,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.laptrinhjavaweb.FormatNumber;
+import com.laptrinhjavaweb.converter.ProductConverter;
 import com.laptrinhjavaweb.dto.BrandDTO;
 import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
+import com.laptrinhjavaweb.entity.ProductEntity;
 import com.laptrinhjavaweb.service.IBrandService;
 import com.laptrinhjavaweb.service.ICartService;
 import com.laptrinhjavaweb.service.IProductService;
@@ -31,6 +32,9 @@ import com.laptrinhjavaweb.util.MessageUtil;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private ProductConverter productConverter;
+
 	@Autowired
 	private MessageUtil messageUtil;
 
@@ -342,5 +346,17 @@ public class HomeController {
 			mav.addObject("totalPrice", FormatNumber.formatNumber(0));
 		}
 	}
-
+	@RequestMapping(value = "/khach-hang/search", method = RequestMethod.GET)
+	public ModelAndView search(@RequestParam String keyword) {
+	    List<ProductEntity> mListProduct = productService.search(keyword);
+	    List<ProductDTO> result = new ArrayList<ProductDTO>();
+		for (ProductEntity item : mListProduct) {
+			ProductDTO product = productConverter.converterToDTO(item);
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			result.add(product);
+		}
+	    ModelAndView mav = new ModelAndView("web/trangchu-search");
+	    mav.addObject("result", result);
+	    return mav;    
+	}
 }

@@ -3,8 +3,10 @@ package com.laptrinhjavaweb.service;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import com.laptrinhjavaweb.dto.ProductDTO;
+import com.laptrinhjavaweb.entity.ProductEntity;
 
 public interface IProductService {
 	List<ProductDTO> getAllProduct();
@@ -35,4 +37,6 @@ public interface IProductService {
 
 	int getTotalItem();
 
+	
+	 List<ProductEntity> search(@Param("keyword") String keyword);
 }

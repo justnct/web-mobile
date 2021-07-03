@@ -117,12 +117,12 @@
 				<div class="col-lg-9">
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="#">
+							<form method="get" action="search">
 								<div class="hero__search__categories">
 									Tất cả sản phẩm <span class="arrow_carrot-down"></span>
 								</div>
-								<input type="text" placeholder="Bạn cần tìm gì ?">
-								<button type="submit" class="site-btn">TÌM KIẾM</button>
+								<input type="text" placeholder="Bạn cần tìm gì ?" name="keyword">
+								<button type="submit" class="site-btn">Tìm kiếm</button>							
 							</form>
 						</div>
 						<div class="hero__search__phone">
