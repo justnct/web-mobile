@@ -100,7 +100,11 @@ public class HomeController {
 			}
 			mav.addObject("listBest", mBestListProduct);
 		}
-
+		
+        // list iphone
+		
+		
+		
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
@@ -416,5 +420,68 @@ public class HomeController {
 		} // TODO Auto-generated method stub
 
 	}
-
+	@RequestMapping(value = "/khach-hang/iphone", method = RequestMethod.GET)
+	public ModelAndView iphone() {
+		ModelAndView mav = new ModelAndView("web/iphone");
+		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
+		mListProductNewest = productService.getIphone();
+		for (ProductDTO product : mListProductNewest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			
+		}
+		mav.addObject("iphone", mListProductNewest);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/khach-hang/nokia", method = RequestMethod.GET)
+	public ModelAndView nokia() {
+		ModelAndView mav = new ModelAndView("web/nokia");
+		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
+		mListProductNewest = productService.getNokia();
+		for (ProductDTO product : mListProductNewest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			
+		}
+		mav.addObject("nokia", mListProductNewest);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/khach-hang/samsung", method = RequestMethod.GET)
+	public ModelAndView samsung() {
+		ModelAndView mav = new ModelAndView("web/samsung");
+		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
+		mListProductNewest = productService.getSamsung();
+		for (ProductDTO product : mListProductNewest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			
+		}
+		mav.addObject("samsung", mListProductNewest);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/khach-hang/oppo", method = RequestMethod.GET)
+	public ModelAndView oppo() {
+		ModelAndView mav = new ModelAndView("web/oppo");
+		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
+		mListProductNewest = productService.getOppo();
+		for (ProductDTO product : mListProductNewest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			
+		}
+		mav.addObject("oppo", mListProductNewest);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/khach-hang/xiaomi", method = RequestMethod.GET)
+	public ModelAndView xiaomi() {
+		ModelAndView mav = new ModelAndView("web/xiaomi");
+		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
+		mListProductNewest = productService.getXiaomi();
+		for (ProductDTO product : mListProductNewest) {
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			
+		}
+		mav.addObject("xiaomi", mListProductNewest);
+		return mav;
+	}
 }

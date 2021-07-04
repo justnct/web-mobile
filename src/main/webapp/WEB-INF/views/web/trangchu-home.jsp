@@ -108,10 +108,17 @@
 							<i class="fa fa-bars"></i> <span>Tất cả sản phẩm</span>
 						</div>
 						<ul>
-							<c:forEach var="item" items="${list}">
-								<li><a href="<c:url value='/khach-hang/trang-chu?nameBrand=${item.name}#product'/>
-								">Điện thoại ${item.name}</a></li>
-							</c:forEach>
+							<li><a href="<c:url value='/khach-hang/iphone'/>">Điện
+									thoại iPhone</a></li>
+							<li><a href="<c:url value='/khach-hang/nokia'/>">Điện
+									thoại Nokia</a></li>
+							<li><a href="<c:url value='/khach-hang/samsung'/>">Điện
+									thoại Samsung</a></li>
+							<li><a href="<c:url value='/khach-hang/xiaomi'/>">Điện
+									thoại Xiaomi</a></li>
+							<li><a href="<c:url value='/khach-hang/Oppo'/>">Điện
+									thoại Oppo</a></li>
+
 						</ul>
 					</div>
 				</div>
@@ -123,7 +130,7 @@
 									Tất cả sản phẩm <span class="arrow_carrot-down"></span>
 								</div>
 								<input type="text" placeholder="Bạn cần tìm gì ?" name="keyword">
-								<button type="submit" class="site-btn">Tìm kiếm</button>							
+								<button type="submit" class="site-btn">Tìm kiếm</button>
 							</form>
 						</div>
 						<div class="hero__search__phone">
@@ -137,18 +144,21 @@
 						</div>
 					</div>
 					<div class="hero__item set-bg"
-						data-setbg="<c:url value='/template/web/img/web/bg_green.jpg' />">
+						data-setbg="<c:url value='/template/web/img/web/bg_green.jpg'  /> "
+						style="height: 300px">
 						<div class="hero__text">
 							<span>CỬA HÀNG ĐIỆN THOẠI</span>
 							<h2>
-								Chuyên điện thoại cảm ứng <br /> Bảo hành trọn đời - Hơi bị
-								chiến
+								Chuyên điện thoại cảm ứng <br /> Bảo hành trọn đời
 							</h2>
-							<p>Có Tiền Mua Thì Có Điện Thoại Bán</p>
-							<a href="<c:url value='/customer/cua-hang?page=1&limit=9&sort=normal'/>"
-								class="primary-btn">MUA LIỀN ĐI</a>
+							<p>Thuận người mua - Vừa người bán</p>
+							<a
+								href="<c:url value='/customer/cua-hang?page=1&limit=9&sort=normal'/>"
+								class="primary-btn">MUA NGAY</a>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</div>
@@ -156,6 +166,7 @@
 	<!-- Hero Section End -->
 
 	<!-- Categories Section Begin -->
+
 	<!-- Categories Section End -->
 
 	<!-- Featured Section Begin -->
@@ -206,31 +217,50 @@
 							</div>
 						</div>
 					</div>
-					</a>
+
 				</c:forEach>
 			</div>
 
 		</div>
-		</div>
+
 	</section>
 	<!-- Featured Section End -->
 
 	<!-- Banner Begin -->
-	<div class="banner">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="banner__pic">
-						<img src="img/banner/banner-1.jpg" alt="">
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="banner__pic">
-						<img src="img/banner/banner-2.jpg" alt="">
-					</div>
-				</div>
-			</div>
+	<div class="slideshow-container">
+
+		<div class="mySlides fade">
+
+			<img src='<c:url value='/template/web/img/web/banner/img6.png'/>'
+				style="width: 100%; height: 360px">
+
 		</div>
+
+		<div class="mySlides fade">
+
+			<img src='<c:url value='/template/web/img/web/banner/img1.jpg'/>'
+				style="width: 100%; height: 360px">
+
+		</div>
+
+		<div class="mySlides fade">
+
+			<img src='<c:url value='/template/web/img/web/banner/img4.jpg'/>'
+				style="width: 100%; height: 360px">
+
+		</div>
+		<div class="mySlides fade">
+
+			<img src='<c:url value='/template/web/img/web/banner/img5.jpg'/>'
+				style="width: 100%; height: 360px">
+
+		</div>
+	</div>
+	<br>
+
+	<div style="text-align: center">
+		<span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+		<span class="dot"></span>
 	</div>
 	<!-- Banner End -->
 
@@ -270,7 +300,7 @@
 									<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 										<c:param name="id" value="${item.id}" />
 									</c:url>
-									<a href="#" class="latest-product__item">
+									<a href="${chitiet}" class="latest-product__item">
 										<div class="product__item__pic set-bg"
 											data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
 											alt=""></div>
@@ -293,7 +323,7 @@
 									<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 										<c:param name="id" value="${item.id}" />
 									</c:url>
-									<a href="#" class="latest-product__item">
+									<a href="${chitiet}" class="latest-product__item">
 										<div class="product__item__pic set-bg"
 											data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
 											alt=""></div>
@@ -317,6 +347,29 @@
 
 	<!-- Footer Section Begin -->
 
+	<script>
+		var slideIndex = 0;
+		showSlides();
+
+		function showSlides() {
+			var i;
+			var slides = document.getElementsByClassName("mySlides");
+			var dots = document.getElementsByClassName("dot");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {
+				slideIndex = 1
+			}
+			for (i = 0; i < dots.length; i++) {
+				dots[i].className = dots[i].className.replace(" active", "");
+			}
+			slides[slideIndex - 1].style.display = "block";
+			dots[slideIndex - 1].className += " active";
+			setTimeout(showSlides, 3000); // Change image every 2 seconds
+		}
+	</script>
 
 </body>
 

@@ -41,4 +41,10 @@ public interface IProductService {
 
 	
 	 List<ProductEntity> search(@Param("keyword") String keyword);
+	 
+	 List<ProductDTO> getIphone();
+	 List<ProductDTO> getNokia();
+	 List<ProductDTO> getXiaomi();
+	 List<ProductDTO> getSamsung();
+	 List<ProductDTO> getOppo();
 }

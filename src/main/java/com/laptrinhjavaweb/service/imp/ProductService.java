@@ -1,7 +1,6 @@
 package com.laptrinhjavaweb.service.imp;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,6 +182,76 @@ public class ProductService implements IProductService {
 			}
 			mListProduct.add(product);
 		}
+		return mListProduct;
+	}
+
+	@Override
+	public List<ProductDTO> getIphone() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getName().contains("iPhone")) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
+		return mListProduct;
+	}
+
+	@Override
+	public List<ProductDTO> getNokia() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getName().contains("Nokia")) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
+		return mListProduct;
+	}
+
+	@Override
+	public List<ProductDTO> getXiaomi() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getName().contains("Xiaomi")) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
+		return mListProduct;
+	}
+
+	@Override
+	public List<ProductDTO> getSamsung() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getName().contains("Samsung")) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
+		return mListProduct;
+	}
+
+	@Override
+	public List<ProductDTO> getOppo() {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getName().contains("OPPO")) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
 		return mListProduct;
 	}
 	

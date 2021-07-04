@@ -10,6 +10,8 @@
 	href="<c:url value='/template/web/css/bootstrap.min.css' />"
 	type="text/css">
 <link rel="stylesheet"
+	href="<c:url value='/template/web/css/banner.css' />" type="text/css">
+<link rel="stylesheet"
 	href="<c:url value='/template/web/css/font-awesome.min.css' />"
 	type="text/css">
 <link rel="stylesheet"
