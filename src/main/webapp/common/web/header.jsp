@@ -66,7 +66,7 @@
 						<ul>
 							<li class="active"><a
 								href="<c:url value='/khach-hang/trang-chu?nameBrand=all'/>">Trang chủ</a></li>
-							<li><a href="<c:url value='/customer/cua-hang?page=1&limit=9&sort=normal'/>">Cửa
+							<li><a href="<c:url value='/khach-hang/cua-hang?page=1&limit=9&sort=normal'/>">Cửa
 									hàng</a></li>
 							<li><a href="<c:url value='/khach-hang/gio-hang'/>">Giỏ
 									hàng</a></li>

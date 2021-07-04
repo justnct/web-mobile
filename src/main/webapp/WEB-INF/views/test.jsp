@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:url var="cuahang" value="/customer/cua-hang" />
+<c:url var="cuahang" value="/khach-hang/cua-hang" />
 <c:url var="sortNormal"
-	value="/customer/cua-hang?page=1&limit=9&sort=normal#haha" />
+	value="/khach-hang/cua-hang?page=1&limit=9&sort=normal#haha" />
 <c:url var="sortASC"
-	value="/customer/cua-hang?page=1&limit=9&sort=asc#haha" />
+	value="/khach-hang/cua-hang?page=1&limit=9&sort=asc#haha" />
 <c:url var="sortDESC"
-	value="/customer/cua-hang?page=1&limit=9&sort=desc#haha" />
+	value="/khach-hang/cua-hang?page=1&limit=9&sort=desc#haha" />
 
 
 <!DOCTYPE html>
@@ -68,12 +68,12 @@
 				<div class="col-lg-9">
 					<div class="hero__search">
 						<div class="hero__search__form">
-							<form action="#">
+							<form method="get" action="search">
 								<div class="hero__search__categories">
 									Tất cả sản phẩm <span class="arrow_carrot-down"></span>
 								</div>
-								<input type="text" placeholder="Bạn cần tìm gì ?">
-								<button type="submit" class="site-btn">Tìm kiếm</button>
+								<input type="text" placeholder="Bạn cần tìm gì ?" name="keyword">
+								<button type="submit" class="site-btn">Tìm kiếm</button>							
 							</form>
 						</div>
 						<div class="hero__search__phone">

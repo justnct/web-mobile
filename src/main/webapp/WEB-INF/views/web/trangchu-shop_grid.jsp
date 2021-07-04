@@ -1,23 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="cuahang" value="/khach-hang/cua-hang" />
+<c:url var="sortNormal"
+	value="/khach-hang/cua-hang?page=1&limit=9&sort=normal#haha" />
+<c:url var="sortASC"
+	value="/khach-hang/cua-hang?page=1&limit=9&sort=asc#haha" />
+<c:url var="sortDESC"
+	value="/khach-hang/cua-hang?page=1&limit=9&sort=desc#haha" />
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Trang chủ</title>
-
-<meta charset="UTF-8">
-<meta name="description" content="Ogani Template">
-<meta name="keywords" content="Ogani, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>T&T Shop</title>
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/bootstrap.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/font-awesome.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/elegant-icons.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/nice-select.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/jquery-ui.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/owl.carousel.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/slicknav.min.css' />"
+	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/template/web/css/style.css' />" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
 <script
 	src='<c:url value='/template/web/pagging/jquery.twbsPagination.js'/>'
 	type="text/javascript"></script>
@@ -33,75 +58,6 @@
 
 </head>
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
-	<!-- Humberger Begin -->
-	<div class="humberger__menu__overlay"></div>
-	<div class="humberger__menu__wrapper">
-		<div class="humberger__menu__logo">
-			<a href="#"><img src="img/logo.png" alt=""></a>
-		</div>
-		<div class="humberger__menu__cart">
-			<ul>
-				<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-				<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-			</ul>
-			<div class="header__cart__price">
-				item: <span>$150.00</span>
-			</div>
-		</div>
-		<div class="humberger__menu__widget">
-			<div class="header__top__right__language">
-				<img src="img/language.png" alt="">
-				<div>English</div>
-				<span class="arrow_carrot-down"></span>
-				<ul>
-					<li><a href="#">Spanish</a></li>
-					<li><a href="#">English</a></li>
-				</ul>
-			</div>
-			<div class="header__top__right__auth">
-				<a href="#"><i class="fa fa-user"></i> Login</a>
-			</div>
-		</div>
-		<nav class="humberger__menu__nav mobile-menu">
-			<ul>
-				<li class="active"><a href="./index.html">Home</a></li>
-				<li><a href="./shop-grid.html">Shop</a></li>
-				<li><a href="#">Pages</a>
-					<ul class="header__menu__dropdown">
-						<li><a href="./shop-details.html">Shop Details</a></li>
-						<li><a href="./shoping-cart.html">Shoping Cart</a></li>
-						<li><a href="./checkout.html">Check Out</a></li>
-						<li><a href="./blog-details.html">Blog Details</a></li>
-					</ul></li>
-				<li><a href="./blog.html">Blog</a></li>
-				<li><a href="./contact.html">Contact</a></li>
-			</ul>
-		</nav>
-		<div id="mobile-menu-wrap"></div>
-		<div class="header__top__right__social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a>
-			<a href="#"><i class="fa fa-pinterest-p"></i></a>
-		</div>
-		<div class="humberger__menu__contact">
-			<ul>
-				<li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-				<li>Free Shipping for all Order of $99</li>
-			</ul>
-		</div>
-	</div>
-	<!-- Humberger End -->
-
-	<!-- Header Section Begin -->
-
-	<!-- Header Section End -->
-
-	<!-- Hero Section Begin -->
 	<section class="hero hero-normal">
 		<div class="container">
 			<div class="row">
@@ -142,7 +98,6 @@
 			</div>
 		</div>
 	</section>
-	
 	<section class="product spad">
 		<div class="container">
 			<div class="row">
@@ -276,18 +231,18 @@
 
 					</div>
 					<div class="filter__item">
-						<div class="row">
+						<div class="row" id="haha">
 							<div class="col-lg-4 col-md-5">
 								<div class="filter__sort">
-									<span>Sắp xếp theo</span> <select>
-										<option value="0">Mặc định</option>
+									<span>Sắp xếp</span> <select id="selectCollection"
+										onchange="change()"> ${kimochi}
 									</select>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
 								<div class="filter__found">
 									<h6>
-										Tổng số sản phẩm <span> ${countProduct}</span>
+										Hiển thị <span>${numberOfDisplays}</span> trong tổng số <span> ${countProduct}</span> sản phẩm. 
 									</h6>
 								</div>
 							</div>
@@ -323,36 +278,100 @@
 								</div>
 							</div>
 						</c:forEach>
+						<div class="product__pagination">
+							<button onclick="moveBack()">Trang trước</button>
+							<c:forEach var="item" items="${listPage}">
+								<a onclick="choicePage(${item})">${item}</a>
+							</c:forEach>
+							<button onclick="moveForward()">Trang tiếp</button>
+						</div>
 					</div>
+
 				</div>
-
-
 			</div>
 		</div>
+
 	</section>
-
-	<div class="product__pagination">
-		<nav aria-label="Page navigation">
-			<ul id="pagination" class="pagination"></ul>
-		</nav>
-	</div>
-	<!-- Product Section End -->
-
-	<!-- Footer Section Begin -->
+	<nav aria-label="Page navigation">
+		<ul class="pagination" id="pagination">
+		</ul>
+		<input type="hidden" value="" id="page" name="page" /> <input
+			type="hidden" value="" id="limit" name="limit" /> <input
+			type="hidden" value="" id="sort" name="sort" />
+	</nav>
 
 
-	<script>
-    $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: 35,
-            visiblePages: 10,
-            onPageClick: function (event, page) {
-                console.info(page + ' (from options)');
-            }
-        })
-        });
-    });
-</script>
-
+	<script type="text/javascript">
+	function moveForward() {
+		var page ="${page}";
+		var totalPage ="${totalPage}";
+		d = document.getElementById("selectCollection").value;
+		if(page != totalPage){
+			var currentPage = Number(page) + 1;
+			window.location.href = "${cuahang}?page="+currentPage+"&limit=9&sort=" +d +"#haha";
+		}else{
+			window.location.href = "${cuahang}?page=1&limit=9&sort=" +d +"#haha";
+		}
+	}
+		
+	
+	function moveBack() {
+		var page ="${page}";
+		var totalPage ="${totalPage}";
+		d = document.getElementById("selectCollection").value;
+		if(page > 1){
+			var currentPage = Number(page) - 1;
+			window.location.href = "${cuahang}?page="+currentPage+"&limit=9&sort=" +d +"#haha";
+		}else{
+			window.location.href = "${cuahang}?page=" + totalPage +"&limit=9&sort=" +d +"#haha";
+		}
+	}
+	
+		function choicePage(data) {
+			d = document.getElementById("selectCollection").value;
+			window.location.href = "${cuahang}?page="+data+"&limit=9&sort=" +d +"#haha";
+		}
+		var totalPages = $
+		{
+			totalPage
+		};
+		var currentPage = $
+		{
+			page
+		};
+		$(function() {
+			window.pagObj = $('#pagination')
+					.twbsPagination(
+							{
+								totalPages : totalPages,
+								visiblePages : 10,
+								startPage : currentPage,
+								onPageClick : function(event, page) {
+									if (currentPage != page) {
+										$('#limit').val(9);
+										$('#page').val(page);
+										d = document
+												.getElementById("selectCollection").value;
+										$('#sort').val(page);
+										window.location.href = "${cuahang}?page="
+												+ page
+												+ "&limit=9&sort="
+												+ d
+												+ "#haha";
+									}
+								}
+							});
+		});
+		function change() {
+			d = document.getElementById("selectCollection").value;
+			if (d == "normal") {
+				window.location.href = "${sortNormal}";
+			} else if (d == "asc") {
+				window.location.href = "${sortASC}";
+			} else {
+				window.location.href = "${sortDESC}";
+			}
+		}
+	</script>
 </body>
 </html>

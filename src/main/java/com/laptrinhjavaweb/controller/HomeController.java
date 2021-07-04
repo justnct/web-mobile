@@ -171,10 +171,10 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/customer/cua-hang", method = RequestMethod.GET)
+	@RequestMapping(value = "/khach-hang/cua-hang", method = RequestMethod.GET)
 	public ModelAndView test(@RequestParam("page") int page, @RequestParam("limit") int limit,
 			@RequestParam("sort") String sort) {
-		ModelAndView mav = new ModelAndView("test");
+		ModelAndView mav = new ModelAndView("web/trangchu-shop_grid");
 
 		Pageable pageable = new PageRequest(page - 1, limit);
 		mav.addObject("page", page);
@@ -191,7 +191,7 @@ public class HomeController {
 			mav.addObject("kimochi",
 					"<option value=\"normal\">Mặc định</option>\r\n"
 							+ "	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
-							+ "	<option value=\"desc\">Giá cao -> thấp</option>");
+							+ "	<option value=\"desc\">Giá cao -> thấp/option>");
 		} else if (sort.equals("asc")) {
 			Pageable pageable1 = new PageRequest(page - 1, limit, Direction.ASC, "price");
 			mListProduct = productService.getAllProductOrderByPrice(pageable1);
