@@ -100,11 +100,9 @@ public class HomeController {
 			}
 			mav.addObject("listBest", mBestListProduct);
 		}
-		
-        // list iphone
-		
-		
-		
+
+		// list iphone
+
 		// list product salest
 		List<ProductDTO> mListProductSalest = new ArrayList<ProductDTO>();
 		mListProductSalest = productService.getAllProductSalest();
@@ -228,14 +226,13 @@ public class HomeController {
 		// put totalPage
 		mav.addObject("totalPage", totalPage);
 
-		if(page != totalPage) {
+		if (page != totalPage) {
 			mav.addObject("numberOfDisplays", limit);
 		} else {
 			int numberOfDisplays = (productService.getTotalItem() % limit == 0) ? limit
-					: productService.getTotalItem() - (limit*(page-1));
+					: productService.getTotalItem() - (limit * (page - 1));
 			mav.addObject("numberOfDisplays", numberOfDisplays);
 		}
-		
 
 		for (ProductDTO product : mListProduct) {
 			if (product.getDiscount() > 0) {
@@ -397,18 +394,19 @@ public class HomeController {
 			mav.addObject("totalPrice", FormatNumber.formatNumber(0));
 		}
 	}
+
 	@RequestMapping(value = "/khach-hang/search", method = RequestMethod.GET)
 	public ModelAndView search(@RequestParam String keyword) {
-	    List<ProductEntity> mListProduct = productService.search(keyword);
-	    List<ProductDTO> result = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProduct = productService.search(keyword);
+		List<ProductDTO> result = new ArrayList<ProductDTO>();
 		for (ProductEntity item : mListProduct) {
 			ProductDTO product = productConverter.converterToDTO(item);
 			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
 			result.add(product);
 		}
-	    ModelAndView mav = new ModelAndView("web/trangchu-search");
-	    mav.addObject("result", result);
-	    return mav;    
+		ModelAndView mav = new ModelAndView("web/trangchu-search");
+		mav.addObject("result", result);
+		return mav;
 	}
 
 	private void addElement(Map<String, Integer> map, String result) {
@@ -420,68 +418,37 @@ public class HomeController {
 		} // TODO Auto-generated method stub
 
 	}
-	@RequestMapping(value = "/khach-hang/iphone", method = RequestMethod.GET)
-	public ModelAndView iphone() {
-		ModelAndView mav = new ModelAndView("web/iphone");
-		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
-		mListProductNewest = productService.getIphone();
-		for (ProductDTO product : mListProductNewest) {
-			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
-			
+
+	@RequestMapping(value = "/khach-hang/cac-san-pham", method = RequestMethod.GET)
+	public ModelAndView productClassification(@RequestParam("nameBrand") String type) {
+		if (type == null) {
+			return new ModelAndView("redirect:/khach-hang/trang-chu?nameBrand=all");
+		} else {
+			ModelAndView mav = new ModelAndView("web/xiaomi");
+			List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+			if (type.toLowerCase().equals("all")) {
+				mListProduct = productService.getAllProduct();
+			} else {
+				mListProduct = productService.getAllProductByName(type);
+			}
+
+			for (ProductDTO product : mListProduct) {
+				if (product.getDiscount() > 0) {
+					product.setPrice(product.getDiscountPrice());
+				}
+				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+			}
+			cart(mav);
+			mav.addObject("xiaomi", mListProduct);
+			return mav;
 		}
-		mav.addObject("iphone", mListProductNewest);
-		return mav;
+
 	}
-	
-	@RequestMapping(value = "/khach-hang/nokia", method = RequestMethod.GET)
-	public ModelAndView nokia() {
-		ModelAndView mav = new ModelAndView("web/nokia");
-		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
-		mListProductNewest = productService.getNokia();
-		for (ProductDTO product : mListProductNewest) {
-			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
-			
-		}
-		mav.addObject("nokia", mListProductNewest);
-		return mav;
-	}
-	
-	@RequestMapping(value = "/khach-hang/samsung", method = RequestMethod.GET)
-	public ModelAndView samsung() {
-		ModelAndView mav = new ModelAndView("web/samsung");
-		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
-		mListProductNewest = productService.getSamsung();
-		for (ProductDTO product : mListProductNewest) {
-			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
-			
-		}
-		mav.addObject("samsung", mListProductNewest);
-		return mav;
-	}
-	
-	@RequestMapping(value = "/khach-hang/oppo", method = RequestMethod.GET)
-	public ModelAndView oppo() {
-		ModelAndView mav = new ModelAndView("web/oppo");
-		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
-		mListProductNewest = productService.getOppo();
-		for (ProductDTO product : mListProductNewest) {
-			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
-			
-		}
-		mav.addObject("oppo", mListProductNewest);
-		return mav;
-	}
-	
-	@RequestMapping(value = "/khach-hang/xiaomi", method = RequestMethod.GET)
-	public ModelAndView xiaomi() {
-		ModelAndView mav = new ModelAndView("web/xiaomi");
-		List<ProductDTO> mListProductNewest = new ArrayList<ProductDTO>();
-		mListProductNewest = productService.getXiaomi();
-		for (ProductDTO product : mListProductNewest) {
-			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
-			
-		}
-		mav.addObject("xiaomi", mListProductNewest);
-		return mav;
+
+	@RequestMapping(value = "/like", method = RequestMethod.GET)
+	public ModelAndView like(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "id") Long id) {
+
+		return new ModelAndView("redirect:/dang-nhap");
 	}
 }

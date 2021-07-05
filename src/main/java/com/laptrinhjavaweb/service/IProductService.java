@@ -47,4 +47,8 @@ public interface IProductService {
 	 List<ProductDTO> getXiaomi();
 	 List<ProductDTO> getSamsung();
 	 List<ProductDTO> getOppo();
+	 
+	 List<ProductDTO> getAllProductByName(String name);
+	 
+	 
 }

@@ -67,16 +67,13 @@
 							<i class="fa fa-bars"></i> <span>Tất cả sản phẩm</span>
 						</div>
 						<ul>
-							<li><a href="<c:url value='/khach-hang/iphone'/>">Điện
-									thoại iPhone</a></li>
-							<li><a href="<c:url value='/khach-hang/nokia'/>">Điện
-									thoại Nokia</a></li>
-							<li><a href="<c:url value='/khach-hang/samsung'/>">Điện
-									thoại Samsung</a></li>
-							<li><a href="<c:url value='/khach-hang/xiaomi'/>">Điện
-									thoại Xiaomi</a></li>
-							<li><a href="<c:url value='/khach-hang/Oppo'/>">Điện
-									thoại Oppo</a></li>
+							<c:forEach var="item" items="${list}">
+								<c:url var="chitiet" value="/khach-hang/cac-san-pham">
+									<c:param name="nameBrand" value="${item.name}" />
+								</c:url>
+								<li><a href="${chitiet}">Điện
+										thoại ${item.name}</a></li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

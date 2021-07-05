@@ -136,7 +136,6 @@
 					var value2 = document.getElementById("quantity"+${item.id}).value;
 					dataObject[""+name1+""] = value1;
 					dataObject[""+name2+""] = value2;
-					alert(value1 + " " + value2);
 				</c:forEach>
 				updateProduct(data);
 		  }

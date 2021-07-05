@@ -254,6 +254,20 @@ public class ProductService implements IProductService {
 			}
 		return mListProduct;
 	}
+
+	@Override
+	public List<ProductDTO> getAllProductByName(String name) {
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		List<ProductEntity> mListProductEntities = productRepository.findAll();
+		
+			for (ProductEntity item : mListProductEntities) {
+				if (item.getName().toLowerCase().contains(name.toLowerCase())) {
+					ProductDTO product = productConverter.converterToDTO(item);
+					mListProduct.add(product);
+				}
+			}
+		return mListProduct;
+	}
 	
 	
 
