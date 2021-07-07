@@ -186,85 +186,12 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public List<ProductDTO> getIphone() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		
-			for (ProductEntity item : mListProductEntities) {
-				if (item.getName().contains("iPhone")) {
-					ProductDTO product = productConverter.converterToDTO(item);
-					mListProduct.add(product);
-				}
-			}
-		return mListProduct;
-	}
-
-	@Override
-	public List<ProductDTO> getNokia() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		
-			for (ProductEntity item : mListProductEntities) {
-				if (item.getName().contains("Nokia")) {
-					ProductDTO product = productConverter.converterToDTO(item);
-					mListProduct.add(product);
-				}
-			}
-		return mListProduct;
-	}
-
-	@Override
-	public List<ProductDTO> getXiaomi() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		
-			for (ProductEntity item : mListProductEntities) {
-				if (item.getName().contains("Xiaomi")) {
-					ProductDTO product = productConverter.converterToDTO(item);
-					mListProduct.add(product);
-				}
-			}
-		return mListProduct;
-	}
-
-	@Override
-	public List<ProductDTO> getSamsung() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		
-			for (ProductEntity item : mListProductEntities) {
-				if (item.getName().contains("Samsung")) {
-					ProductDTO product = productConverter.converterToDTO(item);
-					mListProduct.add(product);
-				}
-			}
-		return mListProduct;
-	}
-
-	@Override
-	public List<ProductDTO> getOppo() {
-		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		
-			for (ProductEntity item : mListProductEntities) {
-				if (item.getName().contains("OPPO")) {
-					ProductDTO product = productConverter.converterToDTO(item);
-					mListProduct.add(product);
-				}
-			}
-		return mListProduct;
-	}
-
-	@Override
 	public List<ProductDTO> getAllProductByName(String name) {
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		List<ProductEntity> mListProductEntities = productRepository.findAll();
-		
+		List<ProductEntity> mListProductEntities = productRepository.findProductByBrand(name);
 			for (ProductEntity item : mListProductEntities) {
-				if (item.getName().toLowerCase().contains(name.toLowerCase())) {
 					ProductDTO product = productConverter.converterToDTO(item);
 					mListProduct.add(product);
-				}
 			}
 		return mListProduct;
 	}

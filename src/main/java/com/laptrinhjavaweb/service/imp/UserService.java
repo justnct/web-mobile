@@ -3,7 +3,12 @@ package com.laptrinhjavaweb.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +35,7 @@ public class UserService implements IUser {
 	@Override
 	@Transactional
 	public boolean register(UserDTO user) {
+		HttpServletRequest request;
 		UserEntity checkUser = userRepository.findOneByUserNameAndStatus(user.getUserName(), 1);
 		if(checkUser == null) {
 			List<RoleEntity> list = new ArrayList<RoleEntity>();

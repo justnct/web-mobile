@@ -32,7 +32,10 @@ public class RegisterAPI {
 		if(userService.register(user)) {
 			roleService.addRole();
 			cartService.addCart(user.getUserName());
-		}		
-		return user;
+			return user;
+		}	
+		UserDTO test = new UserDTO();
+		test.setUserName("");
+		return test;
 	}
 }

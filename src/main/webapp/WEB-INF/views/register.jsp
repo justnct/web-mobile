@@ -34,8 +34,9 @@
 							</div>
 							<form:form id="formSubmit" modelAttribute="model">
 								<!--  <div class="form-group row"> -->
-								<c:if test="${duplicated != null}">
-									<div id="asd" class="alert alert-danger">Tài khoản đã tồn tại</div>
+								<c:if test="${param.duplicated != null}">
+									<div id="asd" class="alert alert-danger">Tài khoản đã tồn
+										tại</div>
 								</c:if>
 								<div class="col-25">
 									<label for="fullName">Họ và tên</label>
@@ -95,10 +96,13 @@
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(result) {
-					window.location.href = "${loginURL}";
+					 if (result.userName == "") {
+						window.location.href = "${signupURL}?duplicated";
+					} else {
+						window.location.href = "${loginURL}";
+					} 
 				},
 				error : function(error) {
-					window.location.href = "${signupURL}";
 				}
 			});
 		}

@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -163,11 +164,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/dang-ky", method = RequestMethod.GET)
-	public ModelAndView registerWeb(@RequestParam(value = "duplicated", required = false) String name) {
+	public ModelAndView registerWeb() {
 		ModelAndView mav = new ModelAndView("register");
-		if (name != null) {
-			mav.addObject("duplicated", "asd");
-		}
 		UserDTO model = new UserDTO();
 		mav.addObject("model", model);
 		return mav;
@@ -421,12 +419,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/khach-hang/cac-san-pham", method = RequestMethod.GET)
 	public ModelAndView productClassification(@RequestParam("nameBrand") String type) {
-		if (type == null) {
-			return new ModelAndView("redirect:/khach-hang/trang-chu?nameBrand=all");
-		} else {
 			ModelAndView mav = new ModelAndView("web/xiaomi");
 			List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-			if (type.toLowerCase().equals("all")) {
+			if (type.equals("All")) {
 				mListProduct = productService.getAllProduct();
 			} else {
 				mListProduct = productService.getAllProductByName(type);
@@ -441,14 +436,7 @@ public class HomeController {
 			cart(mav);
 			mav.addObject("xiaomi", mListProduct);
 			return mav;
-		}
 
 	}
 
-	@RequestMapping(value = "/like", method = RequestMethod.GET)
-	public ModelAndView like(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "id") Long id) {
-
-		return new ModelAndView("redirect:/dang-nhap");
-	}
 }

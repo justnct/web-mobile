@@ -112,8 +112,7 @@
 								<c:url var="chitiet" value="/khach-hang/cac-san-pham">
 									<c:param name="nameBrand" value="${item.name}" />
 								</c:url>
-								<li><a href="${chitiet}">Điện
-										thoại ${item.name}</a></li>
+								<li><a href="${chitiet}">Điện thoại ${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -200,7 +199,7 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><a href="#"><i class="fa fa-heart"></i></a></li>
+									<li><i class="fa fa-heart" onclick="checkCookie(${item.id})"></i></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 								</ul>
@@ -346,6 +345,38 @@
 	<script>
 		var slideIndex = 0;
 		showSlides();
+
+		function setCookie(cname, cvalue, exdays) {
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+			var expires = "expires=" + d.toUTCString();
+			document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+
+		function checkCookie(data) {
+			var username = getCookie("listLike");
+			if (username != "") {
+				var result = getCookie("listLike");
+				setCookie("listLike", result + "," +data, 365);
+			} else {
+				setCookie("listLike", data, 365);
+			}
+		}
+		
+		function getCookie(cname) {
+		    var name = cname + "=";
+		    var ca = document.cookie.split(';');
+		    for(var i = 0; i <ca.length; i++) {
+		        var c = ca[i];
+		        while (c.charAt(0)==' ') {
+		            c = c.substring(1);
+		        }
+		        if (c.indexOf(name) == 0) {
+		            return c.substring(name.length,c.length);
+		        }
+		    }
+		    return "";
+		}
 
 		function showSlides() {
 			var i;
