@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="addLike" value="/addLike" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +31,7 @@
 		<div class="container">
 
 			<div class="row">
-			
+
 				<c:forEach var="item" items="${xiaomi}">
 					<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 						<c:param name="id" value="${item.id}" />
@@ -40,7 +42,7 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><a href="#"><i class="fa fa-heart"></i></a></li>
+									<li><i class="fa fa-heart" onclick="addLike(${item.id})"></i></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 								</ul>
@@ -57,5 +59,27 @@
 			</div>
 		</div>
 	</section>
+
+	<script type="text/javascript">
+	function addLike(id) {
+		var data ={};
+		var name1 = 'id';
+		var value1 = id;
+		data[""+name1+""] = value1;
+		$.ajax({
+            url: '${addLike}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+            	alert("Đã thêm vào sản phẩm yêu thích")
+            },
+            error: function (error) {
+            	alert("Đã thêm vào sản phẩm yêu thích")
+            }
+        });
+	}
+	</script>
 </body>
 </html>

@@ -8,6 +8,8 @@
 	value="/khach-hang/cua-hang?page=1&limit=9&sort=asc#haha" />
 <c:url var="sortDESC"
 	value="/khach-hang/cua-hang?page=1&limit=9&sort=desc#haha" />
+<c:url var="addLike" value="/addLike"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -71,8 +73,7 @@
 								<c:url var="chitiet" value="/khach-hang/cac-san-pham">
 									<c:param name="nameBrand" value="${item.name}" />
 								</c:url>
-								<li><a href="${chitiet}">Điện
-										thoại ${item.name}</a></li>
+								<li><a href="${chitiet}">Điện thoại ${item.name}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -85,7 +86,7 @@
 									Tất cả sản phẩm <span class="arrow_carrot-down"></span>
 								</div>
 								<input type="text" placeholder="Bạn cần tìm gì ?" name="keyword">
-								<button type="submit" class="site-btn">Tìm kiếm</button>							
+								<button type="submit" class="site-btn">Tìm kiếm</button>
 							</form>
 						</div>
 						<div class="hero__search__phone">
@@ -214,7 +215,8 @@
 												alt="">
 												<div class="product__discount__percent">-${item.discount}%</div>
 												<ul class="product__item__pic__hover">
-													<li><a href="#"><i class="fa fa-heart"></i></a></li>
+													<li><i class="fa fa-heart"
+														onclick="addLike(${item.id})"></i></li>
 													<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 													<li><a href="${chitiet}"><i
 															class="fa fa-shopping-cart"></i></a></li>
@@ -246,7 +248,8 @@
 							<div class="col-lg-4 col-md-4">
 								<div class="filter__found">
 									<h6>
-										Hiển thị <span>${numberOfDisplays}</span> trong tổng số <span> ${countProduct}</span> sản phẩm. 
+										Hiển thị <span>${numberOfDisplays}</span> trong tổng số <span>
+											${countProduct}</span> sản phẩm.
 									</h6>
 								</div>
 							</div>
@@ -268,7 +271,7 @@
 										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 										alt="">
 										<ul class="product__item__pic__hover">
-											<li><a href="#"><i class="fa fa-heart"></i></a></li>
+											<li><i class="fa fa-heart" onclick="addLike(${item.id})"></i></li>
 											<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 										</ul>
@@ -375,6 +378,26 @@
 			} else {
 				window.location.href = "${sortDESC}";
 			}
+		}
+		
+		function addLike(id) {
+			var data ={};
+			var name1 = 'id';
+			var value1 = id;
+			data[""+name1+""] = value1;
+			$.ajax({
+	            url: '${addLike}',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	            	alert("Đã thêm vào sản phẩm yêu thích")
+	            },
+	            error: function (error) {
+	            	alert("Đã thêm vào sản phẩm yêu thích")
+	            }
+	        });
 		}
 	</script>
 </body>

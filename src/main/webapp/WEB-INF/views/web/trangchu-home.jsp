@@ -3,6 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="homeAPI" value="/api/homeList" />
 <c:url var="trangchu" value="/khach-hang/trang-chu" />
+<c:url var="addLike" value="/addLike"/>
 
 
 <!DOCTYPE html>
@@ -199,7 +200,7 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><i class="fa fa-heart" onclick="checkCookie(${item.id})"></i></li>
+									<li><i class="fa fa-heart" onclick="addLike(${item.id})"></i></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 								</ul>
@@ -345,38 +346,28 @@
 	<script>
 		var slideIndex = 0;
 		showSlides();
-
-		function setCookie(cname, cvalue, exdays) {
-			var d = new Date();
-			d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-			var expires = "expires=" + d.toUTCString();
-			document.cookie = cname + "=" + cvalue + "; " + expires;
-		}
-
-		function checkCookie(data) {
-			var username = getCookie("listLike");
-			if (username != "") {
-				var result = getCookie("listLike");
-				setCookie("listLike", result + "," +data, 365);
-			} else {
-				setCookie("listLike", data, 365);
-			}
-		}
 		
-		function getCookie(cname) {
-		    var name = cname + "=";
-		    var ca = document.cookie.split(';');
-		    for(var i = 0; i <ca.length; i++) {
-		        var c = ca[i];
-		        while (c.charAt(0)==' ') {
-		            c = c.substring(1);
-		        }
-		        if (c.indexOf(name) == 0) {
-		            return c.substring(name.length,c.length);
-		        }
-		    }
-		    return "";
+		function addLike(id) {
+			var data ={};
+			var name1 = 'id';
+			var value1 = id;
+			data[""+name1+""] = value1;
+			$.ajax({
+	            url: '${addLike}',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	            	alert("Đã thêm vào sản phẩm yêu thích")
+	            },
+	            error: function (error) {
+	            	alert("Đã thêm vào sản phẩm yêu thích")
+	            }
+	        });
 		}
+
+		
 
 		function showSlides() {
 			var i;

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="deleteLike" value="/deleteLike" />
+<c:url var="likeURL" value="/khach-hang/yeu-thich" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +32,7 @@
 		<div class="container">
 
 			<div class="row">
-			
+
 				<c:forEach var="item" items="${xiaomi}">
 					<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
 						<c:param name="id" value="${item.id}" />
@@ -40,7 +43,7 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><a href="#"><i class="fa fa-heart"></i></a></li>
+									<li><i class="fa fa-heart" onclick="deleteLike(${item.id})"></i></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
 									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 								</ul>
@@ -57,5 +60,28 @@
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+		function deleteLike(id) {
+			var data = {};
+			var name1 = 'id';
+			var value1 = id;
+			data["" + name1 + ""] = value1;
+			$.ajax({
+				url : '${deleteLike}',
+				type : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				success : function(result) {
+					alert("Đã xoá sản phẩm yêu thích")
+	            	window.location.href = "${likeURL}";
+				},
+				error : function(error) {
+					alert("Đã xoá sản phẩm yêu thích")
+	            	window.location.href = "${likeURL}";
+				}
+			});
+		}
+	</script>
 </body>
 </html>

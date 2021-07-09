@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +32,10 @@ import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.entity.ProductEntity;
 import com.laptrinhjavaweb.service.IBrandService;
 import com.laptrinhjavaweb.service.ICartService;
+import com.laptrinhjavaweb.service.ICookieService;
 import com.laptrinhjavaweb.service.IProductService;
 import com.laptrinhjavaweb.util.MessageUtil;
+import com.laptrinhjavaweb.util.SecurityUtils;
 
 @Controller
 public class HomeController {
@@ -49,9 +53,18 @@ public class HomeController {
 
 	@Autowired
 	private ICartService cartService;
+	
+	@Autowired
+	private ICookieService cookieService;
+	
+	@Autowired
+	private SecurityUtils serUtils;
+	
 
 	@RequestMapping(value = "/khach-hang/trang-chu", method = RequestMethod.GET)
-	public ModelAndView homePageWeb(@RequestParam(value = "nameBrand") String name) {
+	public ModelAndView homePageWeb(@RequestParam(value = "nameBrand") String name,
+		 HttpServletResponse response,
+			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/trangchu-home");
 		// list brand
 		List<BrandDTO> mListBrand = new ArrayList<BrandDTO>();
@@ -391,6 +404,17 @@ public class HomeController {
 			mav.addObject("count", 0);
 			mav.addObject("totalPrice", FormatNumber.formatNumber(0));
 		}
+
+		// count like product
+		int count = 0;
+		String listLike = cookieService.getCookieValue(serUtils.getPrincipal().getUserName(), "hello");
+		for (String result : listLike.split("-")) {
+			if (result.equals("0")) {
+				break;
+			}
+			count++;
+		}
+		mav.addObject("amountLike", count);
 	}
 
 	@RequestMapping(value = "/khach-hang/search", method = RequestMethod.GET)
@@ -419,24 +443,44 @@ public class HomeController {
 
 	@RequestMapping(value = "/khach-hang/cac-san-pham", method = RequestMethod.GET)
 	public ModelAndView productClassification(@RequestParam("nameBrand") String type) {
-			ModelAndView mav = new ModelAndView("web/xiaomi");
-			List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-			if (type.equals("All")) {
-				mListProduct = productService.getAllProduct();
-			} else {
-				mListProduct = productService.getAllProductByName(type);
-			}
+		ModelAndView mav = new ModelAndView("web/xiaomi");
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		if (type.equals("All")) {
+			mListProduct = productService.getAllProduct();
+		} else {
+			mListProduct = productService.getAllProductByName(type);
+		}
 
-			for (ProductDTO product : mListProduct) {
-				if (product.getDiscount() > 0) {
-					product.setPrice(product.getDiscountPrice());
-				}
-				product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		for (ProductDTO product : mListProduct) {
+			if (product.getDiscount() > 0) {
+				product.setPrice(product.getDiscountPrice());
 			}
-			cart(mav);
-			mav.addObject("xiaomi", mListProduct);
-			return mav;
+			product.setConverterPrice(FormatNumber.formatNumber(product.getPrice()));
+		}
+		cart(mav);
+		mav.addObject("xiaomi", mListProduct);
+		return mav;
 
 	}
 
+	@RequestMapping(value = "/khach-hang/yeu-thich", method = RequestMethod.GET)
+	public ModelAndView like() {
+		ModelAndView mav = new ModelAndView("web/favoriteProducts");
+		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
+		String listLike = cookieService.getCookieValue(serUtils.getPrincipal().getUserName(), "0");
+		for (String result : listLike.split("-")) {
+			if (Long.valueOf(result) > 0) {
+				ProductDTO productDTO = productService.findById(Long.valueOf(result));
+				if (productDTO.getDiscount() > 0) {
+					productDTO.setPrice(productDTO.getDiscountPrice());
+				}
+				productDTO.setConverterPrice(FormatNumber.formatNumber(productDTO.getPrice()));
+				mListProduct.add(productDTO);
+			}
+		}
+		cart(mav);
+		mav.addObject("xiaomi", mListProduct);
+		return mav;
+
+	}
 }
