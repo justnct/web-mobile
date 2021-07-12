@@ -3,7 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="homeAPI" value="/api/homeList" />
 <c:url var="trangchu" value="/khach-hang/trang-chu" />
-<c:url var="addLike" value="/addLike"/>
+<c:url var="addLike" value="/addLike" />
 
 
 <!DOCTYPE html>
@@ -362,6 +362,9 @@
 	            	alert("Đã thêm vào sản phẩm yêu thích")
 	            },
 	            error: function (error) {
+	            	var spanLike = document.getElementById("span_like").innerText;
+					var currentLike = Number(spanLike) + 1;
+					document.getElementById("span_cart").textContent = currentCart;
 	            	alert("Đã thêm vào sản phẩm yêu thích")
 	            }
 	        });

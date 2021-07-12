@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <%@ page import="com.laptrinhjavaweb.util.SecurityUtils"%>
-<c:url var="addProduct" value="/api/product"/>
+<c:url var="addProduct" value="/api/product" />
 <c:url var="chitietURL" value="/khach-hang/chi-tiet-san-pham" />
 
 
@@ -273,39 +273,42 @@
 <!-- Footer Section Begin -->
 
 <script type="text/javascript">
-$('#addCart').click(function(e) {
+	$('#addCart').click(function(e) {
 		e.preventDefault();
 		var data = {};
 		var name1 = 'id';
 		var value1 = '${product.id}';
 		var name2 = 'count';
 		var value2 = document.getElementById("quantity").value;
-		if(value2 == 0){
-        	alert("Mày thích khịa à ???")
+		if (value2 == 0) {
+			alert("Mày thích khịa à ???")
 		} else {
-			data[""+name1+""] = value1;
-			data[""+name2+""] = value2;
-			addProduct(data); 
+			data["" + name1 + ""] = value1;
+			data["" + name2 + ""] = value2;
+			addProduct(data);
 		}
-		
-	}); 
-	
-	
+
+	});
+
 	function addProduct(data) {
-		$.ajax({
-            url: '${addProduct}',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            success: function (result) {
-            	alert("Sản phẩm đã được thêm vào giỏ...")
-            	window.location.href = "${chitietURL}?id=" + result.id;
-            },
-            error: function (error) {
-            	window.location.href = "/khach-hang/chi-tiet-san-pham?id=" + result.id;
-            }
-        });
+		$
+				.ajax({
+					url : '${addProduct}',
+					type : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify(data),
+					dataType : 'json',
+					success : function(result) {
+						var spanCart = document.getElementById("span_cart").innerText;
+						var currentCart = Number(spanCart) + 1;
+						document.getElementById("span_cart").textContent = currentCart;
+						alert("Sản phẩm đã được thêm vào giỏ...")
+					},
+					error : function(error) {
+						window.location.href = "/khach-hang/chi-tiet-san-pham?id="
+								+ result.id;
+					}
+				});
 	}
 </script>
 

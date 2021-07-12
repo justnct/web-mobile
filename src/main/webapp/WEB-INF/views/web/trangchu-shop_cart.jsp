@@ -4,7 +4,7 @@
 <c:url var="deleteProduct" value="/api/removeproduct" />
 <c:url var="updateProduct" value="/api/updateProduct" />
 <c:url var="deleteAllProduct" value="/api/removeAllProduct" />
-<c:url var="cuahang" value="/customer/cua-hang?page=1&limit=9" />
+<c:url var="cuahang" value="/khach-hang/cua-hang?page=1&limit=9&sort=normal" />
 <c:url var="trangchu" value="/khach-hang/trang-chu?nameBrand=all" />
 <c:url var="giohang" value="/khach-hang/gio-hang" />
 
@@ -67,7 +67,7 @@
 										</td>
 										<td class="shoping__cart__total">${item.totalPrice}</td>
 										<td class="shoping__cart__item__close"><span id="btn"
-											onclick="deleteProduct(${item.id})" value="1"
+											onclick="deleteAll	Product(${item.id})" value="1"
 											class="icon_close"></span></td>
 									</tr>
 								</c:forEach>
