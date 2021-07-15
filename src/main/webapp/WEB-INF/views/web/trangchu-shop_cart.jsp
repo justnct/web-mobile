@@ -48,7 +48,7 @@
 							</thead>
 							<tbody>
 								<c:forEach var="item" items="${listProduct}">
-									<tr>
+									<tr id="col${item.id}">
 										<td class="shoping__cart__price"><img
 											src='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 											width="80px" height="80px"></td>
@@ -67,7 +67,7 @@
 										</td>
 										<td class="shoping__cart__total">${item.totalPrice}</td>
 										<td class="shoping__cart__item__close"><span id="btn"
-											onclick="deleteAll	Product(${item.id})" value="1"
+											onclick="deleteAllProduct(${item.id})" value="1"
 											class="icon_close"></span></td>
 									</tr>
 								</c:forEach>
@@ -160,10 +160,9 @@
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(result) {
-					window.location.href = "${giohang}";
 				},
 				error : function(error) {
-					window.location.href = "${giohang}";
+					/* window.location.href = "${giohang}"; */
 				}
 			});
 		}

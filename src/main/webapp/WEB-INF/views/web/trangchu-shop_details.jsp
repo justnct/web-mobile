@@ -305,8 +305,6 @@
 						alert("Sản phẩm đã được thêm vào giỏ...")
 					},
 					error : function(error) {
-						window.location.href = "/khach-hang/chi-tiet-san-pham?id="
-								+ result.id;
 					}
 				});
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,9 +53,6 @@ public class HomeController {
 	
 	@Autowired
 	private ICookieService cookieService;
-	
-	@Autowired
-	private SecurityUtils serUtils;
 	
 
 	@RequestMapping(value = "/khach-hang/trang-chu", method = RequestMethod.GET)
@@ -407,7 +401,7 @@ public class HomeController {
 
 		// count like product
 		int count = 0;
-		String listLike = cookieService.getCookieValue(serUtils.getPrincipal().getUserName(), "hello");
+		String listLike = cookieService.getCookieValue(SecurityUtils.getPrincipal().getUserName(), "hello");
 		for (String result : listLike.split("-")) {
 			if (result.equals("0")) {
 				break;
@@ -467,7 +461,7 @@ public class HomeController {
 	public ModelAndView like() {
 		ModelAndView mav = new ModelAndView("web/favoriteProducts");
 		List<ProductDTO> mListProduct = new ArrayList<ProductDTO>();
-		String listLike = cookieService.getCookieValue(serUtils.getPrincipal().getUserName(), "0");
+		String listLike = cookieService.getCookieValue(SecurityUtils.getPrincipal().getUserName(), "0");
 		for (String result : listLike.split("-")) {
 			if (Long.valueOf(result) > 0) {
 				ProductDTO productDTO = productService.findById(Long.valueOf(result));

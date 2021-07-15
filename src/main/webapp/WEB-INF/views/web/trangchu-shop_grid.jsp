@@ -346,29 +346,8 @@
 		{
 			page
 		};
-		$(function() {
-			window.pagObj = $('#pagination')
-					.twbsPagination(
-							{
-								totalPages : totalPages,
-								visiblePages : 10,
-								startPage : currentPage,
-								onPageClick : function(event, page) {
-									if (currentPage != page) {
-										$('#limit').val(9);
-										$('#page').val(page);
-										d = document
-												.getElementById("selectCollection").value;
-										$('#sort').val(page);
-										window.location.href = "${cuahang}?page="
-												+ page
-												+ "&limit=9&sort="
-												+ d
-												+ "#haha";
-									}
-								}
-							});
-		});
+		
+		
 		function change() {
 			d = document.getElementById("selectCollection").value;
 			if (d == "normal") {
