@@ -10,5 +10,5 @@ public interface ICartService {
 	void delete(Long id);
 	void deleteAll();
 	void addCart(String name);
-	void updateProduct(ProductDTO productDTO);
+	int updateProduct(ProductDTO[] productDTO);
 }

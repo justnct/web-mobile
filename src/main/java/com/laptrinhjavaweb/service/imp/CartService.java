@@ -1,8 +1,6 @@
 package com.laptrinhjavaweb.service.imp;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +22,10 @@ public class CartService implements ICartService {
 
 	@Autowired
 	private CartConverter cartConverter;
-
+	
 	@Autowired
-	private SecurityUtils securityUtils;
+	private SecurityUtils ser;
+	
 
 	@Override
 	@Transactional
@@ -87,33 +86,44 @@ public class CartService implements ICartService {
 	}
 
 	@Override
-	public void updateProduct(ProductDTO productDTO) {
-		CartEntity cartEntity = cartRepository.findOneByName(SecurityUtils.getPrincipal().getUsername());
-		ArrayList<String> list = new ArrayList<String>();
-		int count = 0;
-		String listProduct = cartEntity.getList_product();
-		for (String result : listProduct.split(",")) {
-			list.add(result);
-			if (String.valueOf(productDTO.getId()).equals(result)) {
-				count++;
+	@Transactional
+	public int updateProduct(ProductDTO[] mListProductDTO) {
+		CartEntity cartEntity = cartRepository.findOneByName(ser.getPrincipal().getUsername());
+//		ArrayList<String> list = new ArrayList<String>();
+//		int count = 0;
+//		String listProduct = cartEntity.getList_product();
+//		for (String result : listProduct.split(",")) {
+//			list.add(result);
+//			if (String.valueOf(productDTO.getId()).equals(result)) {
+//				count++;
+//			}
+//		}
+//		// case amout in cart > database
+//		if (productDTO.getCount() > count) {
+//			for (int i = 0; i < productDTO.getCount() - count; i++) {
+//				listProduct += "," + String.valueOf(productDTO.getId());
+//			}
+//		} else { // case amout in cart > database
+//			for (int i = 0; i < count - productDTO.getCount(); i++) {
+//				list.remove(String.valueOf(productDTO.getId()));
+//			}
+//			listProduct = "";
+//			for(int i =0; i < list.size();i++) {
+//				listProduct += list.get(i) +",";
+//			}
+//			listProduct = listProduct.substring(0, listProduct.length()-1);
+//		}
+//		cartEntity.setList_product(listProduct);
+		
+		String list = "";
+		for(ProductDTO productDTO: mListProductDTO) {
+			for(int i =0; i < productDTO.getCount(); i++) {
+				list += String.valueOf(productDTO.getId()) + ",";
 			}
 		}
-		// case amout in cart > database
-		if (productDTO.getCount() > count) {
-			for (int i = 0; i < productDTO.getCount() - count; i++) {
-				listProduct += "," + String.valueOf(productDTO.getId());
-			}
-		} else { // case amout in cart > database
-			for (int i = 0; i < count - productDTO.getCount(); i++) {
-				list.remove(String.valueOf(productDTO.getId()));
-			}
-			listProduct = "";
-			for(int i =0; i < list.size();i++) {
-				listProduct += list.get(i) +",";
-			}
-			listProduct = listProduct.substring(0, listProduct.length()-1);
-		}
-		cartEntity.setList_product(listProduct);
+		list = list.substring(0, list.length()-1);
+		cartEntity.setList_product(list);
 		cartRepository.save(cartEntity);
+		 return mListProductDTO.length;
 	}
 }

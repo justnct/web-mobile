@@ -300,7 +300,8 @@
 					dataType : 'json',
 					success : function(result) {
 						var spanCart = document.getElementById("span_cart").innerText;
-						var currentCart = Number(spanCart) + 1;
+						var quantity = document.getElementById("quantity").value;
+						var currentCart = Number(spanCart) + Number(quantity);
 						document.getElementById("span_cart").textContent = currentCart;
 						alert("Sản phẩm đã được thêm vào giỏ...")
 					},

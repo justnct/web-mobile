@@ -401,14 +401,15 @@ public class HomeController {
 
 		// count like product
 		int count = 0;
-		String listLike = cookieService.getCookieValue(SecurityUtils.getPrincipal().getUserName(), "hello");
-		for (String result : listLike.split("-")) {
-			if (result.equals("0")) {
-				break;
+		String listLike = cookieService.getCookieValue(SecurityUtils.getPrincipal().getUserName(), "0");
+		if(listLike.equals("0") || listLike.contains("0")){
+			mav.addObject("amountLike", 0);
+		} else {
+			for (String result : listLike.split("-")) {
+				count++;
 			}
-			count++;
+			mav.addObject("amountLike", count);
 		}
-		mav.addObject("amountLike", count);
 	}
 
 	@RequestMapping(value = "/khach-hang/search", method = RequestMethod.GET)
