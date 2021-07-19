@@ -165,8 +165,7 @@
 					   window.location.href = "${giohang}";  
 				},
 				error : function(error) {
-					  window.location.href = "${giohang}"; 
-
+					  /* window.location.href = "${giohang}"; */ 
 				}
 			});
 		}
@@ -179,10 +178,7 @@
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(result) {
-					  window.location.href = "${giohang}"; 
-				},
-				error : function(error) {
-					  window.location.href = "${giohang}"; 
+					  window.location.href = "${giohang}";
 				}
 			});
 		}

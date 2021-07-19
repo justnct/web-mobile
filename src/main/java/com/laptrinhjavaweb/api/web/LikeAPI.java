@@ -26,7 +26,7 @@ public class LikeAPI {
 	@PostMapping("/addLike")
 	public String addLike(@RequestBody ProductDTO productDTO) {
 		String ids = cookieService.getCookieValue(SecurityUtils.getPrincipal().getUserName(), String.valueOf(productDTO.getId()));
-		if(ids.contains("0")) {
+		if(ids.startsWith("0")) {
 			ids = String.valueOf(productDTO.getId());
 		} else {
 			if(!ids.contains(String.valueOf(productDTO.getId()))) {
