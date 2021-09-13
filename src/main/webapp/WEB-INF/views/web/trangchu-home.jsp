@@ -359,13 +359,13 @@
 	            data: JSON.stringify(data),
 	            dataType: 'json',
 	            success: function (result) {
-	            	alert("Đã thêm vào sản phẩm yêu thích")
+	            	alert("Success")
 	            },
 	            error: function (error) {
-	            	var spanLike = document.getElementById("span_like").innerText;
+	            	/* var spanLike = document.getElementById("span_like").innerText;
 					var currentLike = Number(spanLike) + 1;
-					document.getElementById("span_cart").textContent = currentCart;
-	            	alert("Đã thêm vào sản phẩm yêu thích")
+					document.getElementById("span_cart").textContent = currentCart; */
+	            	alert("Fails")
 	            }
 	        });
 		}

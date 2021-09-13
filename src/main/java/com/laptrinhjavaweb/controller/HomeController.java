@@ -16,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,14 +50,12 @@ public class HomeController {
 
 	@Autowired
 	private ICartService cartService;
-	
+
 	@Autowired
 	private ICookieService cookieService;
-	
 
 	@RequestMapping(value = "/khach-hang/trang-chu", method = RequestMethod.GET)
-	public ModelAndView homePageWeb(@RequestParam(value = "nameBrand") String name,
-		 HttpServletResponse response,
+	public ModelAndView homePageWeb(@RequestParam(value = "nameBrand") String name, HttpServletResponse response,
 			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/trangchu-home");
 		// list brand
@@ -403,7 +400,7 @@ public class HomeController {
 		// count like product
 		int count = 0;
 		String listLike = cookieService.getCookieValue(SecurityUtils.getPrincipal().getUserName(), "0");
-		if(listLike.equals("0") || listLike.contains("0")){
+		if (listLike.equals("0") || listLike.contains("0")) {
 			mav.addObject("amountLike", 0);
 		} else {
 			for (String result : listLike.split("-")) {
@@ -479,21 +476,5 @@ public class HomeController {
 		return mav;
 
 	}
-	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ModelAndView test() {
-		ModelAndView mav = new ModelAndView("test");
-		ProductDTO productDTO = new ProductDTO();
-		mav.addObject("model", productDTO);
-		return mav;
-	}
-	
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public ModelAndView test(@ModelAttribute(value = "model") ProductDTO productDTO) {
-		ModelAndView mav = new ModelAndView("test");
-		if(productDTO.getId() == 0) {
-			return new ModelAndView("redirect:/dang-nhap");
-		}
-		return mav;
-	}
+
 }
