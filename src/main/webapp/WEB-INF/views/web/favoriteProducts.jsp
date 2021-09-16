@@ -3,7 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:url var="deleteLike" value="/deleteLike" />
 <c:url var="likeURL" value="/khach-hang/yeu-thich" />
-
+<c:url var="addProduct" value="/api/product" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +43,9 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><i class="fa fa-heart" onclick="deleteLike(${item.id})"></i></li>
+									<li><a><i class="fa fa-heart" onclick="deleteLike(${item.id})"></i></a></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+									<li><a ><i class="fa fa-shopping-cart" onclick="addCart(${item.id})"></i></a></li>
 								</ul>
 							</div>
 							<div class="product__item__text">
@@ -81,6 +81,30 @@
 	            	window.location.href = "${likeURL}";
 				}
 			});
+		}
+		function addCart(id) {
+			var data = {};
+			var name1 = 'id';
+			var name2 = 'count';
+				data["" + name1 + ""] = id;
+				data["" + name2 + ""] = 1;
+			$.ajax({
+	            url: '${addProduct}',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	            	var spanCart = document.getElementById("span_cart").innerText;
+					var quantity = 1;
+					var currentCart = Number(spanCart) + Number(quantity);
+					document.getElementById("span_cart").textContent = currentCart;
+	            	alert("Đã thêm sản phẩm vào cửa hàng")
+	            },
+	            error: function (error) {
+	            	alert("Đã thêm sản phẩm vào cửa hàng.")
+	            }
+	        });
 		}
 	</script>
 </body>

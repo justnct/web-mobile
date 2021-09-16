@@ -31,6 +31,7 @@ import com.laptrinhjavaweb.service.IBrandService;
 import com.laptrinhjavaweb.service.ICartService;
 import com.laptrinhjavaweb.service.ICookieService;
 import com.laptrinhjavaweb.service.IProductService;
+import com.laptrinhjavaweb.service.IUser;
 import com.laptrinhjavaweb.util.MessageUtil;
 import com.laptrinhjavaweb.util.SecurityUtils;
 
@@ -47,6 +48,9 @@ public class HomeController {
 
 	@Autowired
 	private IProductService productService;
+	
+	@Autowired
+	private IUser userService;
 
 	@Autowired
 	private ICartService cartService;
@@ -298,7 +302,11 @@ public class HomeController {
 	@RequestMapping(value = "/quan-tri/danh-sach-user", method = RequestMethod.GET)
 	public ModelAndView adminListUser() {
 		ModelAndView mav = new ModelAndView("admin/list-user");
-		return mav;
+		// list user
+				List<UserDTO> mList = new ArrayList<UserDTO>();
+				mList = userService.getAllUser();	
+				mav.addObject("listUser", mList);
+				return mav;
 	}
 
 	@RequestMapping(value = "/quan-tri/danh-sach-don-hang", method = RequestMethod.GET)
@@ -322,6 +330,22 @@ public class HomeController {
 		mav.addObject("model", model);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/quan-tri/chinh-sua-user", method = RequestMethod.GET)
+	public ModelAndView adminEditUser(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/edit-user");
+		UserDTO model = new UserDTO();
+		if (id != null) {
+			model = userService.findById(id);
+		}
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+			mav.addObject("message", message.get("message"));
+			mav.addObject("alert", message.get("alert"));
+		}
+		mav.addObject("model", model);
+		return mav;
+	}
 
 	@RequestMapping(value = "/quan-tri/them-sp", method = RequestMethod.GET)
 	public ModelAndView adminAddSP(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
@@ -336,6 +360,18 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/quan-tri/them-user", method = RequestMethod.GET)
+	public ModelAndView adminAddUser(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/insert-user");
+		UserDTO model = new UserDTO();
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+			mav.addObject("message", message.get("message"));
+			mav.addObject("alert", message.get("alert"));
+		}
+		mav.addObject("model", model);
+		return mav;
+	}
 	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {
 		return new ModelAndView("redirect:/dang-nhap?accessDenied");

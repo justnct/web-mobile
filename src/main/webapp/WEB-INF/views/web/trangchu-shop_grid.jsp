@@ -9,7 +9,7 @@
 <c:url var="sortDESC"
 	value="/khach-hang/cua-hang?page=1&limit=9&sort=desc#haha" />
 <c:url var="addLike" value="/addLike"/>
-
+<c:url var="addProduct" value="/api/product" />
 
 <!DOCTYPE html>
 <html>
@@ -215,11 +215,10 @@
 												alt="">
 												<div class="product__discount__percent">-${item.discount}%</div>
 												<ul class="product__item__pic__hover">
-													<li><i class="fa fa-heart"
-														onclick="addLike(${item.id})"></i></li>
+													<li><a><i class="fa fa-heart"
+														onclick="addLike(${item.id})"></i></a></li>
 													<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-													<li><a href="${chitiet}"><i
-															class="fa fa-shopping-cart"></i></a></li>
+													<li><a ><i class="fa fa-shopping-cart" onclick="addCart(${item.id})"></i></a></li>
 												</ul>
 											</div>
 											<div class="product__discount__item__text">
@@ -271,9 +270,9 @@
 										data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 										alt="">
 										<ul class="product__item__pic__hover">
-											<li><i class="fa fa-heart" onclick="addLike(${item.id})"></i></li>
+											<li><a><i class="fa fa-heart" onclick="addLike(${item.id})"></i></a></li>
 											<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+											<li><a ><i class="fa fa-shopping-cart" onclick="addCart(${item.id})"></i></a></li>
 										</ul>
 									</div>
 									<div class="product__item__text">
@@ -375,6 +374,31 @@
 	            },
 	            error: function (error) {
 	            	alert("Đã thêm vào sản phẩm yêu thích")
+	            }
+	        });
+		}
+		
+		function addCart(id) {
+			var data = {};
+			var name1 = 'id';
+			var name2 = 'count';
+				data["" + name1 + ""] = id;
+				data["" + name2 + ""] = 1;
+			$.ajax({
+	            url: '${addProduct}',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	            	var spanCart = document.getElementById("span_cart").innerText;
+					var quantity = 1;
+					var currentCart = Number(spanCart) + Number(quantity);
+					document.getElementById("span_cart").textContent = currentCart;
+	            	alert("Đã thêm sản phẩm vào cửa hàng")
+	            },
+	            error: function (error) {
+	            	alert("Đã thêm sản phẩm vào cửa hàng.")
 	            }
 	        });
 		}

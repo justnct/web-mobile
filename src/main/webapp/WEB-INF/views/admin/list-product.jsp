@@ -68,6 +68,7 @@
 						</thead>
 						<tfoot>
 							<tr>
+							<th></th>
 								<th>Tên điện thoại</th>
 								<th>Hình ảnh</th>
 								<th>Giảm giá (%)</th>

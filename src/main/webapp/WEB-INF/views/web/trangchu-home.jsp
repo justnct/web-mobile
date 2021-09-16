@@ -4,7 +4,7 @@
 <c:url var="homeAPI" value="/api/homeList" />
 <c:url var="trangchu" value="/khach-hang/trang-chu" />
 <c:url var="addLike" value="/addLike" />
-
+<c:url var="addProduct" value="/api/product" />
 
 <!DOCTYPE html>
 <html>
@@ -200,9 +200,9 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><i class="fa fa-heart" onclick="addLike(${item.id})"></i></li>
+									<li><a><i class="fa fa-heart" onclick="addLike(${item.id})"></i></a></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+									<li><a ><i class="fa fa-shopping-cart" onclick="addCart(${item.id})"></i></a></li>
 								</ul>
 							</div>
 							<div class="product__item__text">
@@ -359,13 +359,10 @@
 	            data: JSON.stringify(data),
 	            dataType: 'json',
 	            success: function (result) {
-	            	alert("Success")
+	            	alert("Đã thêm vào sản phẩm yêu thích")
 	            },
 	            error: function (error) {
-	            	/* var spanLike = document.getElementById("span_like").innerText;
-					var currentLike = Number(spanLike) + 1;
-					document.getElementById("span_cart").textContent = currentCart; */
-	            	alert("Fails")
+					alert("Đã thêm vào sản phẩm yêu thích")
 	            }
 	        });
 		}
@@ -389,6 +386,31 @@
 			slides[slideIndex - 1].style.display = "block";
 			dots[slideIndex - 1].className += " active";
 			setTimeout(showSlides, 3000); // Change image every 2 seconds
+		}
+		
+		function addCart(id) {
+			var data = {};
+			var name1 = 'id';
+			var name2 = 'count';
+				data["" + name1 + ""] = id;
+				data["" + name2 + ""] = 1;
+			$.ajax({
+	            url: '${addProduct}',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	            	var spanCart = document.getElementById("span_cart").innerText;
+					var quantity = 1;
+					var currentCart = Number(spanCart) + Number(quantity);
+					document.getElementById("span_cart").textContent = currentCart;
+	            	alert("Đã thêm sản phẩm vào cửa hàng")
+	            },
+	            error: function (error) {
+	            	alert("Đã thêm sản phẩm vào cửa hàng.")
+	            }
+	        });
 		}
 	</script>
 

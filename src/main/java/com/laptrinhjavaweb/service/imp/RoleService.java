@@ -17,7 +17,7 @@ public class RoleService implements IRoleService{
 	public void addRole() {
 		RoleEntity roleEntity = new RoleEntity();
 		roleEntity.setCode("USER");
-		roleEntity.setName("Người dùng");
+		roleEntity.setName("Nguời dùng");
 		roleRepository.save(roleEntity);
 	}
 

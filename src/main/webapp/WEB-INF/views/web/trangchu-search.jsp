@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="addLike" value="/addLike"/>
+<c:url var="addProduct" value="/api/product" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,9 +41,9 @@
 								data-setbg='<c:url value='/template/web/img/web/product/${item.nameImg}'/>'
 								alt="">
 								<ul class="product__item__pic__hover">
-									<li><a href="#"><i class="fa fa-heart"></i></a></li>
+									<li><a><i class="fa fa-heart" onclick="addLike(${item.id})"></i></a></li>
 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+									<li><a ><i class="fa fa-shopping-cart" onclick="addCart(${item.id})"></i></a></li>
 								</ul>
 							</div>
 							<div class="product__item__text">
@@ -56,5 +58,51 @@
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+	function addLike(id) {
+		var data ={};
+		var name1 = 'id';
+		var value1 = id;
+		data[""+name1+""] = value1;
+		$.ajax({
+            url: '${addLike}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+            	alert("Đã thêm vào sản phẩm yêu thích")
+            },
+            error: function (error) {
+				alert("Đã thêm vào sản phẩm yêu thích")
+            }
+        });
+	}
+	
+	function addCart(id) {
+		var data = {};
+		var name1 = 'id';
+		var name2 = 'count';
+			data["" + name1 + ""] = id;
+			data["" + name2 + ""] = 1;
+		$.ajax({
+            url: '${addProduct}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+            	var spanCart = document.getElementById("span_cart").innerText;
+				var quantity = 1;
+				var currentCart = Number(spanCart) + Number(quantity);
+				document.getElementById("span_cart").textContent = currentCart;
+            	alert("Đã thêm sản phẩm vào cửa hàng")
+            },
+            error: function (error) {
+            	alert("Đã thêm sản phẩm vào cửa hàng.")
+            }
+        });
+	}
+	</script>
 </body>
 </html>
