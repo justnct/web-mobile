@@ -149,7 +149,7 @@
 							</h2>
 							<p>Thuận người mua - Vừa người bán</p>
 							<a
-								href="<c:url value='/customer/cua-hang?page=1&limit=9&sort=normal'/>"
+								href="<c:url value='/khach-hang/cua-hang?page=1&limit=9&sort=normal'/>"
 								class="primary-btn">MUA NGAY</a>
 						</div>
 					</div>
