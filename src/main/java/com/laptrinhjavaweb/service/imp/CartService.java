@@ -89,31 +89,6 @@ public class CartService implements ICartService {
 	@Transactional
 	public int updateProduct(ProductDTO[] mListProductDTO) {
 		CartEntity cartEntity = cartRepository.findOneByName(ser.getPrincipal().getUsername());
-//		ArrayList<String> list = new ArrayList<String>();
-//		int count = 0;
-//		String listProduct = cartEntity.getList_product();
-//		for (String result : listProduct.split(",")) {
-//			list.add(result);
-//			if (String.valueOf(productDTO.getId()).equals(result)) {
-//				count++;
-//			}
-//		}
-//		// case amout in cart > database
-//		if (productDTO.getCount() > count) {
-//			for (int i = 0; i < productDTO.getCount() - count; i++) {
-//				listProduct += "," + String.valueOf(productDTO.getId());
-//			}
-//		} else { // case amout in cart > database
-//			for (int i = 0; i < count - productDTO.getCount(); i++) {
-//				list.remove(String.valueOf(productDTO.getId()));
-//			}
-//			listProduct = "";
-//			for(int i =0; i < list.size();i++) {
-//				listProduct += list.get(i) +",";
-//			}
-//			listProduct = listProduct.substring(0, listProduct.length()-1);
-//		}
-//		cartEntity.setList_product(listProduct);
 		
 		String list = "";
 		for(ProductDTO productDTO: mListProductDTO) {

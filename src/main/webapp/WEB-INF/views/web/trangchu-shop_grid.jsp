@@ -172,29 +172,7 @@
 							</div>
 
 						</div>
-						<div class="sidebar__item">
-							<div class="latest-product__text">
-								<h4>Sản phẩm cũ đã mua</h4>
-								<div class="latest-product__slider owl-carousel">
-									<div class="latest-prdouct__slider__item">
-										<c:forEach var="item" items="${listSalest}">
-											<c:url var="chitiet" value="/khach-hang/chi-tiet-san-pham">
-												<c:param name="id" value="${item.id}" />
-											</c:url>
-											<a href="${chitiet}" class="latest-product__item">
-												<div class="product__item__pic set-bg"
-													data-setbg="<c:url value='/template/web/img/web/product/${item.nameImg}'/>"
-													alt=""></div>
-												<div class="latest-product__item__text">
-													<h6>${item.name}</h6>
-													<span>${item.converterPrice}</span>
-												</div>
-											</a>
-										</c:forEach>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-7">
