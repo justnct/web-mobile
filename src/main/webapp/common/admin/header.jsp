@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Quản trị</title>
 </head>
 <body>
 <!-- Page Wrapper -->
@@ -46,7 +46,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<c:url value='/quan-tri/danh-sach-sp'/>">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="<c:url value='/quan-tri/danh-sach-user'/>">Danh sách người dùng</a>
-                         <a class="collapse-item" href="<c:url value='/quan-tri/danh-sach-hoa-don'/>">Danh sách hóa đơn</a>
                     </div>
                 </div>
             </li>

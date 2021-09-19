@@ -128,7 +128,7 @@
 				  confirmButtonClass: "btn-danger",
 				  confirmButtonText: "Xóa ngay!",
 				  cancelButtonText: "Thoát",
-				  closeOnConfirm: false,
+				  closeOnConfirm: true,
 				  closeOnCancel: false
 				}).then(function(isConfirm) {
 				  if (isConfirm) {

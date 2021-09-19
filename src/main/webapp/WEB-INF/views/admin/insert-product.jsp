@@ -19,7 +19,7 @@
 		</c:if>
 		<div class="container">
 
-			<form:form role="form" id="formSubmit" modelAttribute="model">
+			<form:form role="form" id="formSubmit" modelAttribute="model" action="them-sp" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-25">
 						<label for="name">Tên điện thoại</label>
@@ -62,9 +62,7 @@
 						<label for="nameImg">Hình ảnh</label>
 					</div>
 					<div class="col-75">
-						<input type="file" class="col-xs-10 col-sm-5" id="uploadFile"
-							name="uploadFile" value="${model.nameImg}" />
-						
+						<input type="file" name="image" accept="image/*" class="col-xs-10 col-sm-5" />		
 					</div> 
 					
 					<!-- <div class="col-25">
@@ -102,12 +100,14 @@
 	<script type="text/javascript">
 		$('#btnAddSP').click(function(e) {
 			e.preventDefault();
-			var data = {};
+			/* var data = {};
 			var formData = $('#formSubmit').serializeArray();
 			$.each(formData, function(i, v) {
 				data["" + v.name + ""] = v.value;
 			});
-			addProduct(data);
+			addProduct(data); */
+			document.getElementById("formSubmit").submit();
+
 		});
 
 		function addProduct(data) {

@@ -3,22 +3,15 @@ package com.laptrinhjavaweb.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.laptrinhjavaweb.converter.RoleConverter;
 import com.laptrinhjavaweb.converter.UserConverter;
-import com.laptrinhjavaweb.dto.ProductDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
-import com.laptrinhjavaweb.entity.ProductEntity;
 import com.laptrinhjavaweb.entity.RoleEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
+import com.laptrinhjavaweb.repository.CartRepository;
 import com.laptrinhjavaweb.repository.RoleRepository;
 import com.laptrinhjavaweb.repository.UserRepository;
 import com.laptrinhjavaweb.service.IUser;
@@ -30,14 +23,13 @@ public class UserService implements IUser {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private RoleConverter roleConverter;
-	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private CartRepository cartRepository;
 
 	@Override
 	@Transactional
 	public boolean register(UserDTO user) {
-		HttpServletRequest request;
 		UserEntity checkUser = userRepository.findOneByUserNameAndStatus(user.getUserName(), 1);
 		if(checkUser == null) {
 			List<RoleEntity> list = new ArrayList<RoleEntity>();
@@ -71,6 +63,7 @@ public class UserService implements IUser {
 	public void delete(long[] ids) {
 		for (long id : ids) {
 			userRepository.delete(id);
+			cartRepository.delete(id);
 		}
 	}
 

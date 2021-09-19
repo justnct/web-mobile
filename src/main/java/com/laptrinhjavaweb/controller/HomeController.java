@@ -1,5 +1,9 @@
 package com.laptrinhjavaweb.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +20,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.laptrinhjavaweb.FormatNumber;
@@ -48,7 +54,7 @@ public class HomeController {
 
 	@Autowired
 	private IProductService productService;
-	
+
 	@Autowired
 	private IUser userService;
 
@@ -200,7 +206,7 @@ public class HomeController {
 			mav.addObject("kimochi",
 					"<option value=\"normal\">Mặc định</option>\r\n"
 							+ "	<option value=\"asc\">Giá thấp -> cao</option>\r\n"
-							+ "	<option value=\"desc\">Giá cao -> thấp/option>");
+							+ "	<option value=\"desc\">Giá cao -> thấp</option>");
 		} else if (sort.equals("asc")) {
 			Pageable pageable1 = new PageRequest(page - 1, limit, Direction.ASC, "price");
 			mListProduct = productService.getAllProductOrderByPrice(pageable1);
@@ -303,10 +309,10 @@ public class HomeController {
 	public ModelAndView adminListUser() {
 		ModelAndView mav = new ModelAndView("admin/list-user");
 		// list user
-				List<UserDTO> mList = new ArrayList<UserDTO>();
-				mList = userService.getAllUser();	
-				mav.addObject("listUser", mList);
-				return mav;
+		List<UserDTO> mList = new ArrayList<UserDTO>();
+		mList = userService.getAllUser();
+		mav.addObject("listUser", mList);
+		return mav;
 	}
 
 	@RequestMapping(value = "/quan-tri/danh-sach-don-hang", method = RequestMethod.GET)
@@ -330,9 +336,10 @@ public class HomeController {
 		mav.addObject("model", model);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/quan-tri/chinh-sua-user", method = RequestMethod.GET)
-	public ModelAndView adminEditUser(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+	public ModelAndView adminEditUser(@RequestParam(value = "id", required = false) Long id,
+			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/edit-user");
 		UserDTO model = new UserDTO();
 		if (id != null) {
@@ -360,8 +367,38 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/quan-tri/them-sp", method = RequestMethod.POST)
+	public ModelAndView test(@ModelAttribute("model") ProductDTO productDTO,
+			@RequestParam(value = "image", required = false) MultipartFile photo) {
+		saveFile(photo, productDTO.getName());
+		productDTO.setNameImg(productDTO.getName()+".jpg");
+		productService.insert(productDTO);
+		return new ModelAndView("redirect:/quan-tri/danh-sach-sp");
+	}
+
+	private String saveFile(MultipartFile file, String name) {
+		if (file != null && !file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				// folder to save img
+				File dir = new File(
+						"C:\\Users\\Admin\\Documents\\GitHub\\web-mobile\\src\\main\\webapp\\template\\web\\img\\web\\product");
+				File serverFile = new File(dir.getAbsoluteFile()+ File.separator + name +".jpg");
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile.getPath()));
+				stream.write(bytes);
+				stream.close();
+				return file.getName();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 	@RequestMapping(value = "/quan-tri/them-user", method = RequestMethod.GET)
-	public ModelAndView adminAddUser(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+	public ModelAndView adminAddUser(@RequestParam(value = "id", required = false) Long id,
+			HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/insert-user");
 		UserDTO model = new UserDTO();
 		if (request.getParameter("message") != null) {
@@ -372,6 +409,7 @@ public class HomeController {
 		mav.addObject("model", model);
 		return mav;
 	}
+
 	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
 	public ModelAndView accessDenied() {
 		return new ModelAndView("redirect:/dang-nhap?accessDenied");
