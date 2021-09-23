@@ -337,6 +337,14 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/quan-tri/chinh-sua-sp", method = RequestMethod.POST)
+	public ModelAndView adminEditSPPost(@ModelAttribute("model") ProductDTO productDTO,
+			@RequestParam(value = "image", required = false) MultipartFile photo) {
+		productDTO.setNameImg(saveFile(photo) + ".jpg");
+		productService.update(productDTO);
+		return new ModelAndView("redirect:/quan-tri/danh-sach-sp");
+	}
+
 	@RequestMapping(value = "/quan-tri/chinh-sua-user", method = RequestMethod.GET)
 	public ModelAndView adminEditUser(@RequestParam(value = "id", required = false) Long id,
 			HttpServletRequest request) {
@@ -370,20 +378,19 @@ public class HomeController {
 	@RequestMapping(value = "/quan-tri/them-sp", method = RequestMethod.POST)
 	public ModelAndView test(@ModelAttribute("model") ProductDTO productDTO,
 			@RequestParam(value = "image", required = false) MultipartFile photo) {
-		saveFile(photo, productDTO.getName());
-		productDTO.setNameImg(productDTO.getName()+".jpg");
+		productDTO.setNameImg(saveFile(photo) + ".jpg");
 		productService.insert(productDTO);
 		return new ModelAndView("redirect:/quan-tri/danh-sach-sp");
 	}
 
-	private String saveFile(MultipartFile file, String name) {
+	private String saveFile(MultipartFile file) {
 		if (file != null && !file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
 				// folder to save img
 				File dir = new File(
 						"C:\\Users\\Admin\\Documents\\GitHub\\web-mobile\\src\\main\\webapp\\template\\web\\img\\web\\product");
-				File serverFile = new File(dir.getAbsoluteFile()+ File.separator + name +".jpg");
+				File serverFile = new File(dir.getAbsoluteFile()+ File.separator + file.getName() +".jpg");
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile.getPath()));
 				stream.write(bytes);
 				stream.close();
